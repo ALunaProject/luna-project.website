@@ -1,0 +1,207 @@
+// ------
+// Colors
+
+// Neutrals
+$neutrals-white: #f9f9f9;
+$neutrals-black: #090c10;
+
+// Grayscale
+$gs-eire-black: #10161d;
+$gs-dark-gunmetal: #172028;
+$gs-gunmetal: #222a31;
+$gs-light-gunmetal: #343e47;
+$gs-slate-gray: #858e95;
+$gs-light-slate-gray: #bbc4cc;
+$gs-sea-salt: #dfe6ec;
+$gs-white-smoke: #f6f6f9;
+
+// Blue Violet
+$blue-violet-1200: #0f081a;
+$blue-violet-1100: #10002b;
+$blue-violet-1000: #240046;
+$blue-violet-900: #3c096c;
+$blue-violet-800: #5a189a;
+$blue-violet-700: #7b2cbf;
+$blue-violet: #8f33df;
+$blue-violet-500: #9d4edd;
+$blue-violet-400: #bd68ee;
+$blue-violet-300: #c77dff;
+$blue-violet-200: #e0aaff;
+$blue-violet-100: #f2dcff;
+
+// Blue Violet Desaturated
+$blue-violet-desat-800: #1d1728;
+$blue-violet-desat-700: #0b0810;
+$blue-violet-desat-600: #160f1d;
+$blue-violet-desat-500: #281e32;
+$blue-violet-desat-400: #40334d;
+$blue-violet-desat-300: #6b587b;
+$blue-violet-desat-200: #c9becf;
+$blue-violet-desat-100: #e4e0e9;
+
+// Pure Blue
+$pure-blue-700: #1a237e;
+$pure-blue-600: #283593;
+$pure-blue-500: #3949ab;
+$pure-blue: #3f51b5;
+$pure-blue-300: #5c6bc0;
+$pure-blue-200: #9fa8da;
+$pure-blue-100: #e8eaf6;
+
+// Pantie Blue
+$pantie-blue-700: #154360;
+$pantie-blue-600: #1f618d;
+$pantie-blue-500: #2471a3;
+$pantie-blue: #2980b9;
+$pantie-blue-300: #7fb3d5;
+$pantie-blue-200: #a9cce3;
+$pantie-blue-100: #eaf2f8;
+
+// Blue Sky
+$blue-sky-700: #0d47a1;
+$blue-sky-600: #1565c0;
+$blue-sky-500: #1e88e5;
+$blue-sky: #2196f3;
+$blue-sky-300: #64b5f6;
+$blue-sky-200: #90caf9;
+$blue-sky-100: #e3f2fd;
+
+// Green Grass
+$green-grass-700: #155d27;
+$green-grass-600: #25a244;
+$green-grass-500: #28b44b;
+$green-grass: #2dc653;
+$green-grass-300: #4ad66d;
+$green-grass-200: #6ede8a;
+$green-grass-100: #92e6a7;
+
+// Gold Yellow
+$gold-yellow-700: #805b10;
+$gold-yellow-600: #c9a227;
+$gold-yellow-500: #edc531;
+$gold-yellow: #ffd400;
+$gold-yellow-400: #ffe14c;
+$gold-yellow-300: #ffee99;
+$gold-yellow-100: #fff6cc;
+
+// McLaren Orange
+$mclaren-orange-700: #472400;
+$mclaren-orange-600: #753b00;
+$mclaren-orange-500: #d16900;
+$mclaren-orange: #ff8000;
+$mclaren-orange-300: #ff962e;
+$mclaren-orange-200: #ffad5c;
+$mclaren-orange-100: #ffdbb8;
+
+// Clockwork Orange
+$clockwork-orange-700: #bf360c;
+$clockwork-orange-600: #d84315;
+$clockwork-orange-500: #f4511e;
+$clockwork-orange: #ff5722;
+$clockwork-orange-300: #ff7043;
+$clockwork-orange-200: #ffab91;
+$clockwork-orange-100: #ffccbc;
+
+// Bloody Red
+$bloody-red-700: #641e16;
+$bloody-red-600: #922b21;
+$bloody-red-500: #a93226;
+$bloody-red: #c0392b;
+$bloody-red-300: #e66063;
+$bloody-red-200: #ec8385;
+$bloody-red-100: #efadad;
+
+// ------
+// Gradients
+
+$gradient-brand-primary: linear-gradient(
+        92deg,
+        $blue-violet-700 4.04%,
+        $bloody-red-300 82.86%,
+        $bloody-red-300 98.79%
+);
+
+$gradient-heading-primary: linear-gradient(
+        94deg,
+        $blue-violet-500 25.18%,
+        $pure-blue-300 68%
+);
+
+$gradient-card-active-primary: linear-gradient(
+        98deg,
+        $blue-violet-700 -3.55%,
+        $blue-violet-300 18.43%,
+        $blue-violet-1000 78.28%,
+        $blue-violet-800 95.99%
+);
+
+$gradient-card-active-secondary: linear-gradient(
+        98deg,
+        $clockwork-orange-600 -3.55%,
+        $clockwork-orange-100 18.43%,
+        $clockwork-orange-700 78.28%,
+        $clockwork-orange-600 95.99%
+);
+
+// ------
+// Typography
+$font-abeezee: 'ABeeZee', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
+
+// Font Weights
+$weight-thin: 100;
+$weight-extralight: 200;
+$weight-light: 300;
+$weight-regular: 400;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Font Sizes
+$fs-xs: 12px;
+$fs-sm: 14px;
+$fs-base: 16px;
+$fs-lg: 18px;
+$fs-xl: 20px;
+$fs-2xl: 24px;
+$fs-3xl: 30px;
+$fs-32: 32px; // usado apenas no ABeeZee/3xl
+$fs-4xl: 36px;
+$fs-5xl: 48px;
+$fs-5-5xl: 48px; // mesmo tamanho, letter-spacing diferente
+$fs-6xl: 60px;
+$fs-6-5xl: 64px;
+$fs-7xl: 80px;
+$fs-8xl: 96px;
+$fs-9xl: 128px;
+
+// Letter Spacing
+$ls-none: 0%;
+$ls-wide: 26%;
+
+// Text Case
+$case-original: none;
+
+// ------
+// Shadows & Effects
+
+//Box Shadows
+$shadow-card: 2px 2px 15px 0 rgba(149, 116, 207, 0.15);
+$shadow-post-card:
+        0 4px 4px 0 rgba(0, 0, 0, 0.25),
+        0 4px 20px 0 $blue-violet-desat-700; // #0B0810
+$shadow-focused:
+        0 4px 4px 0 rgba(0, 0, 0, 0.25),
+        0 4px 20px 0 rgba($blue-violet, 0.25); // #8F33DF
+$shadow-hover-primary: 0 0 20px 5px rgba(154, 51, 223, 0.50);
+$shadow-hover-secondary: 0 0 20px 5px rgba(223, 97, 51, 0.50);
+$shadow-toggle-option-1:
+        2px 2px 4.8px 0 rgba($blue-violet-900, 0.27),
+        10px 7px 30px 0 rgba(149, 116, 207, 0.25);
+$shadow-toggle-option-2:
+        -2px 2px 4.8px 0 rgba($blue-violet-900, 0.27),
+        -10px 7px 30px 0 rgba(149, 116, 207, 0.25);
+$shadow-sidebar-left: 5px 0 30px 0 rgba(7, 7, 37, 0.25);
+$shadow-sidebar-right: -5px 0 30px 0 rgba(7, 7, 37, 0.25);
+
+// Blur
+$blur-title: 100px;

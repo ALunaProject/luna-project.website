@@ -1,0 +1,114 @@
+@use "./variables" as *;
+
+// Page Spacing
+@mixin content {
+  display: flex;
+  padding: 75px 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  flex: 1 0 0;
+  width: 100%;
+}
+
+// Effects
+
+@mixin title-blur-effect {
+  filter: blur($blur-title);
+}
+
+@mixin glass-effect {
+  box-shadow:
+          0 4px 4px 0 rgba(0, 0, 0, 0.25) inset,
+          0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+}
+
+// -------
+// Text styles
+
+@mixin text-style($family, $weight, $size, $letter-spacing: $ls-none, $text-case: $case-original) {
+  font-family: $family;
+  font-weight: $weight;
+  font-size: $size;
+  letter-spacing: $letter-spacing;
+  text-transform: $text-case;
+}
+
+// ABeeZee
+@mixin abeezee-xs   { @include text-style($font-abeezee, $weight-regular, $fs-xs); }
+@mixin abeezee-sm   { @include text-style($font-abeezee, $weight-regular, $fs-sm); }
+@mixin abeezee-base { @include text-style($font-abeezee, $weight-regular, $fs-base); }
+@mixin abeezee-lg   { @include text-style($font-abeezee, $weight-regular, $fs-lg); }
+@mixin abeezee-xl   { @include text-style($font-abeezee, $weight-regular, $fs-xl); }
+@mixin abeezee-2xl  { @include text-style($font-abeezee, $weight-regular, $fs-2xl); }
+@mixin abeezee-3xl  { @include text-style($font-abeezee, $weight-regular, $fs-32); }
+
+// Poppins Thin
+@mixin poppins-thin-xs   { @include text-style($font-poppins, $weight-thin, $fs-xs); }
+@mixin poppins-thin-sm   { @include text-style($font-poppins, $weight-thin, $fs-sm); }
+@mixin poppins-thin-base { @include text-style($font-poppins, $weight-thin, $fs-base); }
+@mixin poppins-thin-lg   { @include text-style($font-poppins, $weight-thin, $fs-lg); }
+@mixin poppins-thin-xl   { @include text-style($font-poppins, $weight-thin, $fs-xl); }
+@mixin poppins-thin-2xl  { @include text-style($font-poppins, $weight-thin, $fs-2xl); }
+@mixin poppins-thin-3xl  { @include text-style($font-poppins, $weight-thin, $fs-3xl); }
+@mixin poppins-thin-4xl  { @include text-style($font-poppins, $weight-thin, $fs-4xl); }
+@mixin poppins-thin-5xl  { @include text-style($font-poppins, $weight-thin, $fs-5xl); }
+@mixin poppins-thin-6xl  { @include text-style($font-poppins, $weight-thin, $fs-6xl); }
+
+// Poppins ExtraLight
+@mixin poppins-extralight-xs   { @include text-style($font-poppins, $weight-extralight, $fs-xs); }
+@mixin poppins-extralight-sm   { @include text-style($font-poppins, $weight-extralight, $fs-sm); }
+@mixin poppins-extralight-base { @include text-style($font-poppins, $weight-extralight, $fs-base); }
+@mixin poppins-extralight-lg   { @include text-style($font-poppins, $weight-extralight, $fs-lg); }
+@mixin poppins-extralight-xl   { @include text-style($font-poppins, $weight-extralight, $fs-xl); }
+@mixin poppins-extralight-3xl  { @include text-style($font-poppins, $weight-extralight, $fs-3xl); }
+@mixin poppins-extralight-5xl  { @include text-style($font-poppins, $weight-extralight, $fs-5xl); }
+@mixin poppins-extralight-6xl  { @include text-style($font-poppins, $weight-extralight, $fs-6xl); }
+@mixin poppins-extralight-9xl  { @include text-style($font-poppins, $weight-extralight, $fs-9xl); }
+
+// Poppins Light
+@mixin poppins-light-xs   { @include text-style($font-poppins, $weight-light, $fs-xs); }
+@mixin poppins-light-sm   { @include text-style($font-poppins, $weight-light, $fs-sm); }
+@mixin poppins-light-base { @include text-style($font-poppins, $weight-light, $fs-base); }
+@mixin poppins-light-lg   { @include text-style($font-poppins, $weight-light, $fs-lg); }
+@mixin poppins-light-xl   { @include text-style($font-poppins, $weight-light, $fs-xl); }
+@mixin poppins-light-2xl  { @include text-style($font-poppins, $weight-light, $fs-2xl); }
+@mixin poppins-light-3xl  { @include text-style($font-poppins, $weight-light, $fs-3xl); }
+@mixin poppins-light-4xl  { @include text-style($font-poppins, $weight-light, $fs-4xl); }
+@mixin poppins-light-5xl  { @include text-style($font-poppins, $weight-light, $fs-5xl); }
+@mixin poppins-light-6xl  { @include text-style($font-poppins, $weight-light, $fs-6xl); }
+
+// Poppins Regular
+@mixin poppins-regular-xs   { @include text-style($font-poppins, $weight-regular, $fs-xs); }
+@mixin poppins-regular-base { @include text-style($font-poppins, $weight-regular, $fs-base); }
+@mixin poppins-regular-lg   { @include text-style($font-poppins, $weight-regular, $fs-lg); }
+@mixin poppins-regular-2xl  { @include text-style($font-poppins, $weight-regular, $fs-2xl); }
+@mixin poppins-regular-3xl  { @include text-style($font-poppins, $weight-regular, $fs-3xl); }
+@mixin poppins-regular-4xl  { @include text-style($font-poppins, $weight-regular, $fs-4xl); }
+@mixin poppins-regular-5xl  { @include text-style($font-poppins, $weight-regular, $fs-5xl); }
+@mixin poppins-regular-6xl  { @include text-style($font-poppins, $weight-regular, $fs-6xl); }
+@mixin poppins-regular-7xl  { @include text-style($font-poppins, $weight-regular, $fs-7xl); }
+@mixin poppins-regular-8xl  { @include text-style($font-poppins, $weight-regular, $fs-8xl); }
+@mixin poppins-regular-9xl  { @include text-style($font-poppins, $weight-regular, $fs-9xl); }
+
+// Poppins SemiBold
+@mixin poppins-semibold-xs     { @include text-style($font-poppins, $weight-semibold, $fs-xs); }
+@mixin poppins-semibold-sm     { @include text-style($font-poppins, $weight-semibold, $fs-sm); }
+@mixin poppins-semibold-xl     { @include text-style($font-poppins, $weight-semibold, $fs-xl); }
+@mixin poppins-semibold-4xl    { @include text-style($font-poppins, $weight-semibold, $fs-4xl); }
+@mixin poppins-semibold-5xl    { @include text-style($font-poppins, $weight-semibold, $fs-5xl); }
+@mixin poppins-semibold-5-5xl  { @include text-style($font-poppins, $weight-semibold, $fs-5-5xl, $ls-wide); }
+@mixin poppins-semibold-6xl    { @include text-style($font-poppins, $weight-semibold, $fs-6xl); }
+@mixin poppins-semibold-6-5xl  { @include text-style($font-poppins, $weight-semibold, $fs-6-5xl, $ls-wide); }
+@mixin poppins-semibold-7xl    { @include text-style($font-poppins, $weight-semibold, $fs-7xl); }
+@mixin poppins-semibold-8xl    { @include text-style($font-poppins, $weight-semibold, $fs-8xl); }
+@mixin poppins-semibold-9xl    { @include text-style($font-poppins, $weight-semibold, $fs-9xl); }
+
+// Poppins Bold
+@mixin poppins-bold-xs   { @include text-style($font-poppins, $weight-bold, $fs-xs); }
+@mixin poppins-bold-base { @include text-style($font-poppins, $weight-bold, $fs-base); }
+@mixin poppins-bold-2xl  { @include text-style($font-poppins, $weight-bold, $fs-2xl); }
+@mixin poppins-bold-4xl  { @include text-style($font-poppins, $weight-bold, $fs-4xl); }
+@mixin poppins-bold-6xl  { @include text-style($font-poppins, $weight-bold, $fs-6xl); }
+@mixin poppins-bold-8xl  { @include text-style($font-poppins, $weight-bold, $fs-8xl); }
