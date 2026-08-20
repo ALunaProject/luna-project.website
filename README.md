@@ -8,18 +8,52 @@ _Desenvolvido por Team Luna - disponível no [Figma Community](https://www.figma
 
 A estrutura do projeto é organizada para facilitar a manutenção e o desenvolvimento, como exemplificado abaixo:
 ```
-    src/
-        ├── app/                  # Rotas e páginas principais do Next.js
-        │   ├── favicon.ico       
-        │   ├── globals.css       # Estilos globais padrão (temporário)
-        │   ├── layout.tsx        # Layout raiz/compartilhado
-        │   ├── page.module.css   
-        │   └── page.tsx          # Página principal (Home)
-        └── styles/               # Arquivos e módulos de estilos Sass/SCSS
-        ├── base/                 # Estilos de base/reset
-        │   └── _reset.scss       # Reset de CSS
-        └── main.scss             # Arquivo principal de estilos
-        biome.json                # Configuração do Biome (linter e formatter)
+   src/
+├── assets/                      # Arquivos estáticos (imagens, fontes, ícones)
+│   ├── images/
+│   ├── fonts/
+│   └── icons/
+│
+├── app/                         # Rotas e páginas do Next.js (App Router)
+│   │
+│   ├── (auth)/                  # Grupo de rotas de autenticação
+│   │   ├── login/
+│   │   │   └── page.tsx         # Página de Login
+│   │   └── signup/
+│   │       └── page.tsx         # Página de Cadastro
+│   │
+│   ├── (main)/                  # Grupo de rotas principais (logado)
+│   │   ├── news/
+│   │   │   └── page.tsx         # Página de Notícias
+│   │   ├── discovery/
+│   │   │   └── page.tsx         # Página de Descoberta de Jogos
+│   │   ├── game-purpose/
+│   │   │   └── [id]/            # Rota dinâmica para Propósito do Jogo
+│   │   │       └── page.tsx
+│   │   └── lfg-posts/           # Looking For Group - Posts para parceiros
+│   │       └── page.tsx
+│   │
+│   ├── components/              # Componentes reutilizáveis (globais)
+│   │   ├── ui/                  # Botões, Inputs, Modais, Cards
+│   │   ├── layout/              # Header, Footer, Sidebar
+│   │   └── forms/               # Formulários reutilizáveis
+│   │
+│   ├── screens/                 # Telas completas (chamadas pelo page.tsx)
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── news/
+│   │   ├── discovery/
+│   │   ├── game-purpose/
+│   │   └── lfg-posts/
+│   │
+│   ├── hooks/                   # Hooks personalizados (useAuth, useFetch, etc.)
+│   ├── contexts/                # Contextos React (AuthContext, ThemeContext)
+│   ├── styles/                  # Estilos globais, temas e CSS Modules
+│   ├── utils/                   # Funções auxiliares, validadores e mascaras
+│   └── types/                   # Tipagens TypeScript globais (interfaces)
+│
+├── public/                      # Arquivos públicos estáticos (favicon, robots.txt)
+└── ...
 ```
 ## 🛠️ Ferramentas Utilizadas
 
