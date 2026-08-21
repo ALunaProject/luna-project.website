@@ -8,52 +8,149 @@ _Desenvolvido por Team Luna - disponível no [Figma Community](https://www.figma
 
 A estrutura do projeto é organizada para facilitar a manutenção e o desenvolvimento, como exemplificado abaixo:
 ```
-   src/
+  src/
 ├── assets/                      # Arquivos estáticos (imagens, fontes, ícones)
 │   ├── images/
+│   │   ├── logo.png
+│   │   ├── background-auth.jpg
+│   │   └── game-covers/
 │   ├── fonts/
+│   │   ├── inter.ttf
+│   │   └── roboto.ttf
 │   └── icons/
+│       ├── gamepad.svg
+│       ├── user.svg
+│       └── search.svg
 │
-├── app/                         # Rotas e páginas do Next.js (App Router)
+├── app/                         # Rotas e páginas do Next.js (Page Router)
 │   │
-│   ├── (auth)/                  # Grupo de rotas de autenticação
-│   │   ├── login/
-│   │   │   └── page.tsx         # Página de Login
-│   │   └── signup/
-│   │       └── page.tsx         # Página de Cadastro
+│   ├── _app.tsx                 # Componente principal da aplicação (Provider, Layout)
+│   ├── _document.tsx            # Personalização do HTML (meta tags, fontes)
 │   │
-│   ├── (main)/                  # Grupo de rotas principais (logado)
-│   │   ├── news/
-│   │   │   └── page.tsx         # Página de Notícias
-│   │   ├── discovery/
-│   │   │   └── page.tsx         # Página de Descoberta de Jogos
-│   │   ├── game-purpose/
-│   │   │   └── [id]/            # Rota dinâmica para Propósito do Jogo
-│   │   │       └── page.tsx
-│   │   └── lfg-posts/           # Looking For Group - Posts para parceiros
-│   │       └── page.tsx
+│   ├── login/                   # Página de Login
+│   │   ├── index.tsx            # Componente principal da página
+│   │   └── styles.module.css    # Estilos específicos da página
 │   │
-│   ├── components/              # Componentes reutilizáveis (globais)
-│   │   ├── ui/                  # Botões, Inputs, Modais, Cards
-│   │   ├── layout/              # Header, Footer, Sidebar
-│   │   └── forms/               # Formulários reutilizáveis
+│   ├── signup/                  # Página de Cadastro
+│   │   ├── index.tsx
+│   │   └── styles.module.css
 │   │
-│   ├── screens/                 # Telas completas (chamadas pelo page.tsx)
-│   │   ├── login/
-│   │   ├── signup/
-│   │   ├── news/
-│   │   ├── discovery/
-│   │   ├── game-purpose/
-│   │   └── lfg-posts/
+│   ├── news/                    # Página de Notícias
+│   │   ├── index.tsx
+│   │   ├── styles.module.css
+│   │   └── [id]/                # Rota dinâmica para notícia específica
+│   │       ├── index.tsx
+│   │       └── styles.module.css
 │   │
-│   ├── hooks/                   # Hooks personalizados (useAuth, useFetch, etc.)
-│   ├── contexts/                # Contextos React (AuthContext, ThemeContext)
-│   ├── styles/                  # Estilos globais, temas e CSS Modules
-│   ├── utils/                   # Funções auxiliares, validadores e mascaras
-│   └── types/                   # Tipagens TypeScript globais (interfaces)
+│   ├── discovery/               # Página de Descoberta de Jogos
+│   │   ├── index.tsx
+│   │   └── styles.module.css
+│   │
+│   ├── game-purpose/            # Página de Propósito do Jogo
+│   │   ├── index.tsx
+│   │   ├── styles.module.css
+│   │   └── [gameId]/            # Rota dinâmica para jogo específico
+│   │       ├── index.tsx
+│   │       └── styles.module.css
+│   │
+│   ├── lfg-posts/               # Página de Posts (Looking For Game)
+│   │   ├── index.tsx
+│   │   └── styles.module.css
+│   │
+│   └── api/                     # API Routes (Next.js - opcional)
+│       └── auth/
+│           └── [...nextauth].ts # Configuração de autenticação (se usar NextAuth)
 │
-├── public/                      # Arquivos públicos estáticos (favicon, robots.txt)
-└── ...
+├── components/                  # Componentes reutilizáveis (globais)
+│   │
+│   ├── ui/                      # Componentes UI genéricos
+│   │   ├── Button/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Input/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Card/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Modal/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Dropdown/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Skeleton/           # Skeletons para carregamento
+│   │   │   ├── index.tsx       # Componente Skeleton genérico
+│   │   │   ├── LoginSkeleton.tsx
+│   │   │   ├── NewsSkeleton.tsx
+│   │   │   ├── DiscoverySkeleton.tsx
+│   │   │   ├── GamePurposeSkeleton.tsx
+│   │   │   ├── LfgPostsSkeleton.tsx
+│   │   │   ├── styles.module.css  # Estilos unificados dos skeletons
+│   │   │   └── skeleton.css        # CSS global para skeletons
+│   │   └── styles.module.css    # Estilos globais da UI
+│   │
+│   ├── layout/                 # Componentes de layout
+│   │   ├── Header/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── Footer/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   └── Sidebar/
+│   │       ├── index.tsx
+│   │       └── styles.module.css
+│   │
+│   ├── forms/                  # Formulários reutilizáveis
+│   │   ├── LoginForm/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   ├── RegisterForm/
+│   │   │   ├── index.tsx
+│   │   │   └── styles.module.css
+│   │   └── PostForm/
+│   │       ├── index.tsx
+│   │       └── styles.module.css
+│   │
+│   └── shared/                 # Componentes compartilhados entre páginas
+│       ├── GameCard/
+│       │   ├── index.tsx
+│       │   └── styles.module.css
+│       ├── PostCard/
+│       │   ├── index.tsx
+│       │   └── styles.module.css
+│       └── CommentSection/
+│           ├── index.tsx
+│           └── styles.module.css
+│
+├── hooks/                       # Hooks personalizados
+│   ├── useAuth.ts              # Gerenciamento de autenticação
+│   ├── useFetch.ts             # Requisições HTTP
+│   ├── useGameSearch.ts        # Busca de jogos
+│   └── usePagination.ts        # Paginação
+│
+├── contexts/                   # Contextos React
+│   ├── AuthContext.tsx         # Contexto de autenticação
+│   └── ThemeContext.tsx        # Contexto de tema
+│
+├── styles/                     # Estilos globais
+│   ├── globals.css             # Estilos CSS globais
+│   ├── variables.css           # Variáveis CSS (cores, fontes, espaçamentos)
+│   └── reset.css               # Reset de estilos
+│
+├── utils/                      # Funções auxiliares
+│   ├── validators.ts           # Validadores de dados
+│   ├── formatters.ts           # Formatação de dados (datas, números)
+│   ├── api.ts                  # Configuração do cliente HTTP (Axios)
+│   └── constants.ts            # Constantes globais
+│
+├── types/                      # Tipagens TypeScript
+│   ├── user.types.ts
+│   ├── game.types.ts
+│   ├── post.types.ts
+│   └── comment.types.ts
+│
+└── middleware.ts               # Middleware Next.js (autenticação de rotas)
 ```
 ## 🛠️ Ferramentas Utilizadas
 
