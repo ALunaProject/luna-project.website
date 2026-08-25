@@ -1,0 +1,39 @@
+@use "../../styles/utils" as u;
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+
+  background-image: url("../../assets/images/backgroundLogin.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
+  align-self: stretch;
+}
+.logoImg{
+  //Imagem nn aparecendo!
+}
+.logoTitle{
+  font-family: Cambria, serif; //Lyan usar mixins aqui
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+
+  background: u.$gradient-brand-primary;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
