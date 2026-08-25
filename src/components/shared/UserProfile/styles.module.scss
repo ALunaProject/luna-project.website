@@ -1,0 +1,21 @@
+@use "../../../styles/utils" as *;
+
+.userProfileContainer {
+  display: flex;
+  padding: 0 16px;
+  gap: 12px;
+  align-items: center;
+  align-self: stretch;
+
+  img {
+    width: 45px;
+    height: 45px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+  }
+
+  span {
+    @include poppins-extralight-base;
+    color: $gs-sea-salt;
+  }
+}
