@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 // Effects
 
 @mixin title-blur-effect {
