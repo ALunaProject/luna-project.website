@@ -1,0 +1,7 @@
+@use "../../../styles/utils" as *;
+
+.linkContainer {
+  @include flex-center;
+  gap: 12px;
+  @include poppins-regular-xl;
+}
