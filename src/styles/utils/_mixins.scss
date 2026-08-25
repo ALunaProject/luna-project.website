@@ -89,6 +89,7 @@
 @mixin poppins-regular-xs   { @include text-style($font-poppins, $weight-regular, $fs-xs); }
 @mixin poppins-regular-base { @include text-style($font-poppins, $weight-regular, $fs-base); }
 @mixin poppins-regular-lg   { @include text-style($font-poppins, $weight-regular, $fs-lg); }
+@mixin poppins-regular-xl   { @include text-style($font-poppins, $weight-regular, $fs-xl); }
 @mixin poppins-regular-2xl  { @include text-style($font-poppins, $weight-regular, $fs-2xl); }
 @mixin poppins-regular-3xl  { @include text-style($font-poppins, $weight-regular, $fs-3xl); }
 @mixin poppins-regular-4xl  { @include text-style($font-poppins, $weight-regular, $fs-4xl); }
