@@ -1,15 +1,15 @@
-import SignupCard from "../../components/forms/SignUpCard/SignUpCard";
 import s from "@/app/signup/styles.module.scss";
-import logo from "../../assets/images/LogoLuna.svg";
+import AuthCard from "@/components/forms/AuthCard/AuthCard";
+import LunaLogoIcon from "@/assets/icons/LogoLunaIcon";
 
 export default function SignupPage() {
     return (
         <div className={s.container}>
             <div className={s.logo}>
-                <img src={logo} className={s.logoImg} alt="Luna" />
+                <LunaLogoIcon />
                 <h1 className={s.logoTitle}>LUNA</h1>
             </div>
-            <SignupCard />
+            <AuthCard variant={"signup"}/>
         </div>
     );
 }

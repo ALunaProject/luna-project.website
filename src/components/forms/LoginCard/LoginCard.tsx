@@ -61,7 +61,7 @@ export default function LoginCard() {
             </button>
 
             <p className={s.signupLink}>
-                Não tem uma conta? <a href="/cadastro">Cadastre-se!</a>
+                Não tem uma conta? <a href="/signup">Cadastre-se!</a>
             </p>
         </form>
     );
