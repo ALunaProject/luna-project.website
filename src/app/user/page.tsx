@@ -1,9 +1,9 @@
-
+import Sidebar from "@/components/layout/Sidebar/Sidebar";
 
 export default function UserPage() {
     return (
         <>
-         <h1>oi</h1>
+            <Sidebar isLoggedIn/>
         </>
     )
 }

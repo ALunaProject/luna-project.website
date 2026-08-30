@@ -2,14 +2,94 @@
 
 .sidebarContainer {
   display: flex;
-  flex-direction: column;
-
-}
-.linksWrapper {
-  display: flex;
-  padding: 24px 26.5px;
+  width: fit-content;
+  max-width: 268px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30px;
-  width: 100%;
+  padding: 50px 0;
+  height: 100vh;
+  background: $blue-violet-1200;
+  box-shadow: $shadow-sidebar-left;
+
+  a:first-child {
+    gap: 0;
+    @include transition(all, $duration-medium, $ease-standard);
+
+    svg:last-child {
+      display: inline-block;
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      @include transition(opacity max-width, $duration-medium, $ease-standard);
+    }
+  }
+
+  .linksWrapper {
+    display: flex;
+    padding: 24px 26.5px;
+    flex-direction: column;
+    flex: 1 0 0;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+
+    a {
+      @include transition(all, $duration-medium, $ease-standard);
+      gap: 0;
+
+      span {
+        display: inline-block;
+        opacity: 0;
+        max-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        @include transition(opacity max-width, $duration-medium, $ease-standard);
+      }
+    }
+  }
+
+  // user profile
+  .userProfile {
+    gap: 0;
+    @include transition(all, $duration-medium, $ease-standard);
+
+    span {
+      display: inline-block;
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      @include transition(opacity max-width, $duration-medium, $ease-standard);
+    }
+  }
+
+  &:hover {
+    a:first-child {
+      gap: 10px;
+
+      svg:last-child {
+        opacity: 1;
+        max-width: unset;
+      }
+    }
+
+    .linksWrapper a {
+      gap: 12px;
+
+      span {
+        opacity: 1;
+        max-width: 200px;
+      }
+    }
+
+    .userProfile {
+      gap: 12px;
+
+      span {
+        opacity: 1;
+        max-width: 200px;
+      }
+    }
+  }
 }
