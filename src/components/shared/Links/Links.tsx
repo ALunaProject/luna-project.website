@@ -1,4 +1,4 @@
-import * as I from "@/assets/icons/Icons";
+import * as I from "@/assets/icons/SidebarIcons";
 import Link from "next/link";
 import s from "./styles.module.scss"
 
@@ -13,7 +13,7 @@ const Icon = I[icon]
     return (
         <Link className={s.linkContainer} href={href}>
             <Icon />
-            {label}
+            <span>{label}</span>
         </Link>
     )
 }
