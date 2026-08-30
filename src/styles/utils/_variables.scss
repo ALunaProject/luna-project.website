@@ -205,3 +205,17 @@ $shadow-sidebar-right: -5px 0 30px 0 rgba(7, 7, 37, 0.25);
 
 // Blur
 $blur-title: 100px;
+
+// Transitions
+
+// Duration
+$duration-fast: 0.15s;    // (hover)
+$duration-base: 0.25s;
+$duration-medium: 0.35s;  // (sidebar, modals)
+$duration-slow: 0.5s;     // (pages, drawers, overlays)
+
+// Easing
+$ease-standard: cubic-bezier(0.4, 0, 0.2, 1);   // Material Design
+$ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+$ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+$ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);

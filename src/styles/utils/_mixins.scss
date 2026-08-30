@@ -119,3 +119,16 @@
 @mixin poppins-bold-4xl  { @include text-style($font-poppins, $weight-bold, $fs-4xl); }
 @mixin poppins-bold-6xl  { @include text-style($font-poppins, $weight-bold, $fs-6xl); }
 @mixin poppins-bold-8xl  { @include text-style($font-poppins, $weight-bold, $fs-8xl); }
+
+// Transitions
+
+@mixin transition($properties: all, $duration: $duration-base, $easing: $ease-standard, $delay: 0s) {
+  transition-property: $properties;
+  transition-duration: $duration;
+  transition-timing-function: $easing;
+  transition-delay: $delay;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0.01ms !important;
+  }
+}
