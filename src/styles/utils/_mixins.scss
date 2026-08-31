@@ -1,4 +1,17 @@
 @use "./variables" as *;
+@use "sass:map";
+
+
+// Responsivity
+@mixin respond($breakpoint) {
+  @if not map.has-key($breakpoints, $breakpoint) {
+    @warn "Breakpoint `#{$breakpoint}` não existe. Use: desktop, tablet ou mobile.";
+  } @else {
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
 
 // Page Spacing
 @mixin content {

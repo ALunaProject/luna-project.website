@@ -219,3 +219,17 @@ $ease-standard: cubic-bezier(0.4, 0, 0.2, 1);   // Material Design
 $ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
 $ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
 $ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+// Responsivity
+
+// _breakpoints.scss
+
+$bp-desktop: 1440px;
+$bp-tablet: 834px;
+$bp-mobile: 393px;
+
+$breakpoints: (
+        desktop: $bp-desktop,
+        tablet: $bp-tablet,
+        mobile: $bp-mobile,
+);
