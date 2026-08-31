@@ -1,7 +1,7 @@
 import Links from "@/components/shared/Links/Links";
 import s from "./styles.module.scss"
 import LunaLogo from "@/assets/icons/LunaLogo";
-import UserProfile from "@/components/shared/UserProfile/UserProfile";
+import UserProfile from "@/components/layout/UserProfile/UserProfile";
 
 interface SidebarProps {
     isLoggedIn?: boolean;
