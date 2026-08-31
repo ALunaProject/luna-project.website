@@ -1,0 +1,11 @@
+@use "../../../styles/utils" as *;
+
+.gamesCard {
+  @include flex-center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-self: stretch;
+  border-radius: 12px;
+  background: $blue-violet-desat-600;
+  box-shadow: $shadow-card;
+}
