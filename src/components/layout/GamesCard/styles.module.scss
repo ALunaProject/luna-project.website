@@ -2,10 +2,36 @@
 
 .gamesCard {
   @include flex-center;
+  width: 100%;
+  max-width: 304px;
   flex-direction: column;
   align-items: flex-start;
   justify-self: stretch;
   border-radius: 12px;
   background: $blue-violet-desat-600;
   box-shadow: $shadow-card;
+  img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+
+  }
+}
+.gameProps {
+  @include flex-center;
+  padding: 30px 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  p{
+    @include abeezee-xl;
+  }
+}
+.tagsWrapper {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
 }

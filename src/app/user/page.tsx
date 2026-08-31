@@ -21,7 +21,6 @@ const User = {
     userBio: "Essa é minha bio , eu gosto de jogos e batata.",
 }
 
-
 export default function UserPage() {
     return (
         <main className={s.container}>
@@ -44,20 +43,34 @@ export default function UserPage() {
                     <section className={s.userLists}>
                         <h4>Lists</h4>
                         <div className={s.listsWrapper}>
-                            <ListsCard label="Wishlist"
+                            <ListsCard label="Lista de Desejos"
                                        games={['game1', 'game2', 'game3', 'game4', 'game5', 'game6', 'game7', 'game8']}/>
-                            <ListsCard label="Playing"
+                            <ListsCard label="Jogando"
                                        games={['game1', 'game2', 'game3', 'game4', 'game5', 'game6', 'game7', 'game8']}/>
-                            <ListsCard label="Played"
+                            <ListsCard label="Já Joguei"
                                        games={['game1', 'game2', 'game3', 'game4', 'game5', 'game6', 'game7', 'game8']}/>
                         </div>
                     </section>
                 </aside>
                 <aside className={s.userFavGames}>
-                    <h5>Favoritos de <span>{User.username}</span></h5>
-                    <div>
-                        <GamesCard name="reded"
-                                   imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10"/>
+                    <h5>Favoritos de <span>@{User.username}</span></h5>
+                    <div className={s.favGamesWrapper}>
+                        <GamesCard name="Reded"
+                                   imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10"
+                                   tags={['Jogo','Legal','Buceta']}
+                        />
+                        <GamesCard name="Reded"
+                                   imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10"
+                                   tags={['Jogo','Legal','Buceta']}
+                        />
+                        <GamesCard name="Reded"
+                                   imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10"
+                                   tags={['Jogo','Legal','Buceta']}
+                        />
+                        <GamesCard name="Reded"
+                                   imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10"
+                                   tags={['Jogo','Legal','Buceta']}
+                        />
                     </div>
                 </aside>
             </section>

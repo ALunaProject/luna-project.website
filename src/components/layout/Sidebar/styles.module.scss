@@ -11,6 +11,7 @@
   height: 100vh;
   background: $blue-violet-1200;
   box-shadow: $shadow-sidebar-left;
+  position: absolute;
   @include transition(all, $duration-medium, $ease-standard);
 
   a:first-child {
@@ -68,7 +69,6 @@
 
   &:hover {
     width: 100%;
-
     a:first-child {
       gap: 10px;
 
