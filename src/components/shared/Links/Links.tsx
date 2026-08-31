@@ -1,4 +1,4 @@
-import * as I from "@/assets/icons/SidebarIcons";
+import * as I from "@/assets/icons/LinksIcons";
 import Link from "next/link";
 import s from "./styles.module.scss"
 
