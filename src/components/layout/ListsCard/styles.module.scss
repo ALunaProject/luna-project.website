@@ -1,0 +1,34 @@
+@use "../../../styles/utils" as *;
+
+.listCard {
+  @include flex-center;
+  padding: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 10px;
+  width: 100%;
+  background-color: $blue-violet-desat-600;
+
+  border: 2px solid $pure-blue-600;
+  //dps trocar por :before e colocar com gradient
+  box-shadow: $shadow-post-card;
+  h6 {
+    @include poppins-regular-2xl;
+  }
+  a img {
+    @include transition(all, $duration-fast, $ease-decelerate);
+    &:hover {
+      scale: 1.2;
+    }
+  }
+
+}
+.gamesWrapper {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
