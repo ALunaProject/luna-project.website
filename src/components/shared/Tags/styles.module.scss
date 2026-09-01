@@ -1,0 +1,11 @@
+@use "../../../styles/utils" as *;
+
+.tagContainer {
+  @include flex-center;
+  padding: 4px 10px;
+  align-items: flex-end;
+  gap: 10px;
+  border-radius: 100px;
+  background: $blue-violet;
+  @include abeezee-base;
+}

@@ -1,0 +1,121 @@
+@use "../../styles/utils" as *;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  @include flex-center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 300px;
+  margin-left: 77px;
+  width: 100%;
+  gap: 30px;
+  background: linear-gradient(180deg, rgba(11, 8, 16, 0.00) 22.36%, rgba(16, 13, 18, 0.75) 37.74%, $blue-violet-desat-600 54.57%), var(--banner-image) lightgray 50% / cover no-repeat;
+  // esse background pode ser um mixin, já que é o mesmo em gamepage e newspage
+
+  .userInfo {
+    display: flex;
+    padding: 0 60px;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .userPP {
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+  }
+
+  h5 {
+    @include poppins-regular-3xl;
+    color: $neutrals-white;
+  }
+
+  @include respond(tablet) {
+    .userInfo {
+      flex-direction: column;
+
+      .userFavGames {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.userProps {
+  @include flex-center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.userLists {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  h4 {
+    @include poppins-light-4xl;
+  }
+}
+
+.listsWrapper {
+  @include flex-center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.userInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 30px;
+  flex: 1 0 0;
+  align-self: stretch;
+  width: 100%;
+}
+
+.userFavGames {
+  display: flex;
+  width: 100%;
+  padding-top: 113px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+
+  h5 span {
+    font-style: italic;
+  }
+}
+
+.favGamesWrapper {
+  @include flex-center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+}
+
+.userCommentsWrapper {
+  @include flex-center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 862px;
+
+  h3 {
+    @include poppins-regular-5xl;
+  }
+
+  div a span {
+    @include poppins-regular-xl;
+  }
+}

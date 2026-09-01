@@ -1,0 +1,12 @@
+@use "../../styles/utils" as *;
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  svg:last-child {
+    @include scale-hover-ani($scale-size: 1.05);
+  }
+}

@@ -1,11 +1,19 @@
 import type {Metadata} from "next";
-import {Geist, Geist_Mono, Poppins} from "next/font/google";
+import {Poppins, ABeeZee} from "next/font/google";
 import "@/styles/main.scss"
 
 const PoppinsFont = Poppins({
     weight: ["100","200","300","400","500","600","700","800","900"],
     subsets: ["latin"],
     variable: "--font-poppins",
+    preload: true,
+    display: "swap",
+});
+
+const Abeezee = Poppins({
+    weight: ["100","200","300","400","500","600","700","800","900"],
+    subsets: ["latin"],
+    variable: "--font-abeezee",
     preload: true,
     display: "swap",
 });
@@ -28,7 +36,7 @@ export default function RootLayout({
             />
         </head>
         <body
-            className={`${PoppinsFont.variable}`}
+            className={`${PoppinsFont.variable} ${Abeezee.variable}`}
         >
         {children}
         </body>
