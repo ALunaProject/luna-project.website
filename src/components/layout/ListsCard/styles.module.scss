@@ -8,6 +8,7 @@
   gap: 10px;
   border-radius: 10px;
   width: 100%;
+  max-width: 237px;
   background-color: $blue-violet-desat-600;
 
   border: 2px solid $pure-blue-600;
@@ -23,7 +24,9 @@
     //}
     @include scale-hover-ani;
   }
-
+  @include respond(tablet) {
+    max-width: unset;
+  }
 }
 .gamesWrapper {
   display: flex;

@@ -5,7 +5,7 @@ import Link from "next/link";
 interface ProfileProps {
     username: string;
     userPP: string;
-    className: string;
+    className?: string;
 
 }
 

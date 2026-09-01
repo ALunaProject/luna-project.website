@@ -1,9 +1,10 @@
 @use "../../../styles/utils" as *;
 
 .gamesCard {
-  @include flex-center;
+  display: flex;
   width: 100%;
-  max-width: 304px;
+  max-width: 321px;
+  height: 350px;
   flex-direction: column;
   align-items: flex-start;
   justify-self: stretch;
@@ -11,6 +12,7 @@
   background: $blue-violet-desat-600;
   box-shadow: $shadow-card;
   @include scale-hover-ani($scale-size: 1.025);
+
   img {
     width: 100%;
     object-fit: cover;
@@ -18,6 +20,7 @@
 
   }
 }
+
 .gameProps {
   @include flex-center;
   padding: 30px 12px;
@@ -25,10 +28,12 @@
   align-items: flex-start;
   gap: 16px;
   width: 100%;
-  p{
+
+  p {
     @include abeezee-xl;
   }
 }
+
 .tagsWrapper {
   display: flex;
   align-items: flex-start;
