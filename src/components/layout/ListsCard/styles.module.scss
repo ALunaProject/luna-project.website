@@ -17,10 +17,11 @@
     @include poppins-regular-2xl;
   }
   a img {
-    @include transition(all, $duration-fast, $ease-decelerate);
-    &:hover {
-      scale: 1.2;
-    }
+    //@include transition(all, $duration-fast, $ease-decelerate);
+    //&:hover {
+    //  scale: 1.2;
+    //}
+    @include scale-hover-ani;
   }
 
 }

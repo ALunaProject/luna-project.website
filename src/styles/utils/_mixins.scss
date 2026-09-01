@@ -1,7 +1,6 @@
 @use "./variables" as *;
 @use "sass:map";
 
-
 // Responsivity
 @mixin respond($breakpoint) {
   @if not map.has-key($breakpoints, $breakpoint) {
@@ -143,5 +142,12 @@
 
   @media (prefers-reduced-motion: reduce) {
     transition-duration: 0.01ms !important;
+  }
+}
+
+@mixin scale-hover-ani($scale-size: 1.2){
+  @include transition(all, $duration-fast, $ease-decelerate);
+  &:hover{
+    scale: $scale-size;
   }
 }

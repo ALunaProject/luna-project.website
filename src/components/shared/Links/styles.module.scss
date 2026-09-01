@@ -5,4 +5,7 @@
   gap: 12px;
   @include poppins-regular-xl;
   height: 24px;
+  span{
+    @include scale-hover-ani($scale-size: 1.05);
+  }
 }

@@ -10,6 +10,7 @@
   border-radius: 12px;
   background: $blue-violet-desat-600;
   box-shadow: $shadow-card;
+  @include scale-hover-ani($scale-size: 1.025);
   img {
     width: 100%;
     object-fit: cover;
