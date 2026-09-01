@@ -1,0 +1,18 @@
+@use "../../../styles/utils" as *;
+
+.commentsContainer {
+  display: flex;
+  width: 100%;
+  padding: 15px 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  border-bottom: 1px solid $blue-violet-desat-300;
+
+  p {
+    @include poppins-regular-base;
+  }
+}
+.commentsContainer:last-child {
+  border-bottom: none;
+}
