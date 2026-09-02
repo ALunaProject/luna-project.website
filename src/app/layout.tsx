@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Geist, Geist_Mono, Poppins, Archivo_Narrow} from "next/font/google";
+import {Poppins, ABeeZee, Archivo_Narrow} from "next/font/google";
 import "@/styles/main.scss"
 
 const PoppinsFont = Poppins({
@@ -8,6 +8,14 @@ const PoppinsFont = Poppins({
     variable: "--font-poppins",
     preload: true,
     display: "swap",
+});
+
+const Abeezee = ABeeZee({
+    weight: ['400'],
+    subsets: ["latin"],
+    variable: "--font-abeezee",
+    preload: true,
+    display: "swap"
 });
 
 const archivoNarrow = Archivo_Narrow({
@@ -34,7 +42,7 @@ export default function RootLayout({
             />
         </head>
         <body
-            className={`${PoppinsFont.variable} ${archivoNarrow.variable}`}
+            className={`${PoppinsFont.variable} ${archivoNarrow.variable} ${Abeezee.variable}`}
         >
         {children}
         </body>

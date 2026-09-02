@@ -1,4 +1,16 @@
 @use "./variables" as *;
+@use "sass:map";
+
+// Responsivity
+@mixin respond($breakpoint) {
+  @if not map.has-key($breakpoints, $breakpoint) {
+    @warn "Breakpoint `#{$breakpoint}` não existe. Use: desktop, tablet ou mobile.";
+  } @else {
+    @media (max-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  }
+}
 
 // Page Spacing
 @mixin content {
@@ -95,6 +107,7 @@
 @mixin poppins-regular-xs   { @include text-style($font-poppins, $weight-regular, $fs-xs); }
 @mixin poppins-regular-base { @include text-style($font-poppins, $weight-regular, $fs-base); }
 @mixin poppins-regular-lg   { @include text-style($font-poppins, $weight-regular, $fs-lg); }
+@mixin poppins-regular-xl   { @include text-style($font-poppins, $weight-regular, $fs-xl); }
 @mixin poppins-regular-2xl  { @include text-style($font-poppins, $weight-regular, $fs-2xl); }
 @mixin poppins-regular-3xl  { @include text-style($font-poppins, $weight-regular, $fs-3xl); }
 @mixin poppins-regular-4xl  { @include text-style($font-poppins, $weight-regular, $fs-4xl); }
@@ -124,3 +137,23 @@
 @mixin poppins-bold-4xl  { @include text-style($font-poppins, $weight-bold, $fs-4xl); }
 @mixin poppins-bold-6xl  { @include text-style($font-poppins, $weight-bold, $fs-6xl); }
 @mixin poppins-bold-8xl  { @include text-style($font-poppins, $weight-bold, $fs-8xl); }
+
+// Transitions
+
+@mixin transition($properties: all, $duration: $duration-base, $easing: $ease-standard, $delay: 0s) {
+  transition-property: $properties;
+  transition-duration: $duration;
+  transition-timing-function: $easing;
+  transition-delay: $delay;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@mixin scale-hover-ani($scale-size: 1.2){
+  @include transition(all, $duration-fast, $ease-decelerate);
+  &:hover{
+    scale: $scale-size;
+  }
+}
