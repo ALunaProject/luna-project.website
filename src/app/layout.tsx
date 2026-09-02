@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Geist, Geist_Mono, Poppins} from "next/font/google";
+import {Geist, Geist_Mono, Poppins, Archivo_Narrow} from "next/font/google";
 import "@/styles/main.scss"
 
 const PoppinsFont = Poppins({
@@ -8,6 +8,12 @@ const PoppinsFont = Poppins({
     variable: "--font-poppins",
     preload: true,
     display: "swap",
+});
+
+const archivoNarrow = Archivo_Narrow({
+    subsets: ["latin"],
+    weight: ["600"],
+    variable: "--font-archivo-narrow",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +34,7 @@ export default function RootLayout({
             />
         </head>
         <body
-            className={`${PoppinsFont.variable}`}
+            className={`${PoppinsFont.variable} ${archivoNarrow.variable}`}
         >
         {children}
         </body>

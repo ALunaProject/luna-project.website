@@ -41,6 +41,12 @@
   text-transform: $text-case;
 }
 
+// Archivo Narrow
+@mixin archivo-narrow-semibold-8xl {
+  @include text-style($font-archivoN, $weight-semibold, $fs-8xl);
+}
+
+
 // ABeeZee
 @mixin abeezee-xs   { @include text-style($font-abeezee, $weight-regular, $fs-xs); }
 @mixin abeezee-sm   { @include text-style($font-abeezee, $weight-regular, $fs-sm); }
