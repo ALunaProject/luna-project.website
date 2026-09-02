@@ -1,0 +1,40 @@
+@use "../../styles/utils" as *;
+
+.container {
+  @include content;
+  justify-content: center;
+  min-height: 100vh;
+
+  background-image: url("../../assets/images/backgroundLogin.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+  @media (max-width: 480px) {
+    padding: 32px 16px;
+  }
+}
+
+.logo {
+  @include flex-center;
+  gap: 17px;
+  align-self: stretch;
+}
+
+.logoImg {
+  width: 90px;
+  height: auto;
+}
+
+.logoTitle {
+  @include archivo-narrow-semibold-8xl;
+
+  background: $gradient-brand-primary;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (max-width: 480px) {
+    font-size: $fs-5xl;
+  }
+}
