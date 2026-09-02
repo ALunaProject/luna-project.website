@@ -1,30 +1,30 @@
 {
-  "name": "luna-project.website",
-  "version": "1.4.2-beta",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check",
-    "format": "biome format --write"
-  },
-  "dependencies": {
-    "axios": "^1.19.0",
-    "next": "16.3.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "scss": "^0.2.4",
-    "zustand": "^5.0.14"
-  },
-  "devDependencies": {
-    "sass": "^1.103.1",
-    "@biomejs/biome": "2.4.2",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "1.0.0",
-    "typescript": "^5"
-  },
-  "packageManager": "pnpm@11.21.0"
+	"name": "luna-project.website",
+	"version": "1.4.2-beta",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check",
+		"format": "biome format --write"
+	},
+	"dependencies": {
+		"axios": "^1.19.0",
+		"next": "16.3.0",
+		"react": "19.2.8",
+		"react-dom": "19.2.8",
+		"scss": "^0.2.4",
+		"zustand": "^5.0.14"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.2",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"babel-plugin-react-compiler": "1.0.0",
+		"sass": "^1.103.1",
+		"typescript": "^5"
+	},
+	"packageManager": "pnpm@11.21.0"
 }

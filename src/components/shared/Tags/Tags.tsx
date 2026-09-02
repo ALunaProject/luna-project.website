@@ -1,13 +1,9 @@
 import s from "./styles.module.scss"
 
 interface TagsProps {
-    label: string;
+	label: string
 }
 
-export default function Tags({label}: TagsProps) {
-    return (
-        <span className={s.tagContainer}>
-            {label}
-        </span>
-    )
+export default function Tags({ label }: TagsProps) {
+	return <span className={s.tagContainer}>{label}</span>
 }
