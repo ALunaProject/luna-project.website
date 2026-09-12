@@ -1,6 +1,6 @@
 import s from "./styles.module.scss"
 import UserProfile from "@/components/shared/UserProfile/UserProfile"
-import { getUserByID } from "@/services/userSerices"
+import { getUserByID } from "@/services/userServices"
 import { DEFAULT_AVATAR } from "@/utils/contants"
 
 export default async function Comments(comment: CommentDTO) {

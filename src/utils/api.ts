@@ -1,4 +1,5 @@
 import axios from "axios"
+import {API_BASE_URL} from "@/utils/contants";
 
 function getBaseUrl() {
 	// url relativa (client)
@@ -14,5 +15,9 @@ function getBaseUrl() {
 }
 
 export const api = axios.create({
-	baseURL: getBaseUrl(),
+	// baseURL: getBaseUrl(),
+	baseURL: API_BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+    }
 })
