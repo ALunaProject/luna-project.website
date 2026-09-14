@@ -1,0 +1,32 @@
+@use "../../../styles/utils/index" as *;
+
+.buttonContainer {
+  display: inline-flex;
+  width: 100%;
+  padding: 6px 8px;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 10px;
+  border-radius: 5px;
+  background: $blue-violet-500;
+  @include transition(all, $duration-fast);
+
+  &:hover {
+    background: $blue-violet-800;
+  }
+
+  &:active {
+    background: $blue-violet-400;
+  }
+
+  &:disabled {
+    opacity: 0.75;
+    background-color: $blue-violet-desat-300;
+  }
+
+  span {
+    @include abeezee-base;
+    color: $gs-white-smoke;
+  }
+
+}

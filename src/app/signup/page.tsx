@@ -5,7 +5,7 @@ import LunaLogo from "@/assets/icons/LunaLogo"
 export default function SignupPage() {
 	return (
 		<div className={s.container}>
-			<LunaLogo isLarge />
+			<LunaLogo />
 			<AuthCard variant={"signup"} />
 		</div>
 	)
