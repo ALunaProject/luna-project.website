@@ -1,5 +1,5 @@
 import { api } from "@/utils/api"
-import {AuthResponseDTO, LoginDTO, RegisterDTO} from "@/types/user.types";
+import { AuthResponseDTO, LoginDTO, RegisterDTO } from "@/types/user.types"
 
 export async function getUserByUsername(
 	username: string,
@@ -14,21 +14,23 @@ export async function getUserByUsername(
 }
 
 export async function getUserByID(userId: string): Promise<UserDTO | null> {
-    try {
-        const { data } = await api.get<UserDTO[]>("/api/users");
-        return data.find(u => u.id === userId) ?? null
-    } catch (error) {
-        console.error(error)
-        return null
-    }
+	try {
+		const { data } = await api.get<UserDTO[]>("/api/users")
+		return data.find(u => u.id === userId) ?? null
+	} catch (error) {
+		console.error(error)
+		return null
+	}
 }
 
 export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
-    const response = await api.post("/auth/login", data)
-    return response.data
+	const response = await api.post("/auth/login", data)
+	return response.data
 }
 
-export async function signupService(data: RegisterDTO): Promise<AuthResponseDTO> {
-    const response = await api.post<AuthResponseDTO>("/api/users", data)
-    return response.data
+export async function signupService(
+	data: RegisterDTO,
+): Promise<AuthResponseDTO> {
+	const response = await api.post<AuthResponseDTO>("/api/users", data)
+	return response.data
 }

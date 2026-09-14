@@ -8,25 +8,29 @@ import { useAuth } from "@/hooks/useAuth"
 import { DEFAULT_AVATAR } from "@/utils/contants"
 
 export default function Sidebar() {
-    const { isLoggedIn, user } = useAuth()
+	const { isLoggedIn, user } = useAuth()
 
-    return (
-        <aside className={s.sidebarContainer}>
-            <LunaLogo />
-            <nav className={s.linksWrapper}>
-                <Links href="/news" label="Notícias" icon="NewsIcon" />
-                <Links href="/games" label="Jogos" icon="GamesIcon" />
-                <Links href="/community" label="Comunidade" icon="CommunityIcon" />
-            </nav>
-            {isLoggedIn && user ? (
-                <UserProfile
-                    className={s.userProfile}
-                    username={user.username}
-                    userPP={user.profilePicUrl || DEFAULT_AVATAR}
-                />
-            ) : (
-                <button>entrar</button>
-            )}
-        </aside>
-    )
+	return (
+		<aside className={s.sidebarContainer}>
+			<LunaLogo />
+			<nav className={s.linksWrapper}>
+				<Links href="/news" label="Notícias" icon="NewsIcon" />
+				<Links href="/games" label="Jogos" icon="GamesIcon" />
+				<Links
+					href="/community"
+					label="Comunidade"
+					icon="CommunityIcon"
+				/>
+			</nav>
+			{isLoggedIn && user ? (
+				<UserProfile
+					className={s.userProfile}
+					username={user.username}
+					userPP={user.profilePicUrl || DEFAULT_AVATAR}
+				/>
+			) : (
+				<button>entrar</button>
+			)}
+		</aside>
+	)
 }

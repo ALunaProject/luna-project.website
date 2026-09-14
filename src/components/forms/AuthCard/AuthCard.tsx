@@ -7,10 +7,10 @@ import UserIcon from "../../../assets/icons/UserIcon"
 import MailIcon from "../../../assets/icons/MailIcon"
 import LockIcon from "../../../assets/icons/LockIcon"
 import Eye from "../../../assets/icons/EyeIcon"
-import {loginService, signupService} from "@/services/userServices";
-import {STORAGE_KEYS} from "@/utils/contants";
-import {useRouter} from "next/navigation";
-import {router} from "next/client";
+import { loginService, signupService } from "@/services/userServices"
+import { STORAGE_KEYS } from "@/utils/contants"
+import { useRouter } from "next/navigation"
+import { router } from "next/client"
 
 type AuthCardProps = {
 	variant: "login" | "signup"
@@ -25,11 +25,10 @@ function AuthCard({ variant }: AuthCardProps) {
 	const [email, setEmail] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
 
-    const [loading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<string>("")
+	const [loading, setLoading] = useState<boolean>(false)
+	const [error, setError] = useState<string>("")
 
-    const router = useRouter()
-
+	const router = useRouter()
 
 	const requirements = useMemo(
 		() => [
@@ -47,30 +46,28 @@ function AuthCard({ variant }: AuthCardProps) {
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-        setLoading(true)
-        setError("")
+		setLoading(true)
+		setError("")
 
-        try {
-            const response = isSignup
-                ? await signupService({ username, email, password })
-                : await loginService({ email, password })
+		try {
+			const response = isSignup
+				? await signupService({ username, email, password })
+				: await loginService({ email, password })
 
-            localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
+			localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
 			localStorage.setItem(STORAGE_KEYS.USER, response.username)
 
 			// Redireciona a pagina
-            if (isSignup) {
-                router.push("/login")
-            } else {
-                router.push(`/${response.username}`)
-            }
-
-        } catch (err: any) {
-            setError(err.message || "Erro de conexão. Tente novamente.")
-        } finally {
-            setLoading(false)
-        }
-
+			if (isSignup) {
+				router.push("/login")
+			} else {
+				router.push(`/${response.username}`)
+			}
+		} catch (err: any) {
+			setError(err.message || "Erro de conexão. Tente novamente.")
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	return (
