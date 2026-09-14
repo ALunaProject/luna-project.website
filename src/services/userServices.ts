@@ -5,7 +5,7 @@ export async function getUserByUsername(
 	username: string,
 ): Promise<UserDTO | null> {
 	try {
-		const { data } = await api.get<UserDTO[]>("/users.json")
+		const { data } = await api.get<UserDTO[]>("/api/users")
 		return data.find(u => u.username === username) ?? null
 	} catch (error) {
 		console.error("Falha ao buscar usuário:", error)
@@ -15,15 +15,13 @@ export async function getUserByUsername(
 
 export async function getUserByID(userId: string): Promise<UserDTO | null> {
     try {
-        const { data } = await api.get<UserDTO[]>("/users.json")
+        const { data } = await api.get<UserDTO[]>("/api/users");
         return data.find(u => u.id === userId) ?? null
     } catch (error) {
         console.error(error)
         return null
     }
 }
-// sinceramente n sei pq to fazendo isso, quando vier o back troca pelas reqs sla
-
 
 export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
     const response = await api.post("/auth/login", data)
