@@ -56,8 +56,9 @@ function AuthCard({ variant }: AuthCardProps) {
                 : await loginService({ email, password })
 
             localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
+			localStorage.setItem(STORAGE_KEYS.USER, response.username)
 
-            // Redireciona a pagina
+			// Redireciona a pagina
             if (isSignup) {
                 router.push("/login")
             } else {
