@@ -1,11 +1,11 @@
 import s from "./styles.module.scss"
 import Link from "next/link"
 
-export default function UserNotFound() {
+export default function NotFound() {
 	return (
 		<>
-			<h1>user not found</h1>
-			<Link href="/public">go back</Link>
+			<h1>page not found</h1>
+			<Link href="/">go back</Link>
 		</>
 	)
 }
