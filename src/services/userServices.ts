@@ -23,6 +23,25 @@ export async function getUserByID(userId: string): Promise<UserDTO | null> {
 	}
 }
 
+export async function updateUserById(
+	userId: string,
+	username: string,
+	userBio: string,
+): Promise<UserDTO | null> {
+	try {
+		await getUserByID(userId)
+		const res = await api.put(`/api/users/${userId}`, {
+			username: username,
+			userBio: userBio,
+		})
+		return res.data
+	} catch (error) {
+		console.error(error)
+		return null
+		// atualizar tratativa de erro dos services aqui, ou nao, n sei
+	}
+}
+
 export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
 	const response = await api.post("/auth/login", data)
 	return response.data
