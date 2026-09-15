@@ -1,0 +1,51 @@
+@use "../../../styles/utils/index" as *;
+
+.modalContainer {
+  button {
+    background: none;
+    @include poppins-regular-xl;
+
+    &:hover {
+      background: unset;
+    }
+
+    @include scale-hover-ani($scale-size: 1.05);
+  }
+}
+
+.modalContent {
+  backdrop-filter: blur(10px);
+  background-color: rgb(11 8 16 / 0.5);
+  position: absolute;
+  z-index: 1; // pro sidebar aparecer na tela
+  width: 100vw;
+  padding-left: 77px;
+  height: 100%;
+  right: 0;
+  top: 0;
+  flex-direction: column;
+  @include flex-center;
+  button {
+    background: $blue-violet-500;
+    &:hover{
+      background: $blue-violet-800;
+    }
+  }
+}
+.modalButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.modalLabelSec {
+  display: flex;
+  gap: 4px;
+  span {
+    @include poppins-bold-base;
+    color: $blue-violet-500;
+  }
+  input {
+    @include poppins-regular-base;
+    color: $blue-violet-200;
+  }
+}
