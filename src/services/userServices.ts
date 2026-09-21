@@ -1,5 +1,4 @@
 import { api } from "@/utils/api"
-import { AuthResponseDTO, LoginDTO, RegisterDTO } from "@/types/user.types"
 
 export async function getUserByUsername(
 	username: string,
@@ -47,9 +46,7 @@ export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
 	return response.data
 }
 
-export async function signupService(
-	data: RegisterDTO,
-): Promise<AuthResponseDTO> {
+export async function signupService(data: RegisterDTO): Promise<AuthResponseDTO> {
 	const response = await api.post<AuthResponseDTO>("/api/users", data)
 	return response.data
 }
