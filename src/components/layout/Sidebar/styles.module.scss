@@ -1,6 +1,7 @@
 @use "../../../styles/utils" as *;
 
 .sidebarContainer {
+  z-index: 2;
   min-width: 77px;
   width: 77px;
   display: flex;

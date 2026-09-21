@@ -7,6 +7,10 @@ import UserIcon from "../../../assets/icons/UserIcon"
 import MailIcon from "../../../assets/icons/MailIcon"
 import LockIcon from "../../../assets/icons/LockIcon"
 import Eye from "../../../assets/icons/EyeIcon"
+import { loginService, signupService } from "@/services/userServices"
+import { STORAGE_KEYS } from "@/utils/contants"
+import { useRouter } from "next/navigation"
+import Button from "@/components/ui/Button/Button"
 
 type AuthCardProps = {
 	variant: "login" | "signup"
@@ -17,9 +21,14 @@ function AuthCard({ variant }: AuthCardProps) {
 	const s = isSignup ? signupStyles : loginStyles
 
 	const [showPassword, setShowPassword] = useState<boolean>(false)
-	const [name, setName] = useState<string>("")
+	const [username, setUserName] = useState<string>("")
 	const [email, setEmail] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
+
+	const [loading, setLoading] = useState<boolean>(false)
+	const [error, setError] = useState<string>("")
+
+	const router = useRouter()
 
 	const requirements = useMemo(
 		() => [
@@ -35,9 +44,30 @@ function AuthCard({ variant }: AuthCardProps) {
 		[password],
 	)
 
-	function handleSubmit(e: FormEvent<HTMLFormElement>) {
+	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
-		console.log(isSignup ? { name, email, password } : { email, password })
+		setLoading(true)
+		setError("")
+
+		try {
+			const response = isSignup
+				? await signupService({ username, email, password })
+				: await loginService({ email, password })
+
+			localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
+			localStorage.setItem(STORAGE_KEYS.USER, response.username)
+
+			// Redireciona a pagina
+			if (isSignup) {
+				router.push("/login")
+			} else {
+				router.push(`/${response.username}`)
+			}
+		} catch (err: any) {
+			setError(err.message || "Erro de conexão. Tente novamente.")
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	return (
@@ -55,8 +85,8 @@ function AuthCard({ variant }: AuthCardProps) {
 							id="name"
 							type="text"
 							placeholder="Seu nome"
-							value={name}
-							onChange={e => setName(e.target.value)}
+							value={username}
+							onChange={e => setUserName(e.target.value)}
 							required
 						/>
 					</div>
@@ -112,9 +142,7 @@ function AuthCard({ variant }: AuthCardProps) {
 				)}
 			</div>
 
-			<button type="submit" className={s.submit}>
-				Entrar
-			</button>
+			<Button label={"Entrar"} type="submit" />
 
 			<p className={s.signupLink}>
 				{isSignup ? (

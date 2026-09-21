@@ -6,10 +6,11 @@ import React from "react"
 import ListsCard from "@/components/shared/ListsCard/ListsCard"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import Comments from "@/components/shared/Comments/Comments"
-import { getUserByUsername } from "@/services/userSerices"
+import { getUserByUsername } from "@/services/userServices"
 import { getAllComments } from "@/services/commentsServices"
 import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
 import { getAllGames } from "@/services/gamesServices"
+import EditingButton from "@/components/ui/EditinModal/EditingButton"
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username } = await params
@@ -24,7 +25,7 @@ export default async function UserPage({ params }: UserPageProps) {
 
 	return (
 		<main className={s.container}>
-			<Sidebar isLoggedIn />
+			<Sidebar />
 			<section
 				className={s.content}
 				style={
@@ -44,8 +45,10 @@ export default async function UserPage({ params }: UserPageProps) {
 							/>
 							<h5>@{user.username}</h5>
 							<p>{user.bio}</p>
-							{/* isLogged ? (<Links edit profile>) : null */}
-							{/*so quando tiver autenticação no front*/}
+							<EditingButton
+								profileUser={user}
+								profileUsername={user.username}
+							/>
 						</div>
 						<section className={s.userLists}>
 							<h4>Lists</h4>

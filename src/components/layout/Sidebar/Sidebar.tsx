@@ -1,13 +1,18 @@
+"use client"
+
 import Links from "@/components/shared/Links/Links"
 import s from "./styles.module.scss"
 import LunaLogo from "@/assets/icons/LunaLogo"
 import UserProfile from "@/components/shared/UserProfile/UserProfile"
+import { useAuth } from "@/hooks/useAuth"
+import { DEFAULT_AVATAR } from "@/utils/contants"
+import Button from "@/components/ui/Button/Button"
+import { useRouter } from "next/navigation"
 
-interface SidebarProps {
-	isLoggedIn?: boolean
-}
+export default function Sidebar() {
+	const { isLoggedIn, user } = useAuth()
+	const router = useRouter()
 
-export default function Sidebar({ isLoggedIn }: SidebarProps) {
 	return (
 		<aside className={s.sidebarContainer}>
 			<LunaLogo />
@@ -20,14 +25,19 @@ export default function Sidebar({ isLoggedIn }: SidebarProps) {
 					icon="CommunityIcon"
 				/>
 			</nav>
-			{isLoggedIn ? (
+			{isLoggedIn && user ? (
 				<UserProfile
 					className={s.userProfile}
-					username="chimbinha"
-					userPP="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXefoDt5LxS9Vwl-WUv4HdLmhwkKRuyWw6OwmoNEfBNVfJKHTmm8u-8E0&s=10"
+					username={user.username}
+					userPP={user.profilePicUrl || DEFAULT_AVATAR}
 				/>
 			) : (
-				<button>entrar</button>
+				<Button
+					onClick={() => {
+						router.push("/login")
+					}}
+					label={"Entrar"}
+				/>
 			)}
 		</aside>
 	)

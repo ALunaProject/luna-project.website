@@ -6,7 +6,7 @@ import LunaLogo from "@/assets/icons/LunaLogo"
 export default function LoginPage() {
 	return (
 		<div className={s.container}>
-			<LunaLogo isLarge />
+			<LunaLogo />
 			<AuthCard variant={"login"} />
 		</div>
 	)
