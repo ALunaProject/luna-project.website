@@ -40,22 +40,22 @@ A estrutura do projeto é organizada para facilitar a manutenção e o desenvolv
 │   │
 │   ├── ui/                      # Componentes UI genéricos
 │   │   ├── Button/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Input/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Card/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Modal/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Dropdown/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Skeleton/           # Skeletons para carregamento
-│   │   │   ├── index.tsx       # Componente Skeleton genérico
+│   │   │   ├── page.tsx       # Componente Skeleton genérico
 │   │   │   ├── LoginSkeleton.tsx
 │   │   │   ├── NewsSkeleton.tsx
 │   │   │   ├── DiscoverySkeleton.tsx
@@ -67,35 +67,35 @@ A estrutura do projeto é organizada para facilitar a manutenção e o desenvolv
 │   │
 │   ├── layout/                 # Componentes de layout
 │   │   ├── Header/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── Footer/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   └── Sidebar/
-│   │       ├── index.tsx
+│   │       ├── page.tsx
 │   │       └── styles.module.css
 │   │
 │   ├── forms/                  # Formulários reutilizáveis
 │   │   ├── LoginForm/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   ├── RegisterForm/
-│   │   │   ├── index.tsx
+│   │   │   ├── page.tsx
 │   │   │   └── styles.module.css
 │   │   └── PostForm/
-│   │       ├── index.tsx
+│   │       ├── page.tsx
 │   │       └── styles.module.css
 │   │
 │   └── shared/                 # Componentes compartilhados entre páginas
 │       ├── GameCard/
-│       │   ├── index.tsx
+│       │   ├── page.tsx
 │       │   └── styles.module.css
 │       ├── PostCard/
-│       │   ├── index.tsx
+│       │   ├── page.tsx
 │       │   └── styles.module.css
 │       └── CommentSection/
-│           ├── index.tsx
+│           ├── page.tsx
 │           └── styles.module.css
 │
 ├── hooks/                       # Hooks personalizados

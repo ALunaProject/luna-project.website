@@ -1,0 +1,58 @@
+@use "../../../styles/utils/index" as *;
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 849px;
+  height: 268.59px;
+  box-shadow: $shadow-post-card;
+  padding: 30px 50px;
+  gap: 20px;
+}
+
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.headerPostContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.postPP {
+  width: 72.59px;
+  height: 72.59px;
+  border-radius: 100%;
+}
+
+.profileName {
+  @include poppins-regular-3xl;
+  color: $gs-sea-salt;
+}
+
+.tagsContainer {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+
+.postContent {
+  width: 100%;
+}
+
+.contentText {
+  @include poppins-regular-lg;
+  color: $gs-sea-salt;
+}
+
+.commentButton {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  @include poppins-regular-lg;
+  color: $neutrals-white;
+}
