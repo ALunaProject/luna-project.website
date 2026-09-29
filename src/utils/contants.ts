@@ -10,3 +10,6 @@ export const STORAGE_KEYS = {
 	TOKEN: "@Luna:token",
 	USER: "@Luna:user",
 } as const
+
+export const GAMES_API_KEY =
+	process.env.NEXT_PUBLIC_GAMES_API_KEY
