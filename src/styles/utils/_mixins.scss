@@ -13,6 +13,11 @@
 }
 
 // Page Spacing
+@mixin container {
+  display: flex;
+  height: 100vh;
+}
+
 @mixin content {
   display: flex;
   padding: 75px 30px;
