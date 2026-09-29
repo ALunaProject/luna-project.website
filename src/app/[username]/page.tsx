@@ -15,7 +15,7 @@ import EditingButton from "@/components/ui/EditinModal/EditingButton"
 export default async function UserPage({ params }: UserPageProps) {
 	const { username } = await params
 	const user = await getUserByUsername(username)
-	const games = await getAllGames()
+	// const games = await getAllGames()
 
 	if (!user) {
 		notFound()
@@ -101,15 +101,15 @@ export default async function UserPage({ params }: UserPageProps) {
 							Favoritos de <span>@{user.username}</span>
 						</h5>
 						<div className={s.favGamesWrapper}>
-							{games.slice(0, 4).map((game, index) => (
-								<GamesCard
-									key={index}
-									name={game.name}
-									previewImg={game.previewImg}
-									tags={game.tags}
-									id={game.id}
-								/>
-							))}
+							{/*{games.slice(0, 4).map((game, index) => (*/}
+							{/*	<GamesCard*/}
+							{/*		key={index}*/}
+							{/*		name={game.name}*/}
+							{/*		previewImg={game.previewImg}*/}
+							{/*		tags={game.tags}*/}
+							{/*		id={game.id}*/}
+							{/*	/>*/}
+							{/*))}*/}
 							{/*logica de 4 jogos favs e listas de cada usuario, implementar só depois da integração do back, quando tiver hospedado com relacionamento e etc*/}
 						</div>
 					</aside>

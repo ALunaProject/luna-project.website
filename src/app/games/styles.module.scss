@@ -1,0 +1,12 @@
+@use "../../styles/utils/index" as *;
+
+.container {
+  @include container;
+}
+.content {
+  @include content;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  margin-left: 77px;
+  width: 100%;
+}

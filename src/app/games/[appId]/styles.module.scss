@@ -1,0 +1,19 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  @include flex-center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding-top: 300px;
+  margin-left: 77px;
+  width: 100%;
+  gap: 30px;
+  background: linear-gradient(180deg, rgba(11, 8, 16, 0.00) 22.36%, rgba(16, 13, 18, 0.75) 37.74%, $blue-violet-desat-600 54.57%), var(--banner-image) lightgray 50% / cover no-repeat;
+  // esse background pode ser um mixin, já que é o mesmo em gamepage e newspage
+}
