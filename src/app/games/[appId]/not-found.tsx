@@ -2,10 +2,10 @@ import s from "./styles.module.scss"
 import Link from "next/link"
 
 export default function NotFound() {
-    return (
-        <>
-            <h1>game not found</h1>
-            <Link href="/">go back</Link>
-        </>
-    )
+	return (
+		<>
+			<h1>Jogo não encontrado</h1>
+			<Link href="/games">Voltar</Link>
+		</>
+	)
 }
