@@ -2,11 +2,19 @@
 
 .container {
   @include container;
+  justify-content: flex-start;
 }
 .content {
   @include content;
   justify-content: flex-start;
   overflow-y: scroll;
   margin-left: 77px;
+  width: 100%;
+}
+.gamesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px;
   width: 100%;
 }

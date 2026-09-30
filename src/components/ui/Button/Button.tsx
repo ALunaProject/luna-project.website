@@ -3,7 +3,7 @@ import * as I from "@/assets/icons/LinksIcons"
 import s from "./styles.module.scss"
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	label: string
+	label?: string
 	icon?: keyof typeof I
 }
 
@@ -13,7 +13,7 @@ export default function Button({ label, icon, ...rest }: ButtonProps) {
 	return (
 		<button className={s.buttonContainer} {...rest}>
 			{Icon ? <Icon /> : null}
-			<span>{label}</span>
+			{label ? <span>{label}</span> : null}
 		</button>
 	)
 }
