@@ -8,13 +8,29 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "encrypted-tbn0.gstatic.com",
+				pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
 			},
 			{
 				protocol: "https",
 				hostname: "**.wikimedia.org",
 				pathname: "/**",
 			},
-			//teste para imagens externas, remover depois!!
+			// Domínios da CDN da Steam
+			{
+				protocol: "https",
+				hostname: "shared.akamai.steamstatic.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "cdn.akamai.steamstatic.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "shared.cloudflare.steamstatic.com",
+				pathname: "/**",
+			},
 		],
 	},
 }

@@ -1,27 +1,14 @@
 import s from "./styles.module.scss"
 
-import { getAllGames, getGameDetails } from "@/services/gamesServices"
+import { getGameDetails } from "@/services/gamesServices"
 import { notFound } from "next/navigation"
 import { GamesPageProps } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
 import Tags from "@/components/ui/Tags/Tags"
-
-// export async function generateMetadata({params}: GamesPageProps): Promise<Metadata> {
-//     const {appId} = await params
-//     const featuredGame = await getGameDetails(appId)
-//
-//     if (!featuredGame) {
-//         return {
-//             title: "Luna | Jogo não encontrado",
-//         }
-//     }
-//
-//     return {
-//         title: `Luna | ${featuredGame.name}`,
-//         // You can also add Open Graph / Twitter metadata here:
-//         description: `Confira os detalhes de ${featuredGame.name}`,
-//     }}
+import { DEFAULT_BANNER } from "@/utils/contants"
+import React from "react"
+import Sidebar from "@/components/layout/Sidebar/Sidebar"
 
 export async function generateMetadata({
 	params,
@@ -47,20 +34,35 @@ export default async function GamePage({ params }: GamesPageProps) {
 	if (!game) {
 		notFound()
 	}
+
 	return (
-		<div>
+		<main className={s.container}>
+			<Sidebar />
 			{game ? (
-				<section>
-					<img src={game.header_image} alt={game.name} />
+				<section
+					className={s.content}
+					style={
+						{
+							"--banner-image": `url(${game.background_raw || DEFAULT_BANNER})`,
+						} as React.CSSProperties
+					}>
+					{/* se o background for ficar apenas em cima, criar um Banner separado */}
 					<h1>{game.name}</h1>
-					{/*<p>{game.short_description}</p>*/}
-					{game?.genres?.slice(0, 3).map(g => (
-						<Tags key={g.id} label={g.description} />
-					))}
+					<div className={s.tagsWrapper}>
+						{game?.genres?.map(g => (
+							<Tags key={g.id} label={g.description} />
+						))}
+					</div>
+					<div
+						className={s.description}
+						dangerouslySetInnerHTML={{
+							__html: game.detailed_description,
+						}}
+					/>
 				</section>
 			) : (
 				<p>Não foi possível carregar os detalhes do jogo.</p>
 			)}
-		</div>
+		</main>
 	)
 }

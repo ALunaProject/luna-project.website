@@ -17,13 +17,12 @@ export async function getAllGames(): Promise<GameData[]> {
 			query: {
 				start: "0",
 				count: "25",
-				sort: "20",
+				sort: "11",
 				// sort: categotia de listagem (relevancia, mais jogados, lançamento, alfabetico, etc)
 				// 20 = mais jogados; 11 = mais vendidos, dar uma olhada em cada codigo e testar (nao documentado kk)
 				filters: {
 					released_only: true,
 					type_filters: {
-						include_apps: true,
 						include_games: true,
 					},
 				},
@@ -33,8 +32,7 @@ export async function getAllGames(): Promise<GameData[]> {
 				country_code: "BR",
 			},
 			data_request: {
-				include_basic_info: true,
-				// olhar docs para tratar corretamente
+				include_basic_info: false,
 			},
 		}
 

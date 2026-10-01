@@ -5,7 +5,6 @@ export interface GamesPageProps {
 
 // atributos do jogo(appList) em si
 export interface GameData {
-	item_type: string
 	id: string
 	name: string
 }
@@ -25,14 +24,41 @@ export interface GamesResponse {
 
 // atributos do jogo(appDetails) em si
 export interface GameDetailsData {
-	type: string
 	name: string
+	is_free: boolean
 	detailed_description: string
+	about_the_game: string
 	header_image: string
+	background: string
+	background_raw: string
+
 	genres: Array<{ id: string; description: string }>
+	categories: Array<{ id: string; description: string }>
+	screenshots: Array<{ id: string; path_full: string }>
+	movies: Array<{ id: string; thumbnail: string; dash_av1: string }>
+
 	release_date: {
 		coming_soon: boolean
 		date: string
+	}
+	pc_requirements: {
+		minimum: string
+		recommended: string
+	}
+	price_overview: {
+		currency: string
+		final_formatted: string
+	}
+	platforms: {
+		windows: boolean
+		mac: boolean
+		linux: boolean
+	}
+	ratings: {
+		dejus: {
+			required_age: string
+			descriptors: string
+		}
 	}
 }
 
