@@ -26,23 +26,36 @@
 
 .gameProps {
   @include flex-center;
+  @include transition(margin-top);
   padding: 30px 12px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
   width: 100%;
+  height: 100%;
+  margin-top: 0;
   border-radius: 0 0 12px 12px;
   background-color: $blue-violet-desat-600;
   .buttonsWrapper {
+    @include transition(all);
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    z-index: 1;
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-80px);
     button {
       width: unset;
     }
   }
   &:hover {
-
+    margin-top: -80px;
+    .buttonsWrapper {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 80px;
+    }
   }
 ;
 
