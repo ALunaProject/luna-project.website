@@ -5,8 +5,14 @@ export interface GamesPageProps {
 
 // atributos do jogo(appList) em si
 export interface GameData {
-	id: string
+	appid: string
 	name: string
+	assets: {
+		header_2x: string
+		header: string
+		community_icon: string
+	}
+	tags: Array<{ tagid: number; weight: string }>
 }
 
 // response da API - appList
@@ -71,14 +77,6 @@ interface GameDetailsEntry {
 // resposta de appDetails
 export type GameDetailsResponse = Record<string, GameDetailsEntry>
 
-// export interface GameCategories {
-//     response: {
-//         categories: GameCategory[]
-//     }
-// }
-//
-// export interface GameCategory {
-//     categoryid: string;
-//     type: string;
-//     display_name: string
-// }
+export interface GameTags {
+	data: Array<{ tagid: number; name: string }>
+}

@@ -6,7 +6,6 @@ import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GameData } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
-import { notFound } from "next/navigation"
 
 export async function generateMetadata(): Promise<Metadata> {
 	return constructMetadata({
@@ -25,7 +24,7 @@ export default async function GamesPage() {
 			<section className={s.content}>
 				<div className={s.gamesWrapper}>
 					{games.map((game: GameData) => (
-						<GamesCard key={game.id} {...game} />
+						<GamesCard key={game.appid} {...game} />
 					))}
 					{games.length === 0 && (
 						<p>Nenhum jogo encontrado no momento.</p>

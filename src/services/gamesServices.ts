@@ -5,9 +5,8 @@ import {
 	GameDetailsData,
 	GameDetailsResponse,
 	GamesResponse,
-	GameData,
+	GameData
 } from "@/types/gamesDTO"
-import axios from "axios"
 import { unstable_cache } from "next/cache"
 
 export async function getAllGames(): Promise<GameData[]> {
@@ -32,7 +31,9 @@ export async function getAllGames(): Promise<GameData[]> {
 				country_code: "BR",
 			},
 			data_request: {
-				include_basic_info: false,
+				include_assets: true,
+				include_ratings: true,
+				include_tag_count: 3,
 			},
 		}
 
@@ -44,7 +45,7 @@ export async function getAllGames(): Promise<GameData[]> {
 				},
 			},
 		)
-		console.log(res)
+		console.log(res.data)
 		return res.data?.response?.store_items || []
 	} catch (error) {
 		console.error("Erro ao carregar jogos da Steam:", error)
@@ -82,14 +83,3 @@ export async function getGameDetails(
 		return null
 	}
 }
-
-// export async function getAllCategories(): Promise<GameCategory[]> {
-//     try {
-//         const res = await gamesApi.get<GameCategories>("IStoreBrowseService/GetStoreCategories/v1/?language=brazilian")
-//     	console.log(res)
-//         return res.data?.response?.categories || []
-//     } catch (error) {
-//         console.error("Erro ao carregar jogos da Steam:", error)
-//         return []
-//     }
-// }

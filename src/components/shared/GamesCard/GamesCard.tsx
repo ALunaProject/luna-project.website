@@ -2,18 +2,20 @@ import s from "./styles.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 import Tags from "@/components/ui/Tags/Tags"
-import { DEFAULT_BANNER } from "@/utils/contants"
 import { GameData } from "@/types/gamesDTO"
-import { getGameDetails } from "@/services/gamesServices"
 import Button from "@/components/ui/Button/Button"
+import { STEAM_TAG_NAMES } from "@/utils/contants"
 
 export default async function GamesCard(Game: GameData) {
-	const game = await getGameDetails(Game.id)
+	const genres = Game.tags
+		.slice(0, 3)
+		.map(t => STEAM_TAG_NAMES[t.tagid])
+		.filter(Boolean)
 
 	return (
-		<Link href={`games/${Game.id}`} className={s.gamesCard}>
+		<Link href={`games/${Game.appid}`} className={s.gamesCard}>
 			<Image
-				src={game?.header_image || DEFAULT_BANNER}
+				src={`https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${Game.appid}/${Game.assets.header}?t=1789251637)`}
 				alt={`${Game.name}preview-image`}
 				width={321}
 				height={150}
@@ -21,8 +23,8 @@ export default async function GamesCard(Game: GameData) {
 			<div className={s.gameProps}>
 				<p>{Game.name}</p>
 				<div className={s.tagsWrapper}>
-					{game?.genres?.slice(0, 2).map(g => (
-						<Tags key={g.id} label={g.description} />
+					{genres.map((t, i) => (
+						<Tags key={i} label={t} />
 					))}
 				</div>
 				<div className={s.buttonsWrapper}>
