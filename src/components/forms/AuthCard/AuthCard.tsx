@@ -61,7 +61,7 @@ function AuthCard({ variant }: AuthCardProps) {
 			if (isSignup) {
 				router.push("/login")
 			} else {
-				router.push(`/user/${response.username}`)
+				router.push(`/${response.username}`)
 			}
 		} catch (err: any) {
 			setError(err.message || "Erro de conexão. Tente novamente.")
