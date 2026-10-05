@@ -6,7 +6,26 @@
 
 .content {
   @include contentPage;
+  flex-direction: row;
   align-items: flex-start;
+  z-index: 1;
+}
+
+.gameContent {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 57.47%;
+}
+
+.rating {
+  display: flex;
+  width: 356px;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 80px;
 }
 
 .tagsWrapper {

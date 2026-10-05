@@ -346,10 +346,6 @@
   transition-duration: $duration;
   transition-timing-function: $easing;
   transition-delay: $delay;
-
-  @media (prefers-reduced-motion: reduce) {
-    transition-duration: 0.01ms !important;
-  }
 }
 
 @mixin scale-hover-ani($scale-size: 1.2) {
