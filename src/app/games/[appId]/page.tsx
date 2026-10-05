@@ -49,14 +49,17 @@ export default async function GamePage({ params }: GamesPageProps) {
 					{/* se o background for ficar apenas em cima, criar um Banner separado */}
 					<h1>{game.name}</h1>
 					<div className={s.tagsWrapper}>
-						{game?.genres?.map(g => (
-							<Tags key={g.id} label={g.description} />
+						{game?.genres?.map(gen => (
+							<Tags key={gen.id} label={gen.description} />
+						))}
+						{game?.categories?.map(cat => (
+							<Tags key={cat.id} label={cat.description} />
 						))}
 					</div>
 					<div
 						className={s.description}
 						dangerouslySetInnerHTML={{
-							__html: game.detailed_description,
+							__html: game.about_the_game,
 						}}
 					/>
 				</section>

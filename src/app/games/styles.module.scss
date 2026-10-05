@@ -4,10 +4,12 @@
   @include container;
   justify-content: flex-start;
 }
+
 .content {
   @include content;
 
 }
+
 .gamesWrapper {
   display: flex;
   flex-wrap: wrap;
@@ -15,3 +17,4 @@
   gap: 23px;
   width: 100%;
 }
+

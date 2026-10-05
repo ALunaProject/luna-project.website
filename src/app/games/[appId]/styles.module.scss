@@ -23,20 +23,22 @@
   flex-direction: column;
   gap: 8px;
 
-  img, video, br, p:empty {
+  br, p:empty {
     display: none;
   }
 
   h1, h2, h3, h4, h5, h6, strong, span {
     @include poppins-semibold-xl;
+    text-align: start !important;
   }
 
   p {
-    line-height: 1.6;
+    line-height: 1.6 !important;
+    text-align: start !important;
   }
 
   ul, li {
-    list-style: inside;
+    list-style: inside !important;
   }
 
 }
