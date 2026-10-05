@@ -1,3 +1,5 @@
+"use client"
+
 import { ButtonHTMLAttributes } from "react"
 import * as I from "@/assets/icons/LinksIcons"
 import s from "./styles.module.scss"

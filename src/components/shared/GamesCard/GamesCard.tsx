@@ -5,9 +5,10 @@ import Tags from "@/components/ui/Tags/Tags"
 import { GameData } from "@/types/gamesDTO"
 import Button from "@/components/ui/Button/Button"
 import { STEAM_TAG_NAMES } from "@/utils/contants"
+import CardActions from "@/components/shared/GamesCard/CardActions/GameCardActions"
 
 export default async function GamesCard(Game: GameData) {
-	const genres = Game.tags
+	const tags = Game.tags
 		.slice(0, 3)
 		.map(t => STEAM_TAG_NAMES[t.tagid])
 		.filter(Boolean)
@@ -19,18 +20,16 @@ export default async function GamesCard(Game: GameData) {
 				alt={`${Game.name}preview-image`}
 				width={321}
 				height={150}
+				loading="eager"
 			/>
 			<div className={s.gameProps}>
 				<p>{Game.name}</p>
 				<div className={s.tagsWrapper}>
-					{genres.map((t, i) => (
-						<Tags key={i} label={t} />
+					{tags.map((t, i) => (
+						<Tags inCard key={i} label={t} />
 					))}
 				</div>
-				<div className={s.buttonsWrapper}>
-					<Button label="Adicionar ao Perfil" />
-					<Button icon="AddIcon" />
-				</div>
+				<CardActions />
 			</div>
 		</Link>
 	)

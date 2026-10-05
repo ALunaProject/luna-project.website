@@ -19,7 +19,7 @@ export const NewsIcon = () => (
 	</svg>
 )
 
-//
+// Games Icon
 
 export const GamesIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
@@ -40,7 +40,7 @@ export const GamesIcon = () => (
 	</svg>
 )
 
-//
+// Community
 
 export const CommunityIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
@@ -105,6 +105,96 @@ export const AddIcon = () => (
 			strokeLinejoin="round"
 			strokeWidth={1.5}
 			d="M8 12h8M12 16V8M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7Z"
+		/>
+	</svg>
+)
+
+// Arrow Icon (Right)
+
+export const ArrowIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M6 12V9.33c0-3.31 2.35-4.67 5.22-3.01l2.31 1.34L15.84 9c2.87 1.66 2.87 4.37 0 6.03l-2.31 1.34-2.31 1.34C8.35 19.34 6 17.99 6 14.67V12Z"
+		/>
+	</svg>
+)
+
+export const PlayAddIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={25} height={24} fill="none">
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="M22.03 12c0 1.31-.25 2.57-.72 3.72a4.018 4.018 0 0 0-2.284-.72c-.94 0-1.812.33-2.503.88A3.968 3.968 0 0 0 15.021 19c0 .75.21 1.46.58 2.06.04.07.09.14.15.21a9.866 9.866 0 0 1-3.734.73C6.489 22 2.003 17.52 2.003 12S6.489 2 12.017 2C17.544 2 22.03 6.48 22.03 12Z"
+		/>
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M9.393 12v-1.39c0-1.72 1.222-2.43 2.714-1.57l1.202.69 1.201.69c1.492.86 1.492 2.27 0 3.13l-1.201.69-1.202.69c-1.492.86-2.714.16-2.714-1.57V12ZM23.032 19c0 .75-.21 1.46-.58 2.06-.21.36-.481.68-.792.94-.7.63-1.622 1-2.633 1a3.976 3.976 0 0 1-3.425-1.94c-.37-.6-.581-1.31-.581-2.06 0-1.26.58-2.39 1.502-3.12a4.002 4.002 0 0 1 6.51 3.12ZM20.519 18.98h-2.985M19.027 17.52v2.99"
+		/>
+	</svg>
+)
+
+export const PlayCheckIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={25} height={24} fill="none">
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="M22.03 12c0 1.31-.25 2.57-.72 3.72a4.018 4.018 0 0 0-2.284-.72c-.94 0-1.812.33-2.503.88A3.968 3.968 0 0 0 15.021 19c0 .75.21 1.46.58 2.06.04.07.09.14.15.21a9.866 9.866 0 0 1-3.734.73C6.489 22 2.003 17.52 2.003 12S6.489 2 12.017 2C17.544 2 22.03 6.48 22.03 12Z"
+		/>
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M9.393 12v-1.39c0-1.72 1.222-2.43 2.714-1.57l1.202.69 1.201.69c1.492.86 1.492 2.27 0 3.13l-1.201.69-1.202.69c-1.492.86-2.714.16-2.714-1.57V12ZM23.032 19c0 .75-.21 1.46-.58 2.06-.21.36-.481.68-.792.94-.7.63-1.622 1-2.633 1a3.976 3.976 0 0 1-3.425-1.94c-.37-.6-.581-1.31-.581-2.06 0-1.26.58-2.39 1.502-3.12a4.002 4.002 0 0 1 6.51 3.12Z"
+		/>
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="m17.375 18.971 1.111 1.11 2.404-2.22"
+		/>
+	</svg>
+)
+
+export const PlayWishIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={25} height={24} fill="none">
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="M22.03 12c0 1.31-.25 2.57-.72 3.72a4.018 4.018 0 0 0-2.284-.72c-.94 0-1.812.33-2.503.88A3.968 3.968 0 0 0 15.021 19c0 .75.21 1.46.58 2.06.04.07.09.14.15.21a9.866 9.866 0 0 1-3.734.73C6.489 22 2.003 17.52 2.003 12S6.489 2 12.017 2C17.544 2 22.03 6.48 22.03 12Z"
+		/>
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M9.393 12v-1.39c0-1.72 1.222-2.43 2.714-1.57l1.202.69 1.201.69c1.492.86 1.492 2.27 0 3.13l-1.201.69-1.202.69c-1.492.86-2.714.16-2.714-1.57V12ZM23.032 19c0 .75-.21 1.46-.58 2.06-.21.36-.481.68-.792.94-.7.63-1.622 1-2.633 1a3.976 3.976 0 0 1-3.425-1.94c-.37-.6-.581-1.31-.581-2.06 0-1.26.58-2.39 1.502-3.12a4.002 4.002 0 0 1 6.51 3.12Z"
+		/>
+		<path
+			stroke="#F6F6F9"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M19.592 17.691v1.69l-1.402.84"
 		/>
 	</svg>
 )
