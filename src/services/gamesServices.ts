@@ -5,20 +5,26 @@ import {
 	GameDetailsData,
 	GameDetailsResponse,
 	GamesResponse,
-	GameData
+	GameData,
 } from "@/types/gamesDTO"
 import { unstable_cache } from "next/cache"
 
-export async function getAllGames(): Promise<GameData[]> {
+export async function getAllGames({
+	start,
+	count,
+	sort,
+}: any): Promise<GameData[]> {
 	try {
 		const queryPayload = {
 			// mesmo set de SteamWebApi
 			query: {
-				start: "0",
-				count: "25",
-				sort: "11",
-				// sort: categotia de listagem (relevancia, mais jogados, lançamento, alfabetico, etc)
-				// 20 = mais jogados; 11 = mais vendidos, dar uma olhada em cada codigo e testar (nao documentado kk)
+				start: start,
+				count: count,
+				sort: sort,
+				// sort: categoria de listagem (n documentado kk)
+				// 11 - Mais vendidos (você testou e confirmou)
+				// 20 - Mais recentes
+				// 21 - % de reviews positivas (desc)
 				filters: {
 					released_only: true,
 					type_filters: {
@@ -45,7 +51,6 @@ export async function getAllGames(): Promise<GameData[]> {
 				},
 			},
 		)
-		console.log(res.data)
 		return res.data?.response?.store_items || []
 	} catch (error) {
 		console.error("Erro ao carregar jogos da Steam:", error)
@@ -63,6 +68,7 @@ const getCachedGameDetails = unstable_cache(
 		)
 		const entry = res.data[appId]
 		if (!entry?.success || !entry.data) return null
+		console.log(entry.data)
 		return entry.data
 	},
 	["game-details"],

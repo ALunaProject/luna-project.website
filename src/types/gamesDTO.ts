@@ -3,6 +3,12 @@ export interface GamesPageProps {
 	params: Promise<{ appId: string }>
 }
 
+export type ListGamesProps = {
+	start: number
+	count: number
+	sort: string
+}
+
 // atributos do jogo(appList) em si
 export interface GameData {
 	appid: string

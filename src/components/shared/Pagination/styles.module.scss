@@ -1,0 +1,25 @@
+@use "../../../styles/utils/index" as *;
+
+.pagination {
+  display: flex;
+  gap: 12px;
+
+  a {
+    background-color: $blue-violet-500;
+    padding: 6px 8px;
+    border-radius: 5px;
+    height: unset;
+
+    svg {
+      rotate: 180deg;
+    }
+
+    &:last-child {
+      flex-direction: row-reverse;
+
+      svg {
+        rotate: unset;
+      }
+    }
+  }
+}

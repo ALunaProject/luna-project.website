@@ -1,11 +1,11 @@
 import s from "./styles.module.scss"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
-import { getAllGames, getGameDetails } from "@/services/gamesServices"
-
+import { getAllGames } from "@/services/gamesServices"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GameData } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
+import Pagination from "@/components/shared/Pagination/Pagination"
 
 export async function generateMetadata(): Promise<Metadata> {
 	return constructMetadata({
@@ -15,8 +15,17 @@ export async function generateMetadata(): Promise<Metadata> {
 	})
 }
 
-export default async function GamesPage() {
-	const games: GameData[] = await getAllGames()
+export default async function GamesPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string }>
+}) {
+	const params = await searchParams
+	const page = Math.max(0, Number(params.page) || 0)
+	const count = 25
+	const start = page * count
+
+	const games: GameData[] = await getAllGames({ start, count, sort: "20" })
 
 	return (
 		<main className={s.container}>
@@ -30,6 +39,7 @@ export default async function GamesPage() {
 						<p>Nenhum jogo encontrado no momento.</p>
 					)}
 				</div>
+				<Pagination page={page} />
 			</section>
 		</main>
 	)
