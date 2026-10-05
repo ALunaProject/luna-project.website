@@ -3,9 +3,8 @@
 .postContainer {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 849px;
-  height: 268.59px;
   box-shadow: $shadow-post-card;
   padding: 30px 50px;
   gap: 20px;
@@ -13,14 +12,13 @@
 
 .profileContainer {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-}
-
-.headerPostContainer {
-  display: flex;
+  width: 100%;
   justify-content: space-between;
-  gap: 5px;
+  gap: 32px;
+
+  .userProfile {
+    padding: 0 !important;
+  }
 }
 
 .postPP {
@@ -36,6 +34,8 @@
 
 .tagsContainer {
   display: flex;
+  width: 100%;
+  padding: 10px 0;
   justify-content: end;
   gap: 8px;
 }
@@ -47,11 +47,11 @@
 .contentText {
   @include poppins-regular-lg;
   color: $gs-sea-salt;
+  white-space: break-spaces;
 }
 
 .commentButton {
   display: flex;
-  justify-content: flex-start;
   gap: 8px;
   @include poppins-regular-lg;
   color: $neutrals-white;
