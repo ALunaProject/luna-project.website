@@ -15,7 +15,7 @@ export default function UserProfile({
 }: ProfileProps) {
 	return (
 		<Link
-			href={`/user/${username}`}
+			href={`/${username}`}
 			className={`${s.userProfileContainer} ${className}`}>
 			<Image width={45} height={45} src={userPP} alt={username} />
 			<span>{username}</span>
