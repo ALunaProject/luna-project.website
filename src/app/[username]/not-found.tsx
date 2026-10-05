@@ -1,11 +1,12 @@
-import s from "./styles.module.scss"
-import Link from "next/link"
+import NotFoundState from "@/components/shared/NotFoundState/NotFoundState"
+import userNotFoundImg from "@/assets/images/not-found-user.png"
 
-export default function NotFound() {
+export default function UserNotFound() {
 	return (
-		<>
-			<h1>page not found</h1>
-			<Link href="/">go back</Link>
-		</>
+		<NotFoundState
+			message="Usuário não encontrado"
+			image={userNotFoundImg}
+			imageAlt="Telescópio procurando um usuário"
+		/>
 	)
 }
