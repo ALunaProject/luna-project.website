@@ -22,23 +22,47 @@ export async function getUserByID(userId: string): Promise<UserDTO | null> {
 	}
 }
 
-export async function updateUserById(
+// ⚠️ Endpoints de edição de perfil — se o back usar outra rota/método, ajuste só aqui
+const USER_ENDPOINTS = {
+	update: (id: string) => `/api/users/${id}`, // PUT  { username, bio }
+	profilePic: (id: string) => `/api/users/${id}/profile-pic`, // PUT  multipart (campo "file")
+	banner: (id: string) => `/api/users/${id}/banner`, // PUT  multipart (campo "file")
+}
+
+export interface UpdateProfilePayload {
+	username: string
+	bio: string
+}
+
+export type UserImageKind = "profilePic" | "banner"
+
+// Sem try/catch de propósito: quem chama (modal) mostra o erro pro usuário
+export async function updateUserProfile(
 	userId: string,
-	username: string,
-	userBio: string,
-): Promise<UserDTO | null> {
-	try {
-		await getUserByID(userId)
-		const res = await api.put(`/api/users/${userId}`, {
-			username: username,
-			userBio: userBio,
-		})
-		return res.data
-	} catch (error) {
-		console.error(error)
-		return null
-		// atualizar tratativa de erro dos services aqui, ou nao, n sei
-	}
+	payload: UpdateProfilePayload,
+): Promise<UserDTO> {
+	const { data } = await api.put<UserDTO>(USER_ENDPOINTS.update(userId), payload)
+	return data
+}
+
+export async function uploadUserImage(
+	userId: string,
+	kind: UserImageKind,
+	file: File,
+): Promise<UserDTO> {
+	const form = new FormData()
+	form.append("file", file)
+
+	const url =
+		kind === "profilePic"
+			? USER_ENDPOINTS.profilePic(userId)
+			: USER_ENDPOINTS.banner(userId)
+
+	// o header manual evita o axios serializar o FormData como JSON (default da instância)
+	const { data } = await api.put<UserDTO>(url, form, {
+		headers: { "Content-Type": "multipart/form-data" },
+	})
+	return data
 }
 
 export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
