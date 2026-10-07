@@ -5,7 +5,9 @@ import Button from "@/components/ui/Button/Button"
 import ModalShell from "./ModalShell"
 import s from "./modals.module.scss"
 
-const MAX_IMAGE_MB = 5
+// mesmas regras do back (ImageUploadService): só JPG/PNG e até 2MB
+const MAX_IMAGE_MB = 2
+const ACCEPTED_TYPES = ["image/jpeg", "image/png"]
 
 interface ImageDropModalProps {
 	title: string
@@ -31,6 +33,7 @@ export default function ImageDropModal({
 	const [isDragging, setIsDragging] = useState(false)
 	const [localError, setLocalError] = useState<string | null>(null)
 
+	// preview local; libera a URL quando troca de arquivo ou fecha
 	useEffect(() => {
 		if (!file) {
 			setPreview(null)
@@ -43,12 +46,12 @@ export default function ImageDropModal({
 
 	function pickFile(picked?: File) {
 		if (!picked) return
-		if (!picked.type.startsWith("image/")) {
-			setLocalError("Esse arquivo não é uma imagem.")
+		if (!ACCEPTED_TYPES.includes(picked.type)) {
+			setLocalError("Formato inválido. Apenas JPG e PNG são aceitos.")
 			return
 		}
 		if (picked.size > MAX_IMAGE_MB * 1024 * 1024) {
-			setLocalError(`A imagem passa de ${MAX_IMAGE_MB}MB.`)
+			setLocalError(`Arquivo muito grande. O limite é ${MAX_IMAGE_MB}MB.`)
 			return
 		}
 		setLocalError(null)
@@ -95,7 +98,7 @@ export default function ImageDropModal({
 				<input
 					ref={inputRef}
 					type="file"
-					accept="image/*"
+					accept="image/png,image/jpeg"
 					hidden
 					onChange={e => {
 						pickFile(e.target.files?.[0])

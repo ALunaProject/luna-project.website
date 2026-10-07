@@ -41,6 +41,8 @@ function getErrorMessage(err: unknown) {
 		if (status === 401 || status === 403) {
 			return "Sem permissão. Faça login de novo e tente outra vez."
 		}
+		if (status === 409) return "Esse username já está em uso."
+		if (status === 400) return "Dados inválidos. Confira o que você digitou."
 		if (status === 413) return "Imagem grande demais para o servidor."
 		const msg = err.response?.data?.message ?? err.response?.data?.error
 		if (typeof msg === "string" && msg) return msg
@@ -63,6 +65,7 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 	const [isSaving, setIsSaving] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 
+	// só o dono do perfil edita (/[username] == usuário logado)
 	const canEdit = isLoggedIn && !!user && user.username === profileUser.username
 
 	const toggleEditing = useCallback(() => {
@@ -89,20 +92,34 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 			setError("O username não pode ficar vazio.")
 			return
 		}
+		// o back recusa username com espaço (UserUpdateDto)
+		if (/\s/.test(nextUsername)) {
+			setError("O username não pode ter espaço.")
+			return
+		}
 
 		setIsSaving(true)
 		setError(null)
 		try {
-			await updateUserProfile(profileUser.id, {
+			const updated = await updateUserProfile(profileUser.id, {
 				username: nextUsername,
 				bio: nextBio,
 			})
+
+			// se o back respondeu com outro username, ele não aplicou a troca: não navega pra uma rota que não existe
+			const savedUsername = updated?.username ?? nextUsername
+			if (field === "username" && savedUsername !== nextUsername) {
+				setError(
+					`O back respondeu com o username "${savedUsername}" (não aplicou a troca).`,
+				)
+				return
+			}
 			setActiveField(null)
 
-			if (nextUsername !== profileUser.username) {
+			if (savedUsername !== profileUser.username) {
 				// a rota é /[username], então precisa ir pra nova URL
-				localStorage.setItem(STORAGE_KEYS.USER, nextUsername)
-				router.replace(`/${nextUsername}`)
+				localStorage.setItem(STORAGE_KEYS.USER, savedUsername)
+				router.replace(`/${encodeURIComponent(savedUsername)}`)
 			} else {
 				router.refresh()
 			}
@@ -119,7 +136,7 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 		try {
 			await uploadUserImage(profileUser.id, kind, file)
 			setActiveField(null)
-			router.refresh()
+			router.refresh() // re-renderiza a página (server) com a imagem nova
 		} catch (err) {
 			setError(getErrorMessage(err))
 		} finally {
