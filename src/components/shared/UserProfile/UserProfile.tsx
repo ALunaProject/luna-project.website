@@ -5,13 +5,13 @@ import Link from "next/link"
 interface ProfileProps {
 	username: string
 	userPP: string
-	className?: string
+	className?: string | null
 }
 
 export default function UserProfile({
 	username,
 	userPP,
-	className,
+	className
 }: ProfileProps) {
 	return (
 		<Link

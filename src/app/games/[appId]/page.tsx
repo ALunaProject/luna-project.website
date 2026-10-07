@@ -9,6 +9,7 @@ import Tags from "@/components/ui/Tags/Tags"
 import { DEFAULT_BANNER } from "@/utils/contants"
 import React from "react"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
+import CommentSection from "@/components/layout/CommentSection/CommentSection";
 
 export async function generateMetadata( {
                                             params,
@@ -64,9 +65,10 @@ export default async function GamePage( { params }: GamesPageProps ) {
                             } }
                         />
                     </div>
-                    <div className={ s.rating }>
+                    <section className={ s.rating }>
                         <p>rating</p>
-                    </div>
+                    </section>
+                    <CommentSection />
                 </section>
             ) : (
                 <p>Não foi possível carregar os detalhes do jogo.</p>

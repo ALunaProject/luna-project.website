@@ -8,7 +8,18 @@
   @include contentPage;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: center;
   z-index: 1;
+  flex-wrap: wrap;
+
+  @include respond(desktop) {
+    flex-wrap: unset;
+    flex-direction: column;
+    justify-content: flex-start;
+    .gameContent, .rating{
+      width: 100%;
+    }
+  }
 }
 
 .gameContent {
@@ -17,12 +28,12 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 30px;
-  width: 57.47%;
+  width: 59%;
 }
 
 .rating {
   display: flex;
-  width: 356px;
+  width: 38%;
   flex-direction: column;
   gap: 30px;
   padding-top: 80px;

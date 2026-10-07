@@ -1,11 +1,8 @@
-import s from "./styles.module.scss"
-import Link from "next/link"
+import NotFoundState from "@/components/shared/NotFoundState/NotFoundState";
+import notFoundImg from "@/assets/images/not-found-generic.png";
 
 export default function NotFound() {
-	return (
-		<>
-			<h1>Jogo não encontrado</h1>
-			<Link href="/games">Voltar</Link>
-		</>
-	)
+    return (
+        <NotFoundState message="Jogo não encontrado" imageAlt="game404-image" image={ notFoundImg }/>
+    )
 }

@@ -1,0 +1,35 @@
+@use "../../../styles/utils" as *;
+
+.commentsContainer {
+  @include flex-center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1440px;
+
+  h3 {
+    @include poppins-regular-5xl;
+  }
+
+  h5 {
+    @include poppins-regular-lg;
+  }
+
+  div a span {
+    @include poppins-regular-xl;
+  }
+}
+.createCommentSec {
+  width: 100%;
+}
+
+.createCommentSec input {
+  border: 1px solid $blue-violet-900;
+  border-radius: 4px;
+  padding: 12px;
+  width: 100%;
+  color: $gs-white-smoke;
+
+  &:hover {
+    color: $gs-slate-gray;
+  }
+}
