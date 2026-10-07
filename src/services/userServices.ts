@@ -22,11 +22,11 @@ export async function getUserByID(userId: string): Promise<UserDTO | null> {
 	}
 }
 
-// ⚠️ Endpoints de edição de perfil — se o back usar outra rota/método, ajuste só aqui
+// Endpoints de edição de perfil (UserController do back)
 const USER_ENDPOINTS = {
 	update: (id: string) => `/api/users/${id}`, // PUT  { username, bio }
-	profilePic: (id: string) => `/api/users/${id}/profile-pic`, // PUT  multipart (campo "file")
-	banner: (id: string) => `/api/users/${id}/banner`, // PUT  multipart (campo "file")
+	profilePic: (id: string) => `/api/users/${id}/profile-picture`, // POST multipart (campo "file")
+	banner: (id: string) => `/api/users/${id}/banner`, // POST multipart (campo "file")
 }
 
 export interface UpdateProfilePayload {
@@ -59,7 +59,7 @@ export async function uploadUserImage(
 			: USER_ENDPOINTS.banner(userId)
 
 	// o header manual evita o axios serializar o FormData como JSON (default da instância)
-	const { data } = await api.put<UserDTO>(url, form, {
+	const { data } = await api.post<UserDTO>(url, form, {
 		headers: { "Content-Type": "multipart/form-data" },
 	})
 	return data
