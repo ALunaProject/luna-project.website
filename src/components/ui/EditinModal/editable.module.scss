@@ -1,0 +1,56 @@
+@use "../../../styles/utils/index" as *;
+
+.editable {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  min-height: 24px;
+  border-radius: 6px;
+  @include transition(all, $duration-fast);
+
+  &[data-editing="true"] {
+    outline: 1px dashed rgba($blue-violet-300, 0.6);
+    outline-offset: 4px;
+  }
+}
+
+.corner {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 100%;
+
+  .editBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.editBtn {
+  @include flex-center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+  background: $blue-violet-500;
+  box-shadow: $shadow-card;
+  @include scale-hover-ani($scale-size: 1.1);
+
+  &:hover {
+    background: $blue-violet-800;
+  }
+}
+
+.floating {
+  position: fixed;
+  top: 20px;
+  right: 28px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+}

@@ -11,6 +11,8 @@ import { getAllComments } from "@/services/commentsServices"
 import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
 import { getAllGames } from "@/services/gamesServices"
 import EditingButton from "@/components/ui/EditinModal/EditingButton"
+import EditableField from "@/components/ui/EditinModal/EditableField"
+import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username } = await params
@@ -24,6 +26,7 @@ export default async function UserPage({ params }: UserPageProps) {
 	const comments = await getAllComments()
 
 	return (
+		<ProfileEditProvider profileUser={user}>
 		<main className={s.container}>
 			<Sidebar />
 			<section
@@ -33,22 +36,26 @@ export default async function UserPage({ params }: UserPageProps) {
 						"--banner-image": `url(${user.bannerUrl || DEFAULT_BANNER})`,
 					} as React.CSSProperties
 				}>
+				<EditableField field="banner" label="banner" placement="floating" />
 				<div className={s.userInfo}>
 					<aside className={s.userInfoWrapper}>
 						<div className={s.userProps}>
-							<Image
-								className={s.userPP}
-								src={user.profilePicUrl || DEFAULT_AVATAR}
-								alt={`${user.username}'s profilePic`}
-								width={125}
-								height={125}
-							/>
-							<h5>@{user.username}</h5>
-							<p>{user.bio}</p>
-							<EditingButton
-								profileUser={user}
-								profileUsername={user.username}
-							/>
+							<EditableField field="avatar" label="foto" placement="corner">
+								<Image
+									className={s.userPP}
+									src={user.profilePicUrl || DEFAULT_AVATAR}
+									alt={`${user.username}'s profilePic`}
+									width={125}
+									height={125}
+								/>
+							</EditableField>
+							<EditableField field="username" label="username">
+								<h5>@{user.username}</h5>
+							</EditableField>
+							<EditableField field="bio" label="descrição">
+								<p>{user.bio}</p>
+							</EditableField>
+							<EditingButton />
 						</div>
 						<section className={s.userLists}>
 							<h4>Lists</h4>
@@ -127,5 +134,6 @@ export default async function UserPage({ params }: UserPageProps) {
 				</div>
 			</section>
 		</main>
+		</ProfileEditProvider>
 	)
 }
