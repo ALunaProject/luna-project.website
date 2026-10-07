@@ -15,7 +15,11 @@ import EditableField from "@/components/ui/EditinModal/EditableField"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 
 export default async function UserPage({ params }: UserPageProps) {
-	const { username } = await params
+	const { username: rawUsername } = await params
+	let username = rawUsername
+	try {
+		username = decodeURIComponent(rawUsername)
+	} catch {}
 	const user = await getUserByUsername(username)
 	const games = await getAllGames()
 
