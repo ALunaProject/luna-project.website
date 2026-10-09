@@ -19,7 +19,11 @@
     background: $blue-violet-400;
   }
 
-  &:disabled {
+  &.danger {
+    background: $bloody-red-500;
+  }
+
+    &:disabled {
     opacity: 0.75;
     background-color: $blue-violet-desat-300;
   }
