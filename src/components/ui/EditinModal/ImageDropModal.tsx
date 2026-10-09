@@ -12,18 +12,15 @@ const ACCEPTED_TYPES = ["image/jpeg", "image/png"]
 interface ImageDropModalProps {
 	title: string
 	shape: "round" | "wide"
-	isSaving: boolean
-	error: string | null
 	onClose: () => void
 	onConfirm: (file: File) => void
 }
 
-// Popup básico (teste): arrastar a imagem ou escolher do computador
+// Popup básico (teste): arrastar a imagem ou escolher do computador.
+// Ele só ESCOLHE a imagem (vira preview na página); quem envia pro back é o "Concluir edição".
 export default function ImageDropModal({
 	title,
 	shape,
-	isSaving,
-	error,
 	onClose,
 	onConfirm,
 }: ImageDropModalProps) {
@@ -65,7 +62,7 @@ export default function ImageDropModal({
 	}
 
 	return (
-		<ModalShell title={title} onClose={isSaving ? () => {} : onClose}>
+		<ModalShell title={title} onClose={onClose}>
 			<div
 				className={s.dropzone}
 				data-dragging={isDragging}
@@ -76,6 +73,7 @@ export default function ImageDropModal({
 				onDragLeave={() => setIsDragging(false)}
 				onDrop={handleDrop}>
 				{preview ? (
+					// eslint-disable-next-line @next/next/no-img-element
 					<img
 						src={preview}
 						alt="Pré-visualização"
@@ -107,23 +105,20 @@ export default function ImageDropModal({
 				/>
 			</div>
 
-			{localError || error ? (
-				<span className={s.error}>{localError ?? error}</span>
-			) : null}
+			{localError ? <span className={s.error}>{localError}</span> : null}
+
+			<span className={s.fileName}>
+				A imagem só é salva quando você clicar em &quot;Concluir edição&quot;.
+			</span>
 
 			<div className={s.actions}>
 				<Button
 					type="button"
-					label={isSaving ? "Enviando..." : "Salvar"}
-					disabled={!file || isSaving}
+					label="Usar imagem"
+					disabled={!file}
 					onClick={() => file && onConfirm(file)}
 				/>
-				<Button
-					type="button"
-					label="Cancelar"
-					disabled={isSaving}
-					onClick={onClose}
-				/>
+				<Button type="button" label="Cancelar" onClick={onClose} variant="danger" />
 			</div>
 		</ModalShell>
 	)

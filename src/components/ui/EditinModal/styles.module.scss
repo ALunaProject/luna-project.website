@@ -12,3 +12,16 @@
     @include scale-hover-ani($scale-size: 1.05);
   }
 }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.error {
+  @include poppins-regular-xs;
+  flex-basis: 100%;
+  color: $bloody-red-300;
+}

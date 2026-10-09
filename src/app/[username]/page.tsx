@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import s from "./styles.module.scss"
-import Image from "next/image"
 import React from "react"
 import ListsCard from "@/components/shared/ListsCard/ListsCard"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
@@ -12,10 +11,14 @@ import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
 import { getAllGames } from "@/services/gamesServices"
 import EditingButton from "@/components/ui/EditinModal/EditingButton"
 import EditableField from "@/components/ui/EditinModal/EditableField"
+import InlineText from "@/components/ui/EditinModal/InlineText"
+import ProfileAvatar from "@/components/ui/EditinModal/ProfileAvatar"
+import ProfileSection from "@/components/ui/EditinModal/ProfileSection"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username: rawUsername } = await params
+	// o Next entrega o param codificado ("Eric%20Moreira"); sem decodificar o usuário não é achado e cai no 404
 	let username = rawUsername
 	try {
 		username = decodeURIComponent(rawUsername)
@@ -33,32 +36,35 @@ export default async function UserPage({ params }: UserPageProps) {
 		<ProfileEditProvider profileUser={user}>
 		<main className={s.container}>
 			<Sidebar />
-			<section
+			<ProfileSection
 				className={s.content}
-				style={
-					{
-						"--banner-image": `url(${user.bannerUrl || DEFAULT_BANNER})`,
-					} as React.CSSProperties
-				}>
+				bannerUrl={user.bannerUrl || DEFAULT_BANNER}>
 				<EditableField field="banner" label="banner" placement="floating" />
 				<div className={s.userInfo}>
 					<aside className={s.userInfoWrapper}>
 						<div className={s.userProps}>
 							<EditableField field="avatar" label="foto" placement="corner">
-								<Image
+								<ProfileAvatar
 									className={s.userPP}
 									src={user.profilePicUrl || DEFAULT_AVATAR}
 									alt={`${user.username}'s profilePic`}
-									width={125}
-									height={125}
 								/>
 							</EditableField>
-							<EditableField field="username" label="username">
-								<h5>@{user.username}</h5>
-							</EditableField>
-							<EditableField field="bio" label="descrição">
-								<p>{user.bio}</p>
-							</EditableField>
+							<InlineText
+								field="username"
+								as="h5"
+								prefix="@"
+								value={user.username}
+								maxLength={30}
+							/>
+							<InlineText
+								field="bio"
+								as="p"
+								multiline
+								value={user.bio ?? ""}
+								maxLength={255}
+								placeholder="sem descrição, ainda"
+							/>
 							<EditingButton />
 						</div>
 						<section className={s.userLists}>
@@ -136,7 +142,7 @@ export default async function UserPage({ params }: UserPageProps) {
 						/>
 					))}
 				</div>
-			</section>
+			</ProfileSection>
 		</main>
 		</ProfileEditProvider>
 	)
