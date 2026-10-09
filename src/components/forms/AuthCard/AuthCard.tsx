@@ -11,6 +11,7 @@ import { loginService, signupService } from "@/services/userServices"
 import { STORAGE_KEYS } from "@/utils/contants"
 import { useRouter } from "next/navigation"
 import Button from "@/components/ui/Button/Button"
+import { isReservedUsername } from "@/utils/reservedUsernames"
 
 type AuthCardProps = {
 	variant: "login" | "signup"
@@ -46,6 +47,13 @@ function AuthCard({ variant }: AuthCardProps) {
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+
+		// nomes iguais a rotas do site (login, games, news...) quebrariam o perfil
+		if (isSignup && isReservedUsername(username)) {
+			setError("Esse nome é reservado pelo site. Escolha outro.")
+			return
+		}
+
 		setLoading(true)
 		setError("")
 
