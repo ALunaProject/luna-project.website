@@ -83,6 +83,14 @@ interface GameDetailsEntry {
 // resposta de appDetails
 export type GameDetailsResponse = Record<string, GameDetailsEntry>
 
+export type GameReviewsData = {
+	query_summary: {
+		total_positive: number
+		total_negative: number
+		total_reviews: number
+	}
+}
+
 export interface GameTags {
 	data: Array<{ tagid: number; name: string }>
 }

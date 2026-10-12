@@ -6,6 +6,7 @@ import {
 	GameDetailsResponse,
 	GamesResponse,
 	GameData,
+	GameReviewsData,
 } from "@/types/gamesDTO"
 import { unstable_cache } from "next/cache"
 
@@ -86,6 +87,30 @@ export async function getGameDetails(
 		return await getCachedGameDetails(appId)
 	} catch (error) {
 		console.error("Erro ao carregar detalhes do jogo da Steam:", error)
+		return null
+	}
+}
+
+export async function getAppReviews(
+	appId: string | null,
+): Promise<GameReviewsData | null> {
+	if (!appId) return null
+
+	try {
+		const res = await gamesStoreApi.get<GameReviewsData>(
+			`appreviews/${appId}`,
+			{
+				params: {
+					json: 1,
+					language: "brazilian",
+					purchase_type: "BR",
+					num_per_page: 0,
+				},
+			},
+		)
+		return res.data
+	} catch (error) {
+		console.error("Erro ao carregar análises da Steam:", error)
 		return null
 	}
 }
