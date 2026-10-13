@@ -11,7 +11,7 @@ interface ProfileProps {
 export default function UserProfile({
 	username,
 	userPP,
-	className
+	className,
 }: ProfileProps) {
 	return (
 		<Link

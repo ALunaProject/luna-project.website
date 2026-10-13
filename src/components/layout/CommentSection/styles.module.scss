@@ -9,7 +9,6 @@
   h3 {
     @include poppins-regular-5xl;
   }
-
   h5 {
     @include poppins-regular-lg;
   }
@@ -28,8 +27,9 @@
   padding: 12px;
   width: 100%;
   color: $gs-white-smoke;
+  @include transition($duration-fast);
 
   &:hover {
-    color: $gs-slate-gray;
+    color: $blue-violet-100;
   }
 }
