@@ -6,6 +6,10 @@ import { GameData } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
 import Pagination from "@/components/shared/Pagination/Pagination"
+import { Suspense } from "react"
+import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
+
+const GAMES_PER_PAGE = 25
 
 export async function generateMetadata(): Promise<Metadata> {
 	return constructMetadata({
@@ -15,6 +19,27 @@ export async function generateMetadata(): Promise<Metadata> {
 	})
 }
 
+async function GamesList({ page }: { page: number }) {
+	const start = page * GAMES_PER_PAGE
+	const games: GameData[] = await getAllGames({
+		start,
+		count: GAMES_PER_PAGE,
+		sort: "20",
+	})
+
+	if (games.length === 0) {
+		return <p>Nenhum jogo encontrado no momento.</p>
+	}
+
+	return (
+		<>
+			{games.map((game: GameData) => (
+				<GamesCard key={game.appid} {...game} />
+			))}
+		</>
+	)
+}
+
 export default async function GamesPage({
 	searchParams,
 }: {
@@ -22,22 +47,15 @@ export default async function GamesPage({
 }) {
 	const params = await searchParams
 	const page = Math.max(0, Number(params.page) || 0)
-	const count = 25
-	const start = page * count
-
-	const games: GameData[] = await getAllGames({ start, count, sort: "20" })
 
 	return (
 		<main className={s.container}>
 			<Sidebar />
 			<section className={s.content}>
 				<div className={s.gamesWrapper}>
-					{games.map((game: GameData) => (
-						<GamesCard key={game.appid} {...game} />
-					))}
-					{games.length === 0 && (
-						<p>Nenhum jogo encontrado no momento.</p>
-					)}
+					<Suspense key={page} fallback={<GamesCardSkeletonList />}>
+						<GamesList page={page} />
+					</Suspense>
 				</div>
 				<Pagination page={page} />
 			</section>

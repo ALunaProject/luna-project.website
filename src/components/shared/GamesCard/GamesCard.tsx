@@ -14,7 +14,7 @@ export default async function GamesCard(Game: GameData) {
 		.filter(Boolean)
 
 	return (
-		<Link href={`games/${Game.appid}`} className={s.gamesCard}>
+		<Link href={`/games/${Game.appid}`} className={s.gamesCard}>
 			<Image
 				src={`https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${Game.appid}/${Game.assets.header}?t=1789251637)`}
 				alt={`${Game.name}preview-image`}

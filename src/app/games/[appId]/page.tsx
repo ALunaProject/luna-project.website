@@ -60,12 +60,6 @@ export default async function GamePage({ params }: GamesPageProps) {
 								<Tags key={cat.id} label={cat.description} />
 							))}
 						</div>
-						{/*<div*/}
-						{/*    className={ s.description }*/}
-						{/*    dangerouslySetInnerHTML={ {*/}
-						{/*        __html: game.about_the_game,*/}
-						{/*    } }*/}
-						{/*/>*/}
 						<SeeMoreSection
 							className={s.description}
 							html={game.about_the_game}

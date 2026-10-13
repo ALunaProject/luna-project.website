@@ -12,6 +12,7 @@
   background: $blue-violet-desat-600;
   box-shadow: $shadow-card;
   @include scale-hover-ani($scale-size: 1.025);
+  @include image-skeleton-shimmer;
 
   &:hover {
     box-shadow: $shadow-hover-primary;
@@ -25,13 +26,6 @@
         max-height: 80px;
       }
     }
-  }
-
-  img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 12px 12px 0 0;
-
   }
 }
 
