@@ -3,7 +3,7 @@ import {PostDto} from "@/types/postsDTO";
 
 export async function getPosts(): Promise<PostDto[] | null> {
     try {
-        const {data} = await api.get<PostDto[]>("/posts");
+        const {data} = await api.get<PostDto[]>("/post");
         return data;
     }catch(err) {
         console.error("Nenhum post foi encontrado", err);
@@ -13,7 +13,7 @@ export async function getPosts(): Promise<PostDto[] | null> {
 
 export async function getPostById(id: string): Promise<PostDto | null> {
     try {
-        const {data} = await api.get<PostDto[]>("/posts/");
+        const {data} = await api.get<PostDto[]>("/post");
         return data.find(p => p.id === id) ?? null;
     }catch(err) {
         console.error("Nenhum post foi encontrado", err);
@@ -38,7 +38,7 @@ export async function updatePostById(
 
 export async function deletePostById(postId: string): Promise<PostDto | null> {
     try {
-        const response = await api.delete(`/posts/${postId}`);
+        const response = await api.delete(`/post/${postId}`);
         return response.data;
     }catch(err) {
         console.error("Nenhum post foi encontrado", err);
