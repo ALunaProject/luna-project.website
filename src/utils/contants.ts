@@ -447,3 +447,8 @@ export const STEAM_TAG_NAMES: Record<number, string> = {
 	49213: "Rugby",
 	5941: "Reboot",
 }
+export const MATURE_TAG_IDS = [
+	12095, // Conteúdo Sexual
+	6650,  // Nudez
+	9130,  // Hentai
+]
