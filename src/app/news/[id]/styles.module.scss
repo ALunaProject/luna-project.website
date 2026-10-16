@@ -1,0 +1,76 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  @include container;
+}
+
+.content {
+  @include contentPage;
+  align-items: flex-start;
+
+  h1 {
+    @include poppins-regular-4xl;
+    line-height: 1.15;
+    max-width: 900px;
+
+    @include respond(tablet) {
+      @include poppins-regular-3xl;
+    }
+
+    @include respond(mobile) {
+      @include poppins-regular-2xl;
+    }
+  }
+}
+
+.tagsWrapper {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.meta {
+  @include poppins-light-sm;
+  color: $blue-violet-desat-200;
+}
+
+.description {
+  @include poppins-regular-lg;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.image {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: $shadow-post-card;
+}
+
+.body {
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.readMore {
+  @include flex-center;
+  @include poppins-bold-base;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: $blue-violet;
+  color: $gs-white-smoke;
+  @include transition(box-shadow, $duration-base, $ease-standard);
+
+  &:hover {
+    box-shadow: $shadow-hover-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $blue-violet-300;
+    outline-offset: 3px;
+  }
+}

@@ -1,0 +1,67 @@
+@use "../../../styles/utils/index" as *;
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 1020px;
+  height: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: $shadow-post-card;
+  @include transition(box-shadow, $duration-base, $ease-standard);
+
+  &:hover {
+    box-shadow: $shadow-hover-primary;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $blue-violet-300;
+    outline-offset: 3px;
+  }
+
+  @include respond(tablet) {
+    height: 260px;
+  }
+
+  @include respond(mobile) {
+    height: 200px;
+  }
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  @include transition(transform, $duration-slow, $ease-standard);
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+          to top,
+          rgba($blue-violet-desat-700, 0.9),
+          rgba($blue-violet-desat-700, 0.3) 50%,
+          transparent
+  );
+}
+
+.title {
+  @include poppins-semibold-xl;
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
