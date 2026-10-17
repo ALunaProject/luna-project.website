@@ -23,6 +23,10 @@
   box-shadow: $shadow-focused;
 }
 
+.cardWide {
+  max-width: 640px;
+}
+
 .title {
   @include poppins-regular-2xl;
   color: $blue-violet-200;
@@ -103,20 +107,31 @@
   }
 }
 
-.preview {
-  object-fit: cover;
-  border: 2px solid $blue-violet-500;
+// ---------- Recorte ----------
 
-  &.round {
-    width: 120px;
-    height: 120px;
-    border-radius: 100%;
+.cropArea {
+  position: relative; // o <Cropper> precisa de um container com tamanho e position
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: $blue-violet-desat-800;
+}
+
+.zoomRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span {
+    @include poppins-bold-base;
+    color: $blue-violet-500;
   }
 
-  &.wide {
-    width: 100%;
-    height: 120px;
-    border-radius: 8px;
+  input[type="range"] {
+    flex: 1;
+    accent-color: $blue-violet-500;
+    cursor: pointer;
   }
 }
 
