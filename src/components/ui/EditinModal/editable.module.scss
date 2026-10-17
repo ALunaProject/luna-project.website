@@ -10,12 +10,14 @@
   border-radius: 6px;
   @include transition(all, $duration-fast);
 
+  // dica visual de que dá pra clicar e editar
   &[data-editing="true"] {
     outline: 1px dashed rgba($blue-violet-300, 0.6);
     outline-offset: 4px;
   }
 }
 
+// foto de perfil: lápis no canto inferior direito
 .corner {
   display: inline-flex;
   width: fit-content;
@@ -45,14 +47,18 @@
     background: $blue-violet-800;
   }
 }
+
+// banner: lápis no canto inferior direito da parte visível do banner (dentro do <Banner>)
 .floating {
-  position: fixed;
-  top: 20px;
+  position: absolute;
   right: 28px;
+  bottom: 140px; // fica acima da área onde o perfil começa a sobrepor o banner
   z-index: 3;
   width: 42px;
   height: 42px;
 }
+
+// ---------- nome/bio editados direto na tela ----------
 
 .inlineWrap {
   display: flex;
@@ -60,6 +66,7 @@
   align-items: center;
   gap: 8px;
   max-width: 100%;
+  margin-block: 6px; // mais espaço entre username e bio na hora de editar
 }
 
 .inlineTag {
@@ -81,7 +88,7 @@
   border-bottom: 1px dashed $blue-violet-300;
   border-radius: 4px;
   outline: none;
-  field-sizing: content;
+  field-sizing: content; // o campo acompanha o tamanho do texto (Chrome/Brave/Edge)
   @include transition(all, $duration-fast);
 
   &:focus {

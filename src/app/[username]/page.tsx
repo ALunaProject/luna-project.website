@@ -13,7 +13,7 @@ import EditingButton from "@/components/ui/EditinModal/EditingButton"
 import EditableField from "@/components/ui/EditinModal/EditableField"
 import InlineText from "@/components/ui/EditinModal/InlineText"
 import ProfileAvatar from "@/components/ui/EditinModal/ProfileAvatar"
-import ProfileSection from "@/components/ui/EditinModal/ProfileSection"
+import ProfileBanner from "@/components/ui/EditinModal/ProfileBanner"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 
 export default async function UserPage({ params }: UserPageProps) {
@@ -36,10 +36,8 @@ export default async function UserPage({ params }: UserPageProps) {
 		<ProfileEditProvider profileUser={user}>
 		<main className={s.container}>
 			<Sidebar />
-			<ProfileSection
-				className={s.content}
-				bannerUrl={user.bannerUrl || DEFAULT_BANNER}>
-				<EditableField field="banner" label="banner" placement="floating" />
+			<section className={s.content}>
+				<ProfileBanner bannerUrl={user.bannerUrl || DEFAULT_BANNER} />
 				<div className={s.userInfo}>
 					<aside className={s.userInfoWrapper}>
 						<div className={s.userProps}>
@@ -142,7 +140,7 @@ export default async function UserPage({ params }: UserPageProps) {
 						/>
 					))}
 				</div>
-			</ProfileSection>
+			</section>
 		</main>
 		</ProfileEditProvider>
 	)
