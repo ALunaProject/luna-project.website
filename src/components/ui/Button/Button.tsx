@@ -8,7 +8,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: "primary" | "danger"
 }
 
-export default function Button({ label, icon, variant = "primary", ...rest }: ButtonProps) {
+export default function Button({
+	label,
+	icon,
+	variant = "primary",
+	...rest
+}: ButtonProps) {
 	const Icon = icon ? I[icon] : null
 
 	return (

@@ -11,22 +11,28 @@ export default function EditingButton() {
 
 	if (!canEdit) return null
 
-	return (
-		<div className={s.modalContainer}>
-			{isEditing ? (
-				<div className={s.actions}>
-					<Button
-						onClick={finishEditing}
-						label={isSaving ? "Salvando..." : "Concluir edição"}
-						icon={"EditIcon"}
-						disabled={isSaving}
-					/>
-					<Button onClick={cancelEditing} label="Cancelar" disabled={isSaving} />
-					{error ? <span className={s.error}>{error}</span> : null}
-				</div>
-			) : (
+	if (!isEditing) {
+		return (
+			<div className={s.modalContainer}>
 				<Button onClick={startEditing} label="Editar Perfil" icon={"EditIcon"} />
-			)}
+			</div>
+		)
+	}
+
+	return (
+		<div className={s.actions}>
+			<Button
+				onClick={finishEditing}
+				label={isSaving ? "Salvando..." : "Concluir edição"}
+				disabled={isSaving}
+			/>
+			<Button
+				onClick={cancelEditing}
+				label="Cancelar"
+				variant="danger"
+				disabled={isSaving}
+			/>
+			{error ? <span className={s.error}>{error}</span> : null}
 		</div>
 	)
 }

@@ -118,7 +118,7 @@ export default function ImageDropModal({
 					disabled={!file}
 					onClick={() => file && onConfirm(file)}
 				/>
-				<Button type="button" label="Cancelar" onClick={onClose} variant="danger" />
+				<Button type="button" label="Cancelar" variant="danger" onClick={onClose} />
 			</div>
 		</ModalShell>
 	)

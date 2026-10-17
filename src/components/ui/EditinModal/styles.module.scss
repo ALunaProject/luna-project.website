@@ -13,11 +13,18 @@
   }
 }
 
+// "Concluir edição" (roxo) + "Cancelar" (vermelho), com o visual padrão do Button
 .actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+
+  button {
+    width: auto;
+    min-width: 150px;
+    padding: 8px 20px;
+  }
 }
 
 .error {

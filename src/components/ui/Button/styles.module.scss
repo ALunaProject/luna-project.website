@@ -19,13 +19,22 @@
     background: $blue-violet-400;
   }
 
-  &.danger {
-    background: $bloody-red-500;
-  }
-
-    &:disabled {
+  &:disabled {
     opacity: 0.75;
     background-color: $blue-violet-desat-300;
+  }
+
+  // variante vermelha (ex: botão Cancelar)
+  &.danger {
+    background: $bloody-red-500;
+
+    &:hover {
+      background: $bloody-red-600;
+    }
+
+    &:active {
+      background: $bloody-red;
+    }
   }
 
   span {
@@ -33,4 +42,4 @@
     color: $gs-white-smoke;
   }
 
-}
+}
