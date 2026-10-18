@@ -18,12 +18,15 @@
     box-shadow: $shadow-hover-primary;
 
     .gameProps {
+
       margin-top: -80px;
+      margin-bottom: 80px;
 
       .buttonsWrapper {
         opacity: 1;
         transform: translateY(0);
         max-height: 80px;
+
       }
     }
   }
@@ -41,6 +44,7 @@
   margin-top: 0;
   border-radius: 0 0 12px 12px;
   background-color: $blue-violet-desat-600;
+  @include transition;
 
   .buttonsWrapper {
     @include transition(all);
@@ -52,7 +56,6 @@
     z-index: 1;
     opacity: 0;
     max-height: 0;
-    transform: translateY(-194px);
 
     button {
       width: unset;
