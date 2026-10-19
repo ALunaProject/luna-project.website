@@ -1,0 +1,20 @@
+@use "../../styles/utils/index" as *;
+
+.container {
+  @include container;
+  justify-content: flex-start;
+}
+
+.content {
+  @include content;
+
+}
+
+.gamesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px;
+  width: 100%;
+}
+

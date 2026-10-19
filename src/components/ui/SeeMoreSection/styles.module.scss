@@ -1,0 +1,24 @@
+@use "../../../styles/utils/index" as *;
+
+.clamp {
+  overflow: hidden;
+  max-height: 260px;
+  mask-image: linear-gradient(to bottom, #000 60%, transparent);
+
+  &[data-open="true"] {
+    max-height: none;
+    mask-image: none;
+  }
+}
+
+.trigger {
+  width: 100%;
+  @include abeezee-xl;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  @include transition;
+  &:hover{
+    color: $blue-violet-200;
+  }
+}
