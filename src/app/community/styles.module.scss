@@ -1,6 +1,13 @@
-
+@use "../../styles/utils/index" as *;
 
 .container {
   display: flex;
   height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 150px 250px;
+  gap: 30px;
 }
