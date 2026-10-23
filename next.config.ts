@@ -1,49 +1,55 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-	/* config options here */
-	reactCompiler: true,
-	images: {
-		remotePatterns: [
-			{ // UPLOAD DAS IMAGENS DOS USUARIOS!
-				protocol: "https",
-				hostname: "res.cloudinary.com",
-				pathname: "/**",
-			},
+    /* config options here */
+    reactCompiler: true,
+    images: {
+        remotePatterns: [
+            { // UPLOAD DAS IMAGENS DOS USUARIOS!
+                protocol: "https",
+                hostname: "res.cloudinary.com",
+                pathname: "/**",
+            },
 
-			{
-				protocol: "https",
-				hostname: "encrypted-tbn0.gstatic.com",
-				pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
-			},
-			{
-				protocol: "https",
-				hostname: "**.wikimedia.org",
-				pathname: "/**",
-			},
-			// Domínios da CDN da Steam
-			{
-				protocol: "https",
-				hostname: "**.steamstatic.com",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "shared.akamai.steamstatic.com",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "cdn.akamai.steamstatic.com",
-				pathname: "/**",
-			},
-			{
-				protocol: "https",
-				hostname: "shared.cloudflare.steamstatic.com",
-				pathname: "/**",
-			},
-		],
-	},
+            {
+                protocol: "https",
+                hostname: "encrypted-tbn0.gstatic.com",
+                pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
+            },
+
+            {
+                protocol: "https",
+                hostname: "example.com",
+                pathname: "/images/**",
+            },
+            {
+                protocol: "https",
+                hostname: "**.wikimedia.org",
+                pathname: "/**",
+            },
+            // Domínios da CDN da Steam
+            {
+                protocol: "https",
+                hostname: "**.steamstatic.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "shared.akamai.steamstatic.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "cdn.akamai.steamstatic.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "shared.cloudflare.steamstatic.com",
+                pathname: "/**",
+            },
+        ],
+    },
 }
 
 export default nextConfig
