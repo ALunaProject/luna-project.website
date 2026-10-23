@@ -24,3 +24,21 @@ export async function getListByName( name: string ): Promise<ListsDTO | null> {
         return null
     }
 }
+
+export async function addGameToList(appId: string, id: string, token: string): Promise<ListsDTO | null> {
+    try {
+        const { data } = await api.post<ListsDTO>( `api/lists/${id}/games/${appId}`, {
+            headers: {
+                Authorization: `Bearer ${ token }`,
+            },
+        } );
+        // adicionar no back validação para quando user já adicionou jogo na lista tal
+        return data;
+    }
+    catch(error) {
+        console.error( "Falha ao encontrar lista: ", error );
+        return null;
+    }
+}
+
+//    @PostMapping("/{listId}/games/{appId}")
