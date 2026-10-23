@@ -46,7 +46,9 @@ export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {
 	return response.data
 }
 
-export async function signupService(data: RegisterDTO): Promise<AuthResponseDTO> {
+export async function signupService(
+	data: RegisterDTO,
+): Promise<AuthResponseDTO> {
 	const response = await api.post<AuthResponseDTO>("/api/users", data)
 	return response.data
 }

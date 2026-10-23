@@ -1,0 +1,39 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  @include flex-center;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin-left: 77px;
+  padding: 30px;
+  text-align: center;
+  background: $blue-violet-desat-600;
+}
+
+.message {
+  @include poppins-regular-2xl;
+  color: $neutrals-white;
+}
+
+.illustration {
+  width: auto;
+  height: auto;
+  max-height: 45vh;
+  object-fit: contain;
+}
+
+@include respond(tablet) {
+  .message {
+    @include poppins-regular-xl;
+  }
+
+  .illustration {
+    max-height: 35vh;
+  }
+}

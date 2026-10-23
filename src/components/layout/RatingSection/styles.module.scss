@@ -1,0 +1,126 @@
+@use "../../../styles/utils" as *;
+
+.ratingSection {
+  display: flex;
+  width: 38%;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 80px;
+  @include respond(desktop) {
+    width: 100%;
+  }
+}
+
+.ratingContent {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.overallRate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+
+  h2 {
+    @include poppins-regular-8xl;
+    letter-spacing: -10%;
+    line-height: 90%;
+    text-shadow: $shadow-post-card;
+    padding-right: 8%;
+    //  todos os filhos dessa classe tem esse shadow
+  }
+
+  span {
+    @include abeezee-xl;
+  }
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.otherRatings {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rateList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+// component
+.rateCard {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  width: 153px;
+  justify-content: flex-start;
+  box-shadow: $shadow-post-card;
+  background-color: $blue-violet-desat-800;
+  border-radius: 8px;
+  @include scale-hover-ani(1.05);
+
+  &:hover {
+    box-shadow: $shadow-hover-primary;
+  }
+}
+
+.rateWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  span {
+    @include poppins-regular-xs;
+  }
+
+  span:first-child {
+    font-weight: $weight-semibold;
+  }
+}
+
+.buySection {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.buyGrid {
+  display: flex;
+  gap: 14px;
+}
+
+.buyLink {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 11px;
+  box-shadow: $shadow-post-card;
+  background-color: $blue-violet-desat-800;
+  border-radius: 8px;
+  @include scale-hover-ani(1.05);
+
+  span {
+    @include poppins-bold-xs;
+  }
+
+  &:hover {
+    box-shadow: $shadow-hover-primary;
+  }
+}
+
+.platformPrice {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
