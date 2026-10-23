@@ -62,7 +62,12 @@ function getErrorMessage(err: unknown) {
 			return "Sem permissão. Faça login de novo."
 		}
 		if (status === 409) return "Esse username já está em uso."
-		if (status === 400) return "Dados inválidos. Confira o username e a imagem."
+		if (status === 400) {
+			const msg = err.response?.data?.message
+			return typeof msg === "string" && msg
+				? msg
+				: "Dados inválidos. Confira o username e a imagem."
+		}
 		if (status === 413) return "Imagem grande demais para o servidor."
 		if (!err.response) return "Não consegui falar com o servidor."
 	}
