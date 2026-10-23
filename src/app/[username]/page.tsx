@@ -19,10 +19,13 @@ import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditCont
 export default async function UserPage({ params }: UserPageProps) {
 	const { username: rawUsername } = await params
 	// o Next entrega o param codificado ("Eric%20Moreira"); sem decodificar o usuário não é achado e cai no 404
-	let username = rawUsername
+	let username: string
 	try {
 		username = decodeURIComponent(rawUsername)
-	} catch {}
+	} catch {
+		// URL malformada (ex: /%E0%A4%A): não existe perfil com esse nome
+		notFound()
+	}
 	const user = await getUserByUsername(username)
 	// const games = await getAllGames()
 
@@ -51,7 +54,6 @@ export default async function UserPage({ params }: UserPageProps) {
 							<InlineText
 								field="username"
 								as="h5"
-								prefix="@"
 								value={user.username}
 								maxLength={30}
 							/>
@@ -113,7 +115,7 @@ export default async function UserPage({ params }: UserPageProps) {
 					</aside>
 					<aside className={s.userFavGames}>
 						<h5>
-							Favoritos de <span>@{user.username}</span>
+							Favoritos de <span>{user.username}</span>
 						</h5>
 						<div className={s.favGamesWrapper}>
 							{/*{games.slice(0, 4).map((game, index) => (*/}
