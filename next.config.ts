@@ -24,6 +24,11 @@ const nextConfig: NextConfig = {
 			// Domínios da CDN da Steam
 			{
 				protocol: "https",
+				hostname: "**.steamstatic.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
 				hostname: "shared.akamai.steamstatic.com",
 				pathname: "/**",
 			},
