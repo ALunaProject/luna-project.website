@@ -1,0 +1,65 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 849px;
+  box-shadow: $shadow-post-card;
+  padding: 30px 50px;
+  gap: 20px;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.profileContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 32px;
+
+  .userProfile {
+    padding: 0 !important;
+  }
+}
+
+.postPP {
+  width: 72.59px;
+  height: 72.59px;
+  border-radius: 100%;
+}
+
+.profileName {
+  @include poppins-regular-3xl;
+  color: $gs-sea-salt;
+}
+
+.tagsContainer {
+  display: flex;
+  width: 100%;
+  padding: 10px 0;
+  justify-content: end;
+  gap: 8px;
+}
+
+.postContent {
+  width: 100%;
+}
+
+.contentText {
+  @include poppins-regular-lg;
+  color: $gs-sea-salt;
+  white-space: break-spaces;
+}
+
+.commentButton {
+  display: flex;
+  gap: 8px;
+  @include poppins-regular-lg;
+  color: $neutrals-white;
+}

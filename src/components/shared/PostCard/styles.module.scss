@@ -8,6 +8,8 @@
   box-shadow: $shadow-post-card;
   padding: 30px 50px;
   gap: 20px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .profileContainer {
