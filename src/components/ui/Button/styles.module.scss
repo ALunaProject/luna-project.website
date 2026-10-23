@@ -24,9 +24,22 @@
     background-color: $blue-violet-desat-300;
   }
 
+  // variante vermelha (ex: botão Cancelar)
+  &.danger {
+    background: $bloody-red-500;
+
+    &:hover {
+      background: $bloody-red-600;
+    }
+
+    &:active {
+      background: $bloody-red;
+    }
+  }
+
   span {
     @include abeezee-base;
     color: $gs-white-smoke;
   }
 
-}
+}

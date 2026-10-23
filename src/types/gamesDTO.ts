@@ -91,6 +91,11 @@ export type GameReviewsData = {
 	}
 }
 
+// resposta de IUserReviewsService/GetAppReviews: os dados vêm dentro de "response" (que pode vir vazio)
+export type GameReviewsResponse = {
+	response?: Partial<GameReviewsData>
+}
+
 export interface GameTags {
 	data: Array<{ tagid: number; name: string }>
 }
