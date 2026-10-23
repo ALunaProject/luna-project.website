@@ -12,6 +12,12 @@
   z-index: 1;
   flex-wrap: wrap;
 
+  // banner de largura total (anula o padding lateral do content) e colado no conteúdo (anula o gap de 30px)
+  .banner {
+    width: calc(100% + 60px);
+    margin: 0 -30px -30px;
+  }
+
   @include respond(desktop) {
     flex-wrap: unset;
     flex-direction: column;

@@ -33,8 +33,8 @@
 
 @mixin contentPage {
   @include content;
-  padding-top: 300px;
-  background: linear-gradient(180deg, rgba(11, 8, 16, 0.00) 22.36%, rgba(16, 13, 18, 0.75) 37.74%, $blue-violet-desat-600 54.57%), var(--banner-image) lightgray 50% / cover no-repeat;
+  padding-top: 0; // o <Banner> fica no topo da página e rola junto com o conteúdo
+  background: $blue-violet-desat-600;
 }
 
 @mixin flex-center {
