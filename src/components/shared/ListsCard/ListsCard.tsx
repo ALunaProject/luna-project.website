@@ -1,9 +1,21 @@
+"use client"
+
 import s from "./styles.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 import { ListsDTO } from "@/types/UserLIstsDTO";
+import { useAuth } from "@/hooks/useAuth";
+import Button from "@/components/ui/Button/Button";
 
-export default function ListsCard(List: ListsDTO) {
+interface EditingButtonProps {
+	profileUsername: string
+	List: ListsDTO,
+
+}
+
+export default function ListsCard({List, profileUsername}: EditingButtonProps) {
+	const {isLoggedIn, user} = useAuth()
+
 	return (
 		<div className={s.listCard}>
 			<h6>{List.name}</h6>
@@ -16,8 +28,9 @@ export default function ListsCard(List: ListsDTO) {
 							width={51}
 							height={51}
 						/>
+					{/*	back tem que guardar appId e alguma imagem do jogo, pra colocar nesses cards!!*/}
 					</Link>
-				))}
+				))} {!isLoggedIn || !user || user.username !== profileUsername ? null : <Button icon={"AddIcon"}/>}
 			</div>
 		</div>
 	)
