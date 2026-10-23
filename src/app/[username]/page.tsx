@@ -2,19 +2,17 @@ import { notFound } from "next/navigation"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import s from "./styles.module.scss"
 import React from "react"
-import ListsCard from "@/components/shared/ListsCard/ListsCard"
-import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import Comments from "@/components/shared/Comments/Comments"
 import { getUserByUsername } from "@/services/userServices"
 import { getAllComments } from "@/services/commentsServices"
 import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
-import { getAllGames } from "@/services/gamesServices"
 import EditingButton from "@/components/ui/EditinModal/EditingButton"
 import EditableField from "@/components/ui/EditinModal/EditableField"
 import InlineText from "@/components/ui/EditinModal/InlineText"
 import ProfileAvatar from "@/components/ui/EditinModal/ProfileAvatar"
 import ProfileBanner from "@/components/ui/EditinModal/ProfileBanner"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
+import ListsWrapper from "@/components/layout/ListsWrapper/ListsWrapper";
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username: rawUsername } = await params
@@ -69,48 +67,7 @@ export default async function UserPage({ params }: UserPageProps) {
 						</div>
 						<section className={s.userLists}>
 							<h4>Lists</h4>
-							<div className={s.listsWrapper}>
-								<ListsCard
-									label="Lista de Desejos"
-									games={[
-										"game1",
-										"game2",
-										"game3",
-										"game4",
-										"game5",
-										"game6",
-										"game7",
-										"game8",
-									]}
-								/>
-								<ListsCard
-									label="Jogando"
-									games={[
-										"game1",
-										"game2",
-										"game3",
-										"game4",
-										"game5",
-										"game6",
-										"game7",
-										"game8",
-									]}
-								/>
-								<ListsCard
-									label="Já Joguei"
-									games={[
-										"game1",
-										"game2",
-										"game3",
-										"game4",
-										"game5",
-										"game6",
-										"game7",
-										"game8",
-									]}
-								/>
-								{/*    trocar por um map nas listas do usuário    */}
-							</div>
+							<ListsWrapper userId={user.id} username={user.username} />
 						</section>
 					</aside>
 					<aside className={s.userFavGames}>

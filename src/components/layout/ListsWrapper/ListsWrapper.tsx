@@ -7,7 +7,7 @@ interface ListProps {
     username: string;
 }
 
-export default async function ListsWrapper({userId, username}: ListProps) {
+export default async function ListsWrapper( { userId, username }: ListProps ) {
     // const [ lists, setLists ] = useState<ListsDTO[]>( [] );
     //
     // useEffect( () => {
@@ -20,12 +20,13 @@ export default async function ListsWrapper({userId, username}: ListProps) {
     //     } );
     // }, [] );
 
-    const lists = await getUserLists(userId)
+    const lists = await getUserLists( userId )
 
     return (
-        <section className={s.listsWrapper}>
+        <section className={ s.listsWrapper }>
             { lists && lists.length > 0
-                ? lists.map( ( list ) => <ListsCard key={ list.id } { ...list } /> )
+                ? lists.map( ( list ) => <ListsCard profileUsername={ username } List={ list }
+                                                    key={ list.id }/> )
                 : <p>{ username } não tem nenhuma lista até o momento</p> }
         </section>
     );
