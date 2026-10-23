@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
 	reactCompiler: true,
 	images: {
 		remotePatterns: [
+			{ // UPLOAD DAS IMAGENS DOS USUARIOS!
+				protocol: "https",
+				hostname: "res.cloudinary.com",
+				pathname: "/**",
+			},
+
 			{
 				protocol: "https",
 				hostname: "encrypted-tbn0.gstatic.com",
@@ -16,6 +22,11 @@ const nextConfig: NextConfig = {
 				pathname: "/**",
 			},
 			// Domínios da CDN da Steam
+			{
+				protocol: "https",
+				hostname: "**.steamstatic.com",
+				pathname: "/**",
+			},
 			{
 				protocol: "https",
 				hostname: "shared.akamai.steamstatic.com",

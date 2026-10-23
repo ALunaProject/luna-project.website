@@ -7,13 +7,21 @@ import s from "./styles.module.scss"
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	label?: string
 	icon?: keyof typeof I
+	variant?: "primary" | "danger"
 }
 
-export default function Button({ label, icon, ...rest }: ButtonProps) {
+export default function Button({
+	label,
+	icon,
+	variant = "primary",
+	...rest
+}: ButtonProps) {
 	const Icon = icon ? I[icon] : null
 
 	return (
-		<button className={s.buttonContainer} {...rest}>
+		<button
+			className={`${s.buttonContainer} ${variant === "danger" ? s.danger : ""}`}
+			{...rest}>
 			{Icon ? <Icon /> : null}
 			{label ? <span>{label}</span> : null}
 		</button>

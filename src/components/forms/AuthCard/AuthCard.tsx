@@ -9,11 +9,35 @@ import LockIcon from "../../../assets/icons/LockIcon"
 import Eye from "../../../assets/icons/EyeIcon"
 import { loginService, signupService } from "@/services/userServices"
 import { STORAGE_KEYS } from "@/utils/contants"
+import axios from "axios"
 import { useRouter } from "next/navigation"
 import Button from "@/components/ui/Button/Button"
+import { isReservedUsername } from "@/utils/reservedUsernames"
+import { getPasswordRules, isPasswordValid } from "@/utils/passwordRules"
 
 type AuthCardProps = {
 	variant: "login" | "signup"
+}
+
+// transforma o erro da requisição numa mensagem pra mostrar na tela
+function getAuthErrorMessage(err: unknown, isSignup: boolean) {
+	if (axios.isAxiosError(err)) {
+		if (!err.response) return "Erro de conexão. Tente novamente."
+
+		// mensagem enviada pelo back (ex: regra da senha)
+		const message = err.response.data?.message
+		if (typeof message === "string" && message) return message
+
+		const status = err.response.status
+		if (status === 400) return "Dados inválidos. Confira os campos e tente de novo."
+		if (!isSignup && (status === 401 || status === 403)) {
+			return "Email ou senha incorretos."
+		}
+		if (isSignup && (status === 409 || status === 500)) {
+			return "Não foi possível criar a conta. O email ou o nome já pode estar em uso."
+		}
+	}
+	return "Algo deu errado. Tente novamente."
 }
 
 function AuthCard({ variant }: AuthCardProps) {
@@ -27,25 +51,29 @@ function AuthCard({ variant }: AuthCardProps) {
 
 	const [loading, setLoading] = useState<boolean>(false)
 	const [error, setError] = useState<string>("")
+	// vira true quando tenta enviar com senha fraca: aí as regras não atendidas ficam vermelhas
+	const [showPasswordErrors, setShowPasswordErrors] = useState<boolean>(false)
 
 	const router = useRouter()
 
-	const requirements = useMemo(
-		() => [
-			{ label: "minimum 8 characters", met: password.length >= 8 },
-			{
-				label: "one special character",
-				met: /[^A-Za-z0-9]/.test(password),
-			},
-			{ label: "one number", met: /[0-9]/.test(password) },
-			{ label: "one uppercase character", met: /[A-Z]/.test(password) },
-			{ label: "one lowercase character", met: /[a-z]/.test(password) },
-		],
-		[password],
-	)
+	const requirements = useMemo(() => getPasswordRules(password), [password])
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+
+		// nomes iguais a rotas do site (login, games, news...) quebrariam o perfil
+		if (isSignup && isReservedUsername(username)) {
+			setError("Esse nome é reservado pelo site. Escolha outro.")
+			return
+		}
+
+		// o checklist era só visual: agora a senha precisa cumprir todas as regras pra enviar
+		if (isSignup && !isPasswordValid(password)) {
+			setShowPasswordErrors(true)
+			setError("A senha não atende aos requisitos abaixo.")
+			return
+		}
+
 		setLoading(true)
 		setError("")
 
@@ -54,17 +82,17 @@ function AuthCard({ variant }: AuthCardProps) {
 				? await signupService({ username, email, password })
 				: await loginService({ email, password })
 
-			localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
-			localStorage.setItem(STORAGE_KEYS.USER, response.username)
-
-			// Redireciona a pagina
+			// o cadastro não devolve token: só guarda token/usuário no login
 			if (isSignup) {
 				router.push("/login")
-			} else {
-				router.push(`/${response.username}`)
+				return
 			}
-		} catch (err: any) {
-			setError(err.message || "Erro de conexão. Tente novamente.")
+
+			localStorage.setItem(STORAGE_KEYS.TOKEN, response.token)
+			localStorage.setItem(STORAGE_KEYS.USER, response.username)
+			router.push(`/${response.username}`)
+		} catch (err) {
+			setError(getAuthErrorMessage(err, isSignup))
 		} finally {
 			setLoading(false)
 		}
@@ -134,13 +162,22 @@ function AuthCard({ variant }: AuthCardProps) {
 				{isSignup && (
 					<ul className={signupStyles.requirements}>
 						{requirements.map(req => (
-							<li key={req.label} data-met={req.met}>
+							<li
+								key={req.label}
+								data-met={req.met}
+								data-error={showPasswordErrors && !req.met}>
 								{req.label}
 							</li>
 						))}
 					</ul>
 				)}
 			</div>
+
+			{error ? (
+				<p className={s.error} role="alert">
+					{error}
+				</p>
+			) : null}
 
 			<Button label={"Entrar"} type="submit" />
 
