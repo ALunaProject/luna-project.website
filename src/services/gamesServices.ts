@@ -113,6 +113,8 @@ export async function getAppReviews(
                 },
             },
         )
+        // a Steam responde { success: 0 } (sem query_summary) pra alguns jogos ou quando limita as requisições
+        if (!res.data?.query_summary) return null
         return res.data
     } catch (error) {
         console.error( "Erro ao carregar análises da Steam:", error )

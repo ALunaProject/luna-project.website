@@ -19,21 +19,24 @@ export default async function RatingSection({
 
 	const gameReviews = await getAppReviews(appId)
 
+	// a Steam às vezes responde sem query_summary (jogo sem análises, limite de requisições...)
+	const summary = gameReviews?.query_summary
+
 	function calcSteamRating() {
-		if (gameReviews?.query_summary.total_reviews === 0) return null
-		const res =
-			((gameReviews?.query_summary.total_positive || 0) * 10) /
-			(gameReviews?.query_summary.total_reviews || 0)
+		const total = summary?.total_reviews ?? 0
+		if (total === 0) return null // sem análises: evita dividir 0/0 (NaN)
+		const res = ((summary?.total_positive ?? 0) * 10) / total
 		return Number(res.toFixed(1))
 	}
 
-	const starCount = ((calcSteamRating() ?? 0) / 10) * 5
+	const steamRating = calcSteamRating()
+	const starCount = ((steamRating ?? 0) / 10) * 5
 
 	return (
 		<section className={s.ratingSection}>
 			<div className={s.ratingContent}>
 				<div className={s.overallRate}>
-					<h2>{calcSteamRating()}</h2>
+					<h2>{steamRating}</h2>
 					<div className={s.stars}>
 						{Array.from({ length: 5 }).map((_, index) => {
 							let fillPercentage = 0
