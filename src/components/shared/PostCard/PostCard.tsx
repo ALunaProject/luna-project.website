@@ -6,15 +6,15 @@ import Tags from "@/components/ui/Tags/Tags";
 import {PostDto} from "@/types/postsDTO";
 import {useRouter} from "next/navigation";
 
-
-
 export default function PostCard(post: PostDto, isPostPage?: boolean) {
     const router = useRouter();
 
     return isPostPage ?
         <button
         type="button"
-        onClick={() => router.push(`/community/${post.id}`)}
+        onClick={() => {
+            router.push(`/community/${post.id}`)
+        }}
         className={s.postContainer}>
         <div className={s.profileContainer}>
             <UserProfile className={s.userProfile} username={"Lyan"}
