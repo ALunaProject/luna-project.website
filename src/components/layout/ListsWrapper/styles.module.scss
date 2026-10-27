@@ -1,0 +1,7 @@
+@use "../../../styles/utils" as *;
+
+.listsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

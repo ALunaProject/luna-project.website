@@ -1,6 +1,6 @@
 import { getUserLists } from "@/services/userListsServices";
 import ListsCard from "@/components/shared/ListsCard/ListsCard";
-import s from "@/app/[username]/styles.module.scss";
+import s from "./styles.module.scss"
 
 interface ListProps {
     userId: string;
@@ -25,7 +25,7 @@ export default async function ListsWrapper( { userId, username }: ListProps ) {
     return (
         <section className={ s.listsWrapper }>
             { lists && lists.length > 0
-                ? lists.map( ( list ) => <ListsCard profileUsername={ username } List={ list }
+                ? lists.map( ( list ) => <ListsCard {...list}
                                                     key={ list.id }/> )
                 : <p>{ username } não tem nenhuma lista até o momento</p> }
         </section>

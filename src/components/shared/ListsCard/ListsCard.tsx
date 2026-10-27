@@ -8,15 +8,8 @@ import { useAuth } from "@/hooks/useAuth";
 import Button from "@/components/ui/Button/Button";
 import { STORE_ASSETS } from "@/utils/contants";
 
-interface EditingButtonProps {
-	profileUsername: string
-	List: ListsDTO,
 
-}
-
-export default function ListsCard({List, profileUsername}: EditingButtonProps) {
-	const {isLoggedIn, user} = useAuth()
-
+export default function ListsCard(List: ListsDTO) {
 	return (
 		<div className={s.listCard}>
 			<h6>{List.name}</h6>
@@ -31,7 +24,7 @@ export default function ListsCard({List, profileUsername}: EditingButtonProps) {
 							style={{objectFit: "cover", objectPosition: "top"}}
 						/>
 					</Link>
-				))} {!isLoggedIn || !user || user.username !== profileUsername ? null : <Button icon={"AddIcon"}/>}
+				))}
 			</div>
 		</div>
 	)
