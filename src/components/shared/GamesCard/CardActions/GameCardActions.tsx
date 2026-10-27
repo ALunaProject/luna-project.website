@@ -7,12 +7,13 @@ import { addGameToList, getUserLists } from "@/services/userListsServices"
 import { STORAGE_KEYS } from "@/utils/contants"
 import { ListsDTO } from "@/types/UserLIstsDTO"
 import { useAuth } from "@/hooks/useAuth";
+import { GameData } from "@/types/gamesDTO";
 
 interface GameCardActionsProps {
-	appId: string
+	req: GameData
 }
 
-export default function GameCardActions({appId}: GameCardActionsProps) {
+export default function GameCardActions({req}: GameCardActionsProps) {
 	const {user} = useAuth()
 	const [userLists, setUserLists] = useState<ListsDTO[]>([])
 
@@ -34,9 +35,9 @@ export default function GameCardActions({appId}: GameCardActionsProps) {
 		const list = userLists.find(l => l.type === listType)
 		if (!list) return console.error(`Lista ${listType} não encontrada`)
 
-		const updatedList = await addGameToList(appId, list.id, token)
+		const updatedList = await addGameToList(list.id, req, token)
 		if (updatedList) {
-			// sucesso
+			alert(`Jogo adicionado na lista "${list.name}"`)
 		}
 	}
 

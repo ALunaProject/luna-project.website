@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ListsDTO } from "@/types/UserLIstsDTO";
 import { useAuth } from "@/hooks/useAuth";
 import Button from "@/components/ui/Button/Button";
+import { STORE_ASSETS } from "@/utils/contants";
 
 interface EditingButtonProps {
 	profileUsername: string
@@ -23,12 +24,12 @@ export default function ListsCard({List, profileUsername}: EditingButtonProps) {
 				{List.games.map(game => (
 					<Link key={game.appid} href={`../../games/${game.appid}`}>
 						<Image
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXefoDt5LxS9Vwl-WUv4HdLmhwkKRuyWw6OwmoNEfBNVfJKHTmm8u-8E0&s=10"
-							alt={`${game} preview`}
-							width={51}
-							height={51}
+							src={`${STORE_ASSETS}/steam/apps/${game.appid}/${game.libraryCapsule}?t=1789251637)`}
+							alt={`Ícone de ${game.appid}`}
+							width={50}
+							height={50}
+							style={{objectFit: "cover", objectPosition: "top"}}
 						/>
-					{/*	back tem que guardar appId e alguma imagem do jogo, pra colocar nesses cards!!*/}
 					</Link>
 				))} {!isLoggedIn || !user || user.username !== profileUsername ? null : <Button icon={"AddIcon"}/>}
 			</div>
