@@ -1,5 +1,5 @@
 import { api } from "@/utils/api";
-import { GameCacheResponse, ListsDTO } from "@/types/UserLIstsDTO";
+import { ListsDTO } from "@/types/UserLIstsDTO";
 import { GameData } from "@/types/gamesDTO";
 
 export async function getUserLists(userId: string): Promise<ListsDTO[] | null> {
@@ -34,6 +34,25 @@ export async function addGameToList(
 	}
 }
 
+export async function removeGameOnList(
+	id: string,
+	appId: string,
+	token: string
+):Promise<ListsDTO | null> {
+	try {
+		const {data} = await api.delete<ListsDTO>(`api/lists/${id}/games/${appId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},},
+		);
+		alert(`Jogo deletado da lista`)
+		return data;
+	} catch (error) {
+		console.error("Falha ao remover jogo da lista: ", error);
+		return null;
+	}
+}
+
 export async function renameList(
 	id: string,
 	token: string
@@ -51,21 +70,3 @@ export async function renameList(
 	}
 }
 
-export async function removeGameOnList(
-	id: string,
-	req: GameData,
-	token: string
-) {
-	try {
-		const {data} = await api.delete(`api/lists/${id}/games`, {
-			data: req,
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},},
-		);
-		alert(`Jogo ${req.appid} deletado da lista`)
-		return data;
-	} catch (error) {
-		return  console.error("Falha ao remover jogo da lista: ", error);
-	}
-}

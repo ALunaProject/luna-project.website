@@ -1,3 +1,5 @@
+import { GameData } from "@/types/gamesDTO";
+
 export interface ListsDTO {
 	id: string
 	name: string
@@ -5,10 +7,5 @@ export interface ListsDTO {
 	user: {
 		id: string
 	}
-	games: GameCacheResponse[]
-}
-
-export interface GameCacheResponse {
-	appid: string
-	libraryCapsule: string
+	games: GameData[]
 }
