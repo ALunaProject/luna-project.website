@@ -45,9 +45,9 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 
 	return (
 		<div className={s.buttonsWrapper}>
+			<Button onClick={e => handleAddToList(e, "WISHLIST")} icon="PlayWishIcon"/>
 			<Button onClick={e => handleAddToList(e, "PLAYING")} icon="PlayAddIcon"/>
 			<Button onClick={e => handleAddToList(e, "PLAYED")} icon="PlayCheckIcon"/>
-			<Button onClick={e => handleAddToList(e, "WISHLIST")} icon="PlayWishIcon"/>
 			<Button
 				onClick={e => {
 					e.preventDefault()

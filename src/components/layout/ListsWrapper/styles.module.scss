@@ -1,7 +1,97 @@
 @use "../../../styles/utils" as *;
 
+
 .listsWrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 47.7%;
+    background: linear-gradient($blue-violet-desat-600, $blue-violet-desat-600) padding-box,
+    linear-gradient(90deg, $blue-violet-300, $blue-violet-800, $blue-violet-300) border-box;
+    border: 2px solid transparent;
+    box-shadow: $shadow-post-card;
+    @include respond(tablet) {
+      max-width: unset;
+    }
+    @include scale-hover-ani(1.05)
+  }
 }
+
+.listCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 10px;
+  border-radius: 10px;
+  height: -webkit-fill-available;
+  width: 100%;
+  background: linear-gradient($blue-violet-desat-600, $blue-violet-desat-600) padding-box,
+  linear-gradient(90deg, $blue-violet-300, $blue-violet-800, $blue-violet-300) border-box;
+  border: 2px solid transparent;
+
+  box-shadow: $shadow-post-card;
+
+  h6 {
+    @include poppins-regular-2xl;
+  }
+
+  a img {
+    @include scale-hover-ani;
+  }
+
+  @include respond(tablet) {
+    max-width: unset;
+  }
+}
+
+.gamesWrapper {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.listItem {
+  width: 47.7%;
+  .editListBtn, {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    margin-top: -140px;
+    margin-left: 19.35%;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    border: none;
+    box-shadow: unset;
+    background: $blue-violet-500;
+
+    @include respond(tablet) {
+      max-width: unset;
+    }
+    @include scale-hover-ani(1.1);
+  }
+  .removeListBtn {
+    position: absolute;
+    width: unset;
+    height: unset;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+    background: $blue-violet-500;
+    margin-left: 40px;
+    margin-top: -20px;
+  }
+
+}
+
+
