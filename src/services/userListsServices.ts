@@ -1,14 +1,10 @@
 import { api } from "@/utils/api";
-import { ListsDTO } from "@/types/UserLIstsDTO";
+import { GameCacheResponse, ListsDTO } from "@/types/UserLIstsDTO";
 import { GameData } from "@/types/gamesDTO";
 
 export async function getUserLists(userId: string): Promise<ListsDTO[] | null> {
 	try {
-		const {data} = await api.get<ListsDTO[]>(`api/lists/${userId}`, {
-			// headers: {
-			//     Authorization: `Bearer ${ token }`,
-			// },
-		});
+		const {data} = await api.get<ListsDTO[]>(`api/lists/${userId}`);
 		return data;
 	} catch (error) {
 		console.error("Falha ao encontrar listas do usuário: ", error);
@@ -16,16 +12,6 @@ export async function getUserLists(userId: string): Promise<ListsDTO[] | null> {
 	}
 }
 
-export async function getListByName(name: string): Promise<ListsDTO | null> {
-	try {
-		const {data} = await api.get<ListsDTO[]>("api/lists");
-
-		return data.find(list => list.name === name) ?? null
-	} catch (error) {
-		console.log("Falha ao encontrar lista: ", error)
-		return null
-	}
-}
 
 export async function addGameToList(
 	id: string,
@@ -48,4 +34,38 @@ export async function addGameToList(
 	}
 }
 
-//    @PostMapping("/{listId}/games/{appId}")
+export async function renameList(
+	id: string,
+	token: string
+): Promise<ListsDTO | null> {
+	try {
+		const {data} = await api.put<ListsDTO>(`api/lists/${id}`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		return data;
+	} catch (error) {
+		console.error("Falha ao renomear lista: ", error);
+		return null;
+	}
+}
+
+export async function removeGameOnList(
+	id: string,
+	req: GameData,
+	token: string
+) {
+	try {
+		const {data} = await api.delete(`api/lists/${id}/games`, {
+			data: req,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},},
+		);
+		alert(`Jogo ${req.appid} deletado da lista`)
+		return data;
+	} catch (error) {
+		return  console.error("Falha ao remover jogo da lista: ", error);
+	}
+}
