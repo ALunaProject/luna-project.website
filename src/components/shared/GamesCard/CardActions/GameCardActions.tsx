@@ -8,6 +8,7 @@ import { STORAGE_KEYS } from "@/utils/contants"
 import { ListsDTO } from "@/types/UserLIstsDTO"
 import { useAuth } from "@/hooks/useAuth";
 import { GameData } from "@/types/gamesDTO";
+import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal";
 
 interface GameCardActionsProps {
 	req: GameData
@@ -16,6 +17,8 @@ interface GameCardActionsProps {
 export default function GameCardActions({req}: GameCardActionsProps) {
 	const {user} = useAuth()
 	const [userLists, setUserLists] = useState<ListsDTO[]>([])
+	const [listModalOpen, setListModalOpen] = useState(false)
+
 
 	useEffect(() => {
 		if (!user) return
@@ -45,17 +48,19 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 
 	return (
 		<div className={s.buttonsWrapper}>
-			<Button onClick={e => handleAddToList(e, "WISHLIST")} icon="PlayWishIcon"/>
-			<Button onClick={e => handleAddToList(e, "PLAYING")} icon="PlayAddIcon"/>
-			<Button onClick={e => handleAddToList(e, "PLAYED")} icon="PlayCheckIcon"/>
+			<Button aria-label={`Adicionar à lista "Quero Jogar"`} onClick={e => handleAddToList(e, "WISHLIST")} icon="PlayWishIcon"/>
+			<Button aria-label={`Adicionar à lista "Jogando"`} onClick={e => handleAddToList(e, "PLAYING")} icon="PlayAddIcon"/>
+			<Button aria-label={`Adicionar à lista "Jogado"`} onClick={e => handleAddToList(e, "PLAYED")} icon="PlayCheckIcon"/>
 			<Button
+				aria-label={`Criar nova lista`}
 				onClick={e => {
 					e.preventDefault()
 					e.stopPropagation()
-					// para listas customizadas precisa abrir um modal para escolher a lista
+					setListModalOpen(true)
 				}}
 				icon="AddIcon"
 			/>
+			<ListModal mode={"create"} open={listModalOpen} onClose={() => setListModalOpen(false)}/>
 		</div>
 	)
 }

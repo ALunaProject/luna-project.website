@@ -1,28 +1,6 @@
 @use "../../../styles/utils" as *;
 
-
-.listsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 47.7%;
-    background: linear-gradient($blue-violet-desat-600, $blue-violet-desat-600) padding-box,
-    linear-gradient(90deg, $blue-violet-300, $blue-violet-800, $blue-violet-300) border-box;
-    border: 2px solid transparent;
-    box-shadow: $shadow-post-card;
-    @include respond(tablet) {
-      max-width: unset;
-    }
-    @include scale-hover-ani(1.05)
-  }
-}
-
+// ListCard
 .listCard {
   display: flex;
   flex-direction: column;
@@ -51,6 +29,30 @@
   }
 }
 
+// ListWrapper
+.listsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .addListBtn {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 47.7%;
+    background: linear-gradient($blue-violet-desat-600, $blue-violet-desat-600) padding-box,
+    linear-gradient(90deg, $blue-violet-300, $blue-violet-800, $blue-violet-300) border-box;
+    border: 2px solid transparent;
+    box-shadow: $shadow-post-card;
+    @include respond(tablet) {
+      max-width: unset;
+    }
+    @include scale-hover-ani(1.05)
+  }
+}
+
 .gamesWrapper {
   display: flex;
   align-items: flex-start;
@@ -62,11 +64,13 @@
 
 .listItem {
   width: 47.7%;
+
   .editListBtn, {
+    @include flex-center;
     position: absolute;
     width: 45px;
     height: 45px;
-    margin-top: -140px;
+    margin-top: -2rem;
     margin-left: 19.35%;
     border-radius: 50%;
     cursor: pointer;
@@ -80,7 +84,9 @@
     }
     @include scale-hover-ani(1.1);
   }
+
   .removeListBtn {
+    @include flex-center;
     position: absolute;
     width: unset;
     height: unset;
@@ -90,8 +96,86 @@
     background: $blue-violet-500;
     margin-left: 40px;
     margin-top: -20px;
+    padding: 4px;
   }
 
 }
 
+// CreateListModal
+.dialog {
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: $blue-violet-desat-600;
+  color: $gs-white-smoke;
+  width: min(90vw, 400px);
+  margin: auto;
 
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+  }
+}
+
+.content, .section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+
+  button:first-child {
+    background-color: $bloody-red-500;
+    &:hover {
+      background-color: $bloody-red-700;
+    }
+  }
+
+  input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid $blue-violet-500;
+    background: $blue-violet-desat-700;
+    color: inherit;
+  }
+}
+
+
+.danger {
+  padding-top: 16px;
+  border-top: 1px solid $blue-violet-desat-500;
+
+  h3 {
+    font-size: 0.875rem;
+    color: $bloody-red-500;
+  }
+}
+
+.deleteBtn {
+  background-color: $bloody-red-600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  @include scale-hover-ani(1.05);
+
+  &:hover {
+    background-color: $bloody-red-700;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.error {
+  color: $bloody-red-200;
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

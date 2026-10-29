@@ -9,3 +9,12 @@ export interface ListsDTO {
 	}
 	games: GameData[]
 }
+
+export type ListModalMode =
+	| { mode: "create" }
+	| { mode: "edit"; listId: string; listName: string }
+
+export type UseListModalProps = ListModalMode & {
+	open: boolean
+	onClose: () => void
+}
