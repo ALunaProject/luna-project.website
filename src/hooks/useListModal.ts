@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation"
 import { STORAGE_KEYS } from "@/utils/contants"
 import { createCustomList, deleteList, renameList } from "@/services/userListsServices"
 import { UseListModalProps } from "@/types/UserLIstsDTO";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 export function useListModal(props: UseListModalProps) {
 	const { open, onClose } = props
@@ -15,7 +16,6 @@ export function useListModal(props: UseListModalProps) {
 	const [confirmingDelete, setConfirmingDelete] = useState(false)
 	const [error, setError] = useState<string | null>(null)
 
-	// sempre que abrir, volta ao estado inicial
 	useEffect(() => {
 		if (open) {
 			setName(initialName)
@@ -24,7 +24,6 @@ export function useListModal(props: UseListModalProps) {
 		}
 	}, [open, initialName])
 
-	// executa uma ação autenticada e cuida de loading, erro e refresh
 	async function run(
 		action: (token: string) => Promise<unknown>,
 		errorMessage: string
@@ -34,13 +33,15 @@ export function useListModal(props: UseListModalProps) {
 
 		setLoading(true)
 		setError(null)
-		const result = await action(token)
-		setLoading(false)
-
-		if (!result) return setError(errorMessage)
-
-		onClose()
-		router.refresh()
+		try {
+			await action(token)
+			onClose()
+			router.refresh()
+		} catch (err) {
+			setError(getErrorMessage(err, errorMessage))
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

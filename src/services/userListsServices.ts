@@ -74,44 +74,19 @@ export async function createCustomList(
 	}
 }
 
+export async function deleteList(id: string, token: string): Promise<void> {
+	await api.delete(`api/lists/${id}`, {
+		headers: { Authorization: `Bearer ${token}` },
+	})
+}
+
 export async function renameList(
 	id: string,
-	req: {
-		name: string
-	},
+	req: { name: string },
 	token: string
-): Promise<ListsDTO | null> {
-	try {
-		const {data} = await api.put<ListsDTO>(`api/lists/${id}`,
-			req, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		})
-		alert(`Lista renomeada!`)
-		return data;
-	} catch (error) {
-		alert(`Falha ao renomear lista: ${error}`);
-		return null;
-	}
+): Promise<ListsDTO> {
+	const { data } = await api.patch<ListsDTO>(`api/lists/${id}`, req, {
+		headers: { Authorization: `Bearer ${token}` },
+	})
+	return data
 }
-
-export async function deleteList(
-	id: string,
-	token: string
-): Promise<ListsDTO | null> {
-	try {
-		const {data} = await api.delete<ListsDTO>(`api/lists/${id}`, {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			},
-		);
-		alert(`Lista deletada!`)
-		return data;
-	} catch (error) {
-		console.error("Falha ao deletar lista: ", error);
-		return null;
-	}
-}
-
