@@ -55,9 +55,7 @@ export default function CommentSection() {
 			{comments.map(comment => (
 				<Comments
 					key={comment.id}
-					content={comment.content}
-					id={comment.id}
-					userId={comment.userId}
+					{...comment}
 				/>
 			))}
 		</section>

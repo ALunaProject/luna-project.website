@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
 				hostname: "encrypted-tbn0.gstatic.com",
 				pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
 			},
+
+			{
+				protocol: "https",
+				hostname: "example.com",
+				pathname: "/images/**",
+			},
 			{
 				protocol: "https",
 				hostname: "**.wikimedia.org",
@@ -31,6 +37,10 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "shared.akamai.steamstatic.com",
 				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "cdn.cloudflare.steamstatic.com"
 			},
 			{
 				protocol: "https",

@@ -15,6 +15,8 @@ export const STORAGE_KEYS = {
 
 export const GAMES_API_KEY = process.env.NEXT_PUBLIC_GAMES_API_KEY
 
+export const STORE_ASSETS = "https://shared.akamai.steamstatic.com/store_item_assets"
+
 // Fonte: https://store.steampowered.com/tagdata/populartags/english
 // deixando aqui temporáriamente pq fazer uma req pra cada card vai acabar com as reqs do servidor, depois salvar no nosso back
 

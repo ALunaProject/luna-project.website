@@ -57,7 +57,6 @@ export async function getAllGames( {
                 },
             },
         )
-        console.log( res.data.response.store_items )
         return res.data?.response?.store_items || []
     } catch (error) {
         console.error( "Erro ao carregar jogos da Steam:", error )
@@ -75,7 +74,6 @@ const getCachedGameDetails = unstable_cache(
         )
         const entry = res.data[appId]
         if (!entry?.success || !entry.data) return null
-        console.log( entry.data )
         return entry.data
     },
     [ "game-details" ],

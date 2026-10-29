@@ -29,7 +29,11 @@ export function useAuth() {
 
 		getUserByUsername(username)
 			.then(setUser)
-			.finally(() => setIsLoading(false))
+			.catch(() => {
+				setUser(null);
+				setIsLoggedIn(false);
+			})
+			.finally(() => setIsLoading(false));
 	}, [])
 
 	useEffect(() => {
