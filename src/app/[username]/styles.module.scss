@@ -6,10 +6,19 @@
 }
 
 .content {
-  @include contentPage;
-  // esse background pode ser um mixin, já que é o mesmo em gamepage e newspage
+  @include flex-center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  margin-left: 77px;
+  width: 100%;
+  gap: 30px;
+  background: $blue-violet-desat-600; // o banner é o componente <Banner>, só no topo da página
 
   .userInfo {
+    position: relative;
+    z-index: 1; // fica por cima do pé do banner
+    margin-top: -130px; // sobe sobre o fim do banner (400 + 30 de gap - 130 = 300, a mesma posição de antes)
     display: flex;
     padding: 0 60px;
     align-items: flex-start;

@@ -117,7 +117,19 @@
     &[data-met="true"] {
       color: $green-grass-300;
     }
+
+    // tentou enviar sem cumprir a regra
+    &[data-error="true"] {
+      color: $bloody-red-300;
+    }
   }
+}
+
+.error {
+  @include poppins-regular-xs;
+  width: 100%;
+  text-align: center;
+  color: $bloody-red-300;
 }
 
 .submit {

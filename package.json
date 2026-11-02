@@ -15,6 +15,7 @@
 		"next": "16.3.0",
 		"react": "19.2.8",
 		"react-dom": "19.2.8",
+		"react-easy-crop": "^6.2.4",
 		"scss": "^0.2.4",
 		"zustand": "^5.0.14"
 	},

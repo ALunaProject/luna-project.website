@@ -12,9 +12,9 @@ export interface RatingSectionProps {
 }
 
 export default async function RatingSection({
-	appId,
-	game,
-}: RatingSectionProps) {
+												appId,
+												game,
+											}: RatingSectionProps) {
 	const app = game
 
 	const gameReviews = await getAppReviews(appId)

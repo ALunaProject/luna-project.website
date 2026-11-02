@@ -1,7 +1,9 @@
-export const DEFAULT_AVATAR =
-	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwIoKBtBMERe4gtT1eueK4-5flQr0m6jH85-RXRDVHQQ&s"
-export const DEFAULT_BANNER =
-	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTBGDdRCjkglWm9ueAyne1mhAiDPNMfqKVKATvnHK-lA&s"
+import defaultAvatar from "@/assets/images/default-avatar.jpg"
+import defaultBanner from "@/assets/images/default-banner.png"
+
+// Imagens padrão: usadas em todo perfil que ainda não tem foto/banner próprios (inclusive os recém-criados)
+export const DEFAULT_AVATAR = defaultAvatar.src
+export const DEFAULT_BANNER = defaultBanner.src
 
 export const API_BASE_URL =
 	process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
