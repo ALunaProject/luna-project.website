@@ -1,12 +1,14 @@
 import { NewsApiResponse, NewsArticle, NewsPageResult } from "@/types/newsDTO"
 import { decodeNewsId } from "@/utils/newsId"
+import { unstable_cache } from "next/cache"
+import { newsApi } from "@/utils/news-api"
 
-const BASE_URL = "https://newsapi.org/v2/everything"
 export const NEWS_PAGE_SIZE = 10
 const MAX_RESULTS = 100
+const CACHE_TIME = 60 * 60 * 24 // 24hrs
 
 const QUERY =
-    '"videogame" OR "videojogos" OR "playstation" OR "xbox" OR "nintendo"'
+    '"videogame" OR "videojogos" OR "playstation" OR "xbox" OR "nintendo" OR "steam"'
 
 // descarta notícias sem imagem ou deletadas
 function isValidArticle(article: NewsArticle): boolean {
@@ -16,47 +18,45 @@ function isValidArticle(article: NewsArticle): boolean {
         !!article.url
     )
 }
+const fetchNewsPage = unstable_cache(
+    async (page: number): Promise<NewsPageResult> => {
+        const apiKey = process.env.NEWS_API_KEY
 
-export async function getAllNews(page = 1): Promise<NewsPageResult> {
-    const apiKey = process.env.NEWS_API_KEY
-
-    if (!apiKey) {
-        console.error("NEWS_API_KEY não definida no .env.local")
-        return { articles: [], totalPages: 0 }
-    }
-
-    const params = new URLSearchParams({
-        q: QUERY,
-        searchIn: "title,description",
-        language: "pt",
-        sortBy: "publishedAt",
-        pageSize: String(NEWS_PAGE_SIZE),
-        page: String(page),
-    })
-
-    try {
-        const response = await fetch(`${BASE_URL}?${params}`, {
-            headers: { "X-Api-Key": apiKey },
-            next: { revalidate: 600 }, // cache de 10 min
-        })
-
-        if (!response.ok) {
-            throw new Error(`NewsAPI respondeu HTTP ${response.status}`)
+        if (!apiKey) {
+            throw new Error("NEWS_API_KEY não definida no .env")
         }
 
-        const data: NewsApiResponse = await response.json()
+        const { data } = await newsApi.get<NewsApiResponse>("/everything", {
+            headers: { "X-Api-Key": apiKey },
+            params: {
+                q: QUERY,
+                searchIn: "title,description",
+                language: "pt",
+                sortBy: "publishedAt",
+                pageSize: NEWS_PAGE_SIZE,
+                page,
+            },
+        })
+
         const total = Math.min(data.totalResults, MAX_RESULTS)
 
         return {
             articles: data.articles.filter(isValidArticle),
             totalPages: Math.ceil(total / NEWS_PAGE_SIZE),
         }
+    },
+    ["news-page", QUERY],
+    { revalidate: CACHE_TIME },
+)
+
+export async function getAllNews(page = 1): Promise<NewsPageResult> {
+    try {
+        return await fetchNewsPage(page)
     } catch (error) {
         console.error("Erro ao buscar notícias:", error)
         return { articles: [], totalPages: 0 }
     }
 }
-
 export async function getNewsDetails(
     id: string,
     page = 1,
