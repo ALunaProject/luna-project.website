@@ -27,6 +27,7 @@ export async function getAllNews(page = 1): Promise<NewsPageResult> {
 
     const params = new URLSearchParams({
         q: QUERY,
+        searchIn: "title,description",
         language: "pt",
         sortBy: "publishedAt",
         pageSize: String(NEWS_PAGE_SIZE),
