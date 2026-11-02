@@ -2,11 +2,39 @@
 
 .container {
   @include container;
+  align-items: flex-start;
 }
 
 .content {
   @include contentPage;
   align-items: flex-start;
+
+  .banner {
+    position: relative;
+    flex-shrink: 0;
+    width: calc(100% + 60px);
+    height: 300px;
+    margin: 0 -30px -30px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    // degradê para o banner se fundir com o fundo da página
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+              180deg,
+              rgba($blue-violet-desat-600, 0) 40%,
+              $blue-violet-desat-600 100%
+      );
+    }
+  }
+
 
   h1 {
     @include poppins-regular-4xl;
@@ -21,15 +49,6 @@
       @include poppins-regular-2xl;
     }
   }
-}
-
-.tagsWrapper {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
 }
 
 .meta {
@@ -49,11 +68,6 @@
   object-fit: cover;
   border-radius: 8px;
   box-shadow: $shadow-post-card;
-}
-
-.body {
-  line-height: 1.6;
-  max-width: 70ch;
 }
 
 .readMore {

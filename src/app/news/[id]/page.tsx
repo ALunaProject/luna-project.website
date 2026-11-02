@@ -49,13 +49,15 @@ export default async function NewsDetailPage({
     return (
         <main className={s.container}>
             <Sidebar />
-            <section
-                className={s.content}
-                style={
-                    {
-                        "--banner-image": `url(${article.urlToImage})`,
-                    } as React.CSSProperties
-                }>
+            <section className={s.content}>
+                <div className={s.banner}>
+                    <img
+                        src={article.urlToImage ?? ""}
+                        alt=""
+                        referrerPolicy="no-referrer"
+                    />
+                </div>
+
                 <h1>{article.title}</h1>
 
                 <p className={s.meta}>
@@ -68,7 +70,12 @@ export default async function NewsDetailPage({
                     <p className={s.description}>{article.description}</p>
                 )}
 
-                <img src={article.urlToImage ?? ""} alt="" className={s.image} />
+                <img
+                    src={article.urlToImage ?? ""}
+                    alt=""
+                    className={s.image}
+                    referrerPolicy="no-referrer"
+                />
 
                 <a
                     href={article.url}
@@ -79,5 +86,6 @@ export default async function NewsDetailPage({
                 </a>
             </section>
         </main>
+
     )
 }
