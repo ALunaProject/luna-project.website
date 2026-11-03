@@ -1,0 +1,40 @@
+@use "../../../styles/utils/index" as *;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.item,
+.gap {
+  @include flex-center;
+  @include poppins-regular-xs;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 999px;
+  color: $gs-white-smoke;
+}
+
+.item {
+  background: $blue-violet-desat-700;
+  @include transition(background-color, $duration-fast, $ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    background: $blue-violet-desat-400;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $blue-violet-300;
+    outline-offset: 2px;
+  }
+}
+
+.active,
+.active:hover {
+  background: $blue-violet;
+}
