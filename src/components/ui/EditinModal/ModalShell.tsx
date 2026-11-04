@@ -13,7 +13,12 @@ interface ModalShellProps {
 }
 
 // Fundo borrado + card roxo. Fecha com ESC ou clicando fora.
-export default function ModalShell({ title, onClose, wide, children }: ModalShellProps) {
+export default function ModalShell({
+	title,
+	onClose,
+	wide,
+	children,
+}: ModalShellProps) {
 	useEffect(() => {
 		function onKey(e: KeyboardEvent) {
 			if (e.key === "Escape") onClose()

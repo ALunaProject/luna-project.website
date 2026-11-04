@@ -17,6 +17,7 @@ export interface GameData {
 		header_2x: string
 		header: string
 		community_icon: string
+		library_capsule: string
 	}
 	tags: Array<{ tagid: number; weight: string }>
 }

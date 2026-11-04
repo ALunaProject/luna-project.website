@@ -46,7 +46,9 @@ const ProfileEditContext = createContext<ProfileEditContextValue | null>(null)
 export function useProfileEdit() {
 	const ctx = useContext(ProfileEditContext)
 	if (!ctx) {
-		throw new Error("useProfileEdit precisa estar dentro de <ProfileEditProvider>")
+		throw new Error(
+			"useProfileEdit precisa estar dentro de <ProfileEditProvider>",
+		)
 	}
 	return ctx
 }
@@ -124,7 +126,8 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 	}, [profileUser.bannerUrl, setPreview])
 
 	// só o dono do perfil edita (/[username] == usuário logado)
-	const canEdit = isLoggedIn && !!user && user.username === profileUser.username
+	const canEdit =
+		isLoggedIn && !!user && user.username === profileUser.username
 
 	// valida o username enquanto digita (bloqueia espaço e nome de rota)
 	const usernameError = useMemo(() => {
@@ -210,7 +213,11 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 			}
 			if (files.avatar) {
 				step = "a foto"
-				await uploadUserImage(profileUser.id, "profilePic", files.avatar)
+				await uploadUserImage(
+					profileUser.id,
+					"profilePic",
+					files.avatar,
+				)
 			}
 			if (files.banner) {
 				step = "o banner"
@@ -262,7 +269,9 @@ export function ProfileEditProvider({ profileUser, children }: ProviderProps) {
 			{canEdit && isEditing && pickerField ? (
 				<ImageDropModal
 					title={
-						pickerField === "avatar" ? "Alterar foto de perfil" : "Alterar banner"
+						pickerField === "avatar"
+							? "Alterar foto de perfil"
+							: "Alterar banner"
 					}
 					shape={pickerField === "avatar" ? "round" : "wide"}
 					onClose={() => setPickerField(null)}

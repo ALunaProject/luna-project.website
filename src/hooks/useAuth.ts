@@ -29,6 +29,10 @@ export function useAuth() {
 
 		getUserByUsername(username)
 			.then(setUser)
+			.catch(() => {
+				setUser(null)
+				setIsLoggedIn(false)
+			})
 			.finally(() => setIsLoading(false))
 	}, [])
 
