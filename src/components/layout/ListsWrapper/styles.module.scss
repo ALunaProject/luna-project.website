@@ -125,6 +125,7 @@
 
   button:first-child {
     background-color: $bloody-red-500;
+
     &:hover {
       background-color: $bloody-red-700;
     }
@@ -178,4 +179,59 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+
+// UserListsModal
+.userListsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.userLists {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 50vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.userListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid $blue-violet-500;
+  background: $blue-violet-desat-700;
+  button {
+    width: unset;
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.userListCount {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.userListInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+
+  span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
