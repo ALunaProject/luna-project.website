@@ -1,12 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import { createPortal } from "react-dom"
 import s from "../styles.module.scss"
-import { ListsDTO } from "@/types/UserLIstsDTO"
-import { useDialog } from "@/hooks/useDialog"
-import Button from "@/components/ui/Button/Button"
-import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal"
+import { ListsDTO } from "@/types/UserLIstsDTO";
+import { useDialog } from "@/hooks/useDialog";
+import Button from "@/components/ui/Button/Button";
+import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal";
 
 interface UserListsModalProps {
 	open: boolean
@@ -14,25 +15,34 @@ interface UserListsModalProps {
 	lists: ListsDTO[]
 	onListsChange?: () => void
 	canCreate?: boolean
+	// When provided, each list gets an "Adicionar" button
 	onAddToList?: (list: ListsDTO) => void | Promise<void>
+	// Optional: marks lists that already contain the game (button disabled)
 	isGameInList?: (list: ListsDTO) => boolean
 }
 
 export default function UserListsModal({
-	open,
-	onClose,
-	lists,
-	onListsChange,
-	canCreate = true,
-	onAddToList,
-	isGameInList,
-}: UserListsModalProps) {
+										   open,
+										   onClose,
+										   lists,
+										   onListsChange,
+										   canCreate = true,
+										   onAddToList,
+										   isGameInList,
+									   }: UserListsModalProps) {
+	const router = useRouter()
 	const dialogRef = useDialog(open)
+	const wasOpen = useRef(false)
 	const [createOpen, setCreateOpen] = useState(false)
 	const [addingId, setAddingId] = useState<string | null>(null)
 
 	const [mounted, setMounted] = useState(false)
 	useEffect(() => setMounted(true), [])
+
+	useEffect(() => {
+		if (wasOpen.current && !open) router.refresh()
+		wasOpen.current = open
+	}, [open, router])
 
 	if (!mounted) return null
 
@@ -51,10 +61,11 @@ export default function UserListsModal({
 			ref={dialogRef}
 			className={s.dialog}
 			onClose={onClose}
-			onClick={e => {
+			onClick={(e) => {
 				e.stopPropagation()
 				if (e.target === e.currentTarget) onClose()
-			}}>
+			}}
+		>
 			<div className={s.userListsContent}>
 				<h2>{onAddToList ? "Adicionar à lista" : "Listas"}</h2>
 
@@ -69,34 +80,18 @@ export default function UserListsModal({
 									<div className={s.userListInfo}>
 										<span>{list.name}</span>
 										<span className={s.userListCount}>
-											{list.games.length}{" "}
-											{list.games.length === 1
-												? "jogo"
-												: "jogos"}
-										</span>
+                                            {list.games.length} {list.games.length === 1 ? "jogo" : "jogos"}
+                                        </span>
 									</div>
 
 									{onAddToList && (
 										<Button
+											className={s.userListAddBtn}
 											type="button"
 											aria-label={`Adicionar jogo à lista ${list.name}`}
-											label={
-												alreadyIn
-													? "Adicionado"
-													: adding
-														? "Adicionando..."
-														: "Adicionar"
-											}
-											icon={
-												alreadyIn || adding
-													? undefined
-													: "AddIcon"
-											}
-											disabled={
-												alreadyIn ||
-												adding ||
-												addingId !== null
-											}
+											label={alreadyIn ? "Adicionado" : adding ? "Adicionando..." : "Adicionar"}
+											icon={alreadyIn || adding ? undefined : "AddIcon"}
+											disabled={alreadyIn || adding || addingId !== null}
 											onClick={() => handleAdd(list)}
 										/>
 									)}
@@ -120,7 +115,6 @@ export default function UserListsModal({
 					)}
 				</div>
 			</div>
-
 			<ListModal
 				mode="create"
 				open={createOpen}
@@ -130,6 +124,6 @@ export default function UserListsModal({
 				}}
 			/>
 		</dialog>,
-		document.body,
+		document.body
 	)
 }
