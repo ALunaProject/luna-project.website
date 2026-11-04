@@ -22,11 +22,10 @@ export async function getUserByID(userId: string): Promise<UserDTO | null> {
 	}
 }
 
-// Endpoints de edição de perfil (UserController do back)
 const USER_ENDPOINTS = {
-	update: (id: string) => `/api/users/${id}`, // PUT  { username, bio }
-	profilePic: (id: string) => `/api/users/${id}/profile-picture`, // POST multipart (campo "file")
-	banner: (id: string) => `/api/users/${id}/banner`, // POST multipart (campo "file")
+	update: (id: string) => `/api/users/${id}`,
+	profilePic: (id: string) => `/api/users/${id}/profile-picture`,
+	banner: (id: string) => `/api/users/${id}/banner`,
 }
 
 export interface UpdateProfilePayload {
@@ -36,12 +35,14 @@ export interface UpdateProfilePayload {
 
 export type UserImageKind = "profilePic" | "banner"
 
-// Sem try/catch de propósito: quem chama (modal) mostra o erro pro usuário
 export async function updateUserProfile(
 	userId: string,
 	payload: UpdateProfilePayload,
 ): Promise<UserDTO> {
-	const { data } = await api.put<UserDTO>(USER_ENDPOINTS.update(userId), payload)
+	const { data } = await api.put<UserDTO>(
+		USER_ENDPOINTS.update(userId),
+		payload,
+	)
 	return data
 }
 
@@ -58,7 +59,6 @@ export async function uploadUserImage(
 			? USER_ENDPOINTS.profilePic(userId)
 			: USER_ENDPOINTS.banner(userId)
 
-	// o header manual evita o axios serializar o FormData como JSON (default da instância)
 	const { data } = await api.post<UserDTO>(url, form, {
 		headers: { "Content-Type": "multipart/form-data" },
 	})

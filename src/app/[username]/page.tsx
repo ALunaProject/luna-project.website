@@ -10,11 +10,11 @@ import InlineText from "@/components/ui/EditinModal/InlineText"
 import ProfileAvatar from "@/components/ui/EditinModal/ProfileAvatar"
 import ProfileBanner from "@/components/ui/EditinModal/ProfileBanner"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
-import ListsWrapper from "@/components/layout/ListsWrapper/ListsWrapper";
-import CommentSection from "@/components/layout/CommentSection/CommentSection";
+import ListsWrapper from "@/components/layout/ListsWrapper/ListsWrapper"
+import CommentSection from "@/components/layout/CommentSection/CommentSection"
 
-export default async function UserPage({params}: UserPageProps) {
-	const {username: rawUsername} = await params
+export default async function UserPage({ params }: UserPageProps) {
+	const { username: rawUsername } = await params
 	// o Next entrega o param codificado ("Eric%20Moreira"); sem decodificar o usuário não é achado e cai no 404
 	let username: string
 	try {
@@ -34,16 +34,23 @@ export default async function UserPage({params}: UserPageProps) {
 	return (
 		<ProfileEditProvider profileUser={user}>
 			<main className={s.container}>
-				<Sidebar/>
+				<Sidebar />
 				<section className={s.content}>
-					<ProfileBanner bannerUrl={user.bannerUrl || DEFAULT_BANNER}/>
+					<ProfileBanner
+						bannerUrl={user.bannerUrl || DEFAULT_BANNER}
+					/>
 					<div className={s.userInfo}>
 						<aside className={s.userInfoWrapper}>
 							<div className={s.userProps}>
-								<EditableField field="avatar" label="foto" placement="corner">
+								<EditableField
+									field="avatar"
+									label="foto"
+									placement="corner">
 									<ProfileAvatar
 										className={s.userPP}
-										src={user.profilePicUrl || DEFAULT_AVATAR}
+										src={
+											user.profilePicUrl || DEFAULT_AVATAR
+										}
 										alt={`${user.username}'s profilePic`}
 									/>
 								</EditableField>
@@ -61,23 +68,24 @@ export default async function UserPage({params}: UserPageProps) {
 									maxLength={255}
 									placeholder="sem descrição, ainda"
 								/>
-								<EditingButton/>
+								<EditingButton />
 							</div>
 							<section className={s.userLists}>
 								<h4>Lists</h4>
-								<ListsWrapper userId={user.id} username={user.username}/>
+								<ListsWrapper
+									userId={user.id}
+									username={user.username}
+								/>
 							</section>
 						</aside>
 						<aside className={s.userFavGames}>
 							<h5>
 								Favoritos de <span>{user.username}</span>
 							</h5>
-							<div className={s.favGamesWrapper}>
-
-							</div>
+							<div className={s.favGamesWrapper}></div>
 						</aside>
 					</div>
-					<CommentSection/>
+					<CommentSection />
 				</section>
 			</main>
 		</ProfileEditProvider>

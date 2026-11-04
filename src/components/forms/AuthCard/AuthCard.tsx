@@ -29,7 +29,8 @@ function getAuthErrorMessage(err: unknown, isSignup: boolean) {
 		if (typeof message === "string" && message) return message
 
 		const status = err.response.status
-		if (status === 400) return "Dados inválidos. Confira os campos e tente de novo."
+		if (status === 400)
+			return "Dados inválidos. Confira os campos e tente de novo."
 		if (!isSignup && (status === 401 || status === 403)) {
 			return "Email ou senha incorretos."
 		}

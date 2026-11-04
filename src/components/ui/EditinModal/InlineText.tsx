@@ -25,8 +25,15 @@ export default function InlineText({
 	maxLength,
 	placeholder,
 }: InlineTextProps) {
-	const { canEdit, isEditing, isSaving, draft, setText, usernameError, finishEditing } =
-		useProfileEdit()
+	const {
+		canEdit,
+		isEditing,
+		isSaving,
+		draft,
+		setText,
+		usernameError,
+		finishEditing,
+	} = useProfileEdit()
 	const inputRef = useRef<HTMLInputElement>(null)
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 

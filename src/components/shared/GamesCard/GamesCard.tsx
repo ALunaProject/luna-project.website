@@ -25,10 +25,10 @@ export default async function GamesCard(Game: GameData) {
 				<p>{Game.name}</p>
 				<div className={s.tagsWrapper}>
 					{tags.map((t, i) => (
-						<Tags inCard key={i} label={t}/>
+						<Tags inCard key={i} label={t} />
 					))}
 				</div>
-				<CardActions req={Game}/>
+				<CardActions req={Game} />
 			</div>
 		</Link>
 	)

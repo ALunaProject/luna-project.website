@@ -3,16 +3,16 @@
 import s from "./styles.module.scss"
 import Image from "next/image"
 import Link from "next/link"
-import { ListsDTO } from "@/types/UserLIstsDTO";
-import { STORAGE_KEYS, STORE_ASSETS } from "@/utils/contants";
-import { useProfileEdit } from "@/components/ui/EditinModal/ProfileEditContext";
-import Button from "@/components/ui/Button/Button";
-import { removeGameOnList } from "@/services/userListsServices";
-import { useRouter } from "next/navigation";
+import { ListsDTO } from "@/types/UserLIstsDTO"
+import { STORAGE_KEYS, STORE_ASSETS } from "@/utils/contants"
+import { useProfileEdit } from "@/components/ui/EditinModal/ProfileEditContext"
+import Button from "@/components/ui/Button/Button"
+import { removeGameOnList } from "@/services/userListsServices"
+import { useRouter } from "next/navigation"
 
-function RemoveGame({id, appId}: {id: string, appId: string}) {
+function RemoveGame({ id, appId }: { id: string; appId: string }) {
 	const router = useRouter()
-	const {canEdit, isEditing} = useProfileEdit()
+	const { canEdit, isEditing } = useProfileEdit()
 	if (!canEdit || !isEditing) return null
 
 	async function handleRemoveFromList() {
@@ -23,17 +23,20 @@ function RemoveGame({id, appId}: {id: string, appId: string}) {
 		router.refresh()
 	}
 
-	return <Button
-		className={s.removeListBtn}
-		type="button"
-		aria-label={`Remover jogo`}
-		title={`Remover jogo`}
-		icon="DeleteCheckIcon"
-		onClick={(e) => {
-			e.preventDefault()
-			e.stopPropagation()
-			handleRemoveFromList()
-		}}/>
+	return (
+		<Button
+			className={s.removeListBtn}
+			type="button"
+			aria-label={`Remover jogo`}
+			title={`Remover jogo`}
+			icon="DeleteCheckIcon"
+			onClick={e => {
+				e.preventDefault()
+				e.stopPropagation()
+				handleRemoveFromList()
+			}}
+		/>
+	)
 }
 
 export default function ListsCard(List: ListsDTO) {
@@ -49,7 +52,10 @@ export default function ListsCard(List: ListsDTO) {
 							alt={`Ícone de ${game.appid}`}
 							width={50}
 							height={50}
-							style={{objectFit: "cover", objectPosition: "top"}}
+							style={{
+								objectFit: "cover",
+								objectPosition: "top",
+							}}
 						/>
 					</Link>
 				))}

@@ -1,11 +1,10 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-	/* config options here */
 	reactCompiler: true,
 	images: {
 		remotePatterns: [
-			{ // UPLOAD DAS IMAGENS DOS USUARIOS!
+			{
 				protocol: "https",
 				hostname: "res.cloudinary.com",
 				pathname: "/**",
@@ -14,7 +13,7 @@ const nextConfig: NextConfig = {
 			{
 				protocol: "https",
 				hostname: "encrypted-tbn0.gstatic.com",
-				pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
+				pathname: "/**",
 			},
 
 			{
@@ -40,7 +39,7 @@ const nextConfig: NextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "cdn.cloudflare.steamstatic.com"
+				hostname: "cdn.cloudflare.steamstatic.com",
 			},
 			{
 				protocol: "https",

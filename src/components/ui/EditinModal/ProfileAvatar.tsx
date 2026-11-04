@@ -10,7 +10,11 @@ interface ProfileAvatarProps {
 }
 
 // Foto de perfil: se há uma imagem escolhida e ainda não salva, mostra o preview local
-export default function ProfileAvatar({ src, alt, className }: ProfileAvatarProps) {
+export default function ProfileAvatar({
+	src,
+	alt,
+	className,
+}: ProfileAvatarProps) {
 	const { previews } = useProfileEdit()
 
 	if (previews.avatar) {

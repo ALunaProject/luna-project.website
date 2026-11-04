@@ -1,4 +1,4 @@
-import { GameData } from "@/types/gamesDTO";
+import { GameData } from "@/types/gamesDTO"
 
 export interface ListsDTO {
 	id: string

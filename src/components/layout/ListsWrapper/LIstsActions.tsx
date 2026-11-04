@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useProfileEdit } from "@/components/ui/EditinModal/ProfileEditContext"
 import Button from "@/components/ui/Button/Button"
-import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal";
+import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal"
 import s from "./styles.module.scss"
 
 export default function ListsActions() {

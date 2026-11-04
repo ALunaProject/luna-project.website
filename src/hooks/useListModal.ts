@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { STORAGE_KEYS } from "@/utils/contants"
-import { createCustomList, deleteList, renameList } from "@/services/userListsServices"
-import { UseListModalProps } from "@/types/UserLIstsDTO";
-import { getErrorMessage } from "@/utils/getErrorMessage";
+import {
+	createCustomList,
+	deleteList,
+	renameList,
+} from "@/services/userListsServices"
+import { UseListModalProps } from "@/types/UserLIstsDTO"
+import { getErrorMessage } from "@/utils/getErrorMessage"
 
 export function useListModal(props: UseListModalProps) {
 	const { open, onClose } = props
@@ -26,7 +30,7 @@ export function useListModal(props: UseListModalProps) {
 
 	async function run(
 		action: (token: string) => Promise<unknown>,
-		errorMessage: string
+		errorMessage: string,
 	) {
 		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
 		if (!token) return setError("Você precisa estar logado")
@@ -52,8 +56,8 @@ export function useListModal(props: UseListModalProps) {
 
 		if (props.mode === "create") {
 			return run(
-				(token) => createCustomList(token, { name: trimmed }),
-				"Não foi possível criar a lista"
+				token => createCustomList(token, { name: trimmed }),
+				"Não foi possível criar a lista",
 			)
 		}
 
@@ -61,8 +65,8 @@ export function useListModal(props: UseListModalProps) {
 		if (trimmed === listName) return onClose() // nada mudou
 
 		return run(
-			(token) => renameList(listId, { name: trimmed }, token),
-			"Não foi possível renomear a lista"
+			token => renameList(listId, { name: trimmed }, token),
+			"Não foi possível renomear a lista",
 		)
 	}
 
@@ -71,8 +75,8 @@ export function useListModal(props: UseListModalProps) {
 		const { listId } = props
 
 		return run(
-			(token) => deleteList(listId, token),
-			"Não foi possível apagar a lista"
+			token => deleteList(listId, token),
+			"Não foi possível apagar a lista",
 		)
 	}
 

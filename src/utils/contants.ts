@@ -1,7 +1,6 @@
 import defaultAvatar from "@/assets/images/default-avatar.jpg"
 import defaultBanner from "@/assets/images/default-banner.png"
 
-// Imagens padrão: usadas em todo perfil que ainda não tem foto/banner próprios (inclusive os recém-criados)
 export const DEFAULT_AVATAR = defaultAvatar.src
 export const DEFAULT_BANNER = defaultBanner.src
 
@@ -15,10 +14,11 @@ export const STORAGE_KEYS = {
 
 export const GAMES_API_KEY = process.env.NEXT_PUBLIC_GAMES_API_KEY
 
-export const STORE_ASSETS = "https://shared.akamai.steamstatic.com/store_item_assets"
+export const STORE_ASSETS =
+	"https://shared.akamai.steamstatic.com/store_item_assets"
 
 // Fonte: https://store.steampowered.com/tagdata/populartags/english
-// deixando aqui temporáriamente pq fazer uma req pra cada card vai acabar com as reqs do servidor, depois salvar no nosso back
+//TODO: deixar esse SET no back e chamar da nossa api
 
 export const STEAM_TAG_NAMES: Record<number, string> = {
 	492: "Indie",
@@ -451,8 +451,8 @@ export const STEAM_TAG_NAMES: Record<number, string> = {
 	49213: "Rugby",
 	5941: "Reboot",
 }
-export const MATURE_TAG_IDS = [
-//	12095, // Conteúdo Sexual
-//	6650,  // Nudez
-	9130,  // Hentai
+export const EXCLUDES_TAGS = [
+	//	12095, // Conteúdo Sexual
+	//	6650,  // Nudez
+	9130, // Hentai
 ]

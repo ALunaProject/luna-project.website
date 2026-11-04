@@ -56,7 +56,9 @@ export default function ImageDropModal({
 			return
 		}
 		if (picked.size > MAX_SOURCE_MB * 1024 * 1024) {
-			setLocalError(`Arquivo muito grande. O limite é ${MAX_SOURCE_MB}MB.`)
+			setLocalError(
+				`Arquivo muito grande. O limite é ${MAX_SOURCE_MB}MB.`,
+			)
 			return
 		}
 		setLocalError(null)
@@ -77,7 +79,12 @@ export default function ImageDropModal({
 		setIsProcessing(true)
 		setLocalError(null)
 		try {
-			const cropped = await cropImageToFile(sourceUrl, areaPixels, preset, sourceFile.type)
+			const cropped = await cropImageToFile(
+				sourceUrl,
+				areaPixels,
+				preset,
+				sourceFile.type,
+			)
 			onConfirm(cropped) // o popup fecha daqui
 		} catch (err) {
 			setLocalError(
@@ -105,8 +112,12 @@ export default function ImageDropModal({
 							maxZoom={4}
 							onCropChange={setCrop}
 							onZoomChange={setZoom}
-							onCropAreaChange={(_, pixels) => setAreaPixels(pixels)}
-							style={{ cropAreaStyle: { border: "2px solid #9d4edd" } }}
+							onCropAreaChange={(_, pixels) =>
+								setAreaPixels(pixels)
+							}
+							style={{
+								cropAreaStyle: { border: "2px solid #9d4edd" },
+							}}
 						/>
 					</div>
 
@@ -123,7 +134,8 @@ export default function ImageDropModal({
 					</label>
 
 					<span className={s.fileName}>
-						Arraste a imagem para posicionar e use o zoom para escolher a área.{" "}
+						Arraste a imagem para posicionar e use o zoom para
+						escolher a área.{" "}
 						<button
 							type="button"
 							className={s.pickBtn}
@@ -168,7 +180,8 @@ export default function ImageDropModal({
 			{localError ? <span className={s.error}>{localError}</span> : null}
 
 			<span className={s.fileName}>
-				A imagem só é salva quando você clicar em &quot;Concluir edição&quot;.
+				A imagem só é salva quando você clicar em &quot;Concluir
+				edição&quot;.
 			</span>
 
 			<div className={s.actions}>
@@ -178,7 +191,12 @@ export default function ImageDropModal({
 					disabled={!areaPixels || isProcessing}
 					onClick={handleConfirm}
 				/>
-				<Button type="button" label="Cancelar" variant="danger" onClick={onClose} />
+				<Button
+					type="button"
+					label="Cancelar"
+					variant="danger"
+					onClick={onClose}
+				/>
 			</div>
 		</ModalShell>
 	)
