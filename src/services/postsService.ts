@@ -1,6 +1,22 @@
 import {api} from "@/utils/api"
 import {PostDto} from "@/types/postsDTO";
 
+export async function createPost(req: {
+    content: string
+}, token: string): Promise<PostDto | null> {
+    try{
+        const {data} = await api.post<PostDto>("api/post", req, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return data
+    }catch(err){
+        console.error("Error creating post", err)
+        return null;
+    }
+}
+
 export async function getPosts(): Promise<PostDto[] | null> {
     try {
         const {data} = await api.get<PostDto[]>("api/post");
