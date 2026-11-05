@@ -17,6 +17,7 @@ export interface GameData {
 		header_2x: string
 		header: string
 		community_icon: string
+		library_capsule: string
 	}
 	tags: Array<{ tagid: number; weight: string }>
 }
@@ -89,6 +90,11 @@ export type GameReviewsData = {
 		total_negative: number
 		total_reviews: number
 	}
+}
+
+// resposta de IUserReviewsService/GetAppReviews: os dados vêm dentro de "response" (que pode vir vazio)
+export type GameReviewsResponse = {
+	response?: Partial<GameReviewsData>
 }
 
 export interface GameTags {

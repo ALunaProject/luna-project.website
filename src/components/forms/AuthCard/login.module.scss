@@ -111,6 +111,13 @@
   }
 }
 
+.error {
+  @include poppins-regular-xs;
+  width: 100%;
+  text-align: center;
+  color: $bloody-red-300;
+}
+
 .signupLink {
   @include text-style($font-poppins, $weight-regular, $fs-sm);
   line-height: 125%;

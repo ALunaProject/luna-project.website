@@ -6,10 +6,19 @@
 }
 
 .content {
-  @include contentPage;
-  // esse background pode ser um mixin, já que é o mesmo em gamepage e newspage
+  @include flex-center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: scroll;
+  margin-left: 77px;
+  width: 100%;
+  gap: 30px;
+  background: $blue-violet-desat-600;
 
   .userInfo {
+    position: relative;
+    z-index: 1;
+    margin-top: -130px;
     display: flex;
     padding: 0 60px;
     align-items: flex-start;
@@ -58,12 +67,6 @@
   }
 }
 
-.listsWrapper {
-  @include flex-center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-}
 
 .userInfoWrapper {
   display: flex;

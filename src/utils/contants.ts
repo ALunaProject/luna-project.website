@@ -1,7 +1,8 @@
-export const DEFAULT_AVATAR =
-	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwIoKBtBMERe4gtT1eueK4-5flQr0m6jH85-RXRDVHQQ&s"
-export const DEFAULT_BANNER =
-	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTBGDdRCjkglWm9ueAyne1mhAiDPNMfqKVKATvnHK-lA&s"
+import defaultAvatar from "@/assets/images/default-avatar.jpg"
+import defaultBanner from "@/assets/images/default-banner.png"
+
+export const DEFAULT_AVATAR = defaultAvatar.src
+export const DEFAULT_BANNER = defaultBanner.src
 
 export const API_BASE_URL =
 	process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
@@ -13,8 +14,11 @@ export const STORAGE_KEYS = {
 
 export const GAMES_API_KEY = process.env.NEXT_PUBLIC_GAMES_API_KEY
 
+export const STORE_ASSETS =
+	"https://shared.akamai.steamstatic.com/store_item_assets"
+
 // Fonte: https://store.steampowered.com/tagdata/populartags/english
-// deixando aqui temporáriamente pq fazer uma req pra cada card vai acabar com as reqs do servidor, depois salvar no nosso back
+//TODO: deixar esse SET no back e chamar da nossa api
 
 export const STEAM_TAG_NAMES: Record<number, string> = {
 	492: "Indie",
@@ -447,8 +451,8 @@ export const STEAM_TAG_NAMES: Record<number, string> = {
 	49213: "Rugby",
 	5941: "Reboot",
 }
-export const MATURE_TAG_IDS = [
-//	12095, // Conteúdo Sexual
-//	6650,  // Nudez
-	9130,  // Hentai
+export const EXCLUDES_TAGS = [
+	//	12095, // Conteúdo Sexual
+	//	6650,  // Nudez
+	9130, // Hentai
 ]

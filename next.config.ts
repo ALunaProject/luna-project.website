@@ -1,14 +1,25 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-	/* config options here */
 	reactCompiler: true,
 	images: {
 		remotePatterns: [
 			{
 				protocol: "https",
+				hostname: "res.cloudinary.com",
+				pathname: "/**",
+			},
+
+			{
+				protocol: "https",
 				hostname: "encrypted-tbn0.gstatic.com",
-				pathname: "/**", // <--- Adicionado para liberar qualquer subcaminho/imagem
+				pathname: "/**",
+			},
+
+			{
+				protocol: "https",
+				hostname: "example.com",
+				pathname: "/images/**",
 			},
 			{
 				protocol: "https",
@@ -18,8 +29,17 @@ const nextConfig: NextConfig = {
 			// Domínios da CDN da Steam
 			{
 				protocol: "https",
+				hostname: "**.steamstatic.com",
+				pathname: "/**",
+			},
+			{
+				protocol: "https",
 				hostname: "shared.akamai.steamstatic.com",
 				pathname: "/**",
+			},
+			{
+				protocol: "https",
+				hostname: "cdn.cloudflare.steamstatic.com",
 			},
 			{
 				protocol: "https",

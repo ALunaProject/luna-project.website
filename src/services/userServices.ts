@@ -22,23 +22,47 @@ export async function getUserByID(userId: string): Promise<UserDTO | null> {
 	}
 }
 
-export async function updateUserById(
+const USER_ENDPOINTS = {
+	update: (id: string) => `/api/users/${id}`,
+	profilePic: (id: string) => `/api/users/${id}/profile-picture`,
+	banner: (id: string) => `/api/users/${id}/banner`,
+}
+
+export interface UpdateProfilePayload {
+	username: string
+	bio: string
+}
+
+export type UserImageKind = "profilePic" | "banner"
+
+export async function updateUserProfile(
 	userId: string,
-	username: string,
-	userBio: string,
-): Promise<UserDTO | null> {
-	try {
-		await getUserByID(userId)
-		const res = await api.put(`/api/users/${userId}`, {
-			username: username,
-			userBio: userBio,
-		})
-		return res.data
-	} catch (error) {
-		console.error(error)
-		return null
-		// atualizar tratativa de erro dos services aqui, ou nao, n sei
-	}
+	payload: UpdateProfilePayload,
+): Promise<UserDTO> {
+	const { data } = await api.put<UserDTO>(
+		USER_ENDPOINTS.update(userId),
+		payload,
+	)
+	return data
+}
+
+export async function uploadUserImage(
+	userId: string,
+	kind: UserImageKind,
+	file: File,
+): Promise<UserDTO> {
+	const form = new FormData()
+	form.append("file", file)
+
+	const url =
+		kind === "profilePic"
+			? USER_ENDPOINTS.profilePic(userId)
+			: USER_ENDPOINTS.banner(userId)
+
+	const { data } = await api.post<UserDTO>(url, form, {
+		headers: { "Content-Type": "multipart/form-data" },
+	})
+	return data
 }
 
 export async function loginService(data: LoginDTO): Promise<AuthResponseDTO> {

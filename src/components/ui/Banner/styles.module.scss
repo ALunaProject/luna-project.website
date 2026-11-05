@@ -1,0 +1,28 @@
+@use "../../../styles/utils/index" as *;
+
+.banner {
+  position: relative;
+  z-index: 0;
+  flex-shrink: 0; // dentro do flex da página, não deixa o banner encolher
+  width: 100%;
+  height: var(--banner-height, 400px);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+}
+
+// degradê do pé do banner até a cor de fundo da página (mesmo degradê que era usado no background)
+.fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 8, 16, 0) 40%,
+    rgba(16, 13, 18, 0.75) 70%,
+    $blue-violet-desat-600 100%
+  );
+}

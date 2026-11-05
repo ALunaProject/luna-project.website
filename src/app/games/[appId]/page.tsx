@@ -6,8 +6,8 @@ import { GamesPageProps } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
 import Tags from "@/components/ui/Tags/Tags"
+import Banner from "@/components/ui/Banner/Banner"
 import { DEFAULT_BANNER } from "@/utils/contants"
-import React from "react"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import CommentSection from "@/components/layout/CommentSection/CommentSection"
 import RatingSection from "@/components/layout/RatingSection/RatingSection"
@@ -42,14 +42,13 @@ export default async function GamePage({ params }: GamesPageProps) {
 		<main className={s.container}>
 			<Sidebar />
 			{game ? (
-				<section
-					className={s.content}
-					style={
-						{
-							"--banner-image": `url(${game.background_raw || DEFAULT_BANNER})`,
-						} as React.CSSProperties
-					}>
-					{/* se o background for ficar apenas em cima, criar um Banner separado */}
+				<section className={s.content}>
+					<Banner
+						className={s.banner}
+						src={game.background_raw || DEFAULT_BANNER}
+						alt={`Banner de ${game.name}`}
+						height={300}
+					/>
 					<div className={s.gameContent}>
 						<h1>{game.name}</h1>
 						<div className={s.tagsWrapper}>
