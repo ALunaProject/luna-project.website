@@ -17,7 +17,7 @@ export default async function PostPage({params}: PostPageResponse) {
     return (
         <main className={s.container}>
             <Sidebar />
-            <PostCard {...post}  />
+            <PostCard post={post}  />
                 <CommentSection/>
         </main>
     )

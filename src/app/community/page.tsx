@@ -17,7 +17,7 @@ export default async function CommunityPage() {
             >
                 <PostActions/>
                 {posts?.map((post: PostDto) => (
-                    <PostCard key={post.id} {...post} />
+                    <PostCard key={post.id} post={post} isPostPage />
                 ))}
             </section>
         </main>

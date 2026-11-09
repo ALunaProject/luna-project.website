@@ -3,10 +3,10 @@
 import s from "./styles.module.scss"
 import UserProfile from "@/components/shared/UserProfile/UserProfile";
 import Tags from "@/components/ui/Tags/Tags";
-import {PostDto} from "@/types/postsDTO";
+import {PostCardProps, PostDto} from "@/types/postsDTO";
 import {useRouter} from "next/navigation";
 
-export default function PostCard(post: PostDto, isPostPage?: boolean) {
+export default function PostCard({ post, isPostPage = false }: PostCardProps) {
     const router = useRouter();
 
     return isPostPage ?
