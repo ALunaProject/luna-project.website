@@ -65,7 +65,7 @@ export default async function GamePage({ params }: GamesPageProps) {
 						/>
 					</div>
 					<RatingSection appId={appId} game={game} />
-					<CommentSection />
+					<CommentSection targetId={appId} type="game" />
 				</section>
 			) : (
 				<p>Não foi possível carregar os detalhes do jogo.</p>
