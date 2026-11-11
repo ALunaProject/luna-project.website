@@ -8,6 +8,7 @@ import {createPost} from "@/services/postsService";
 import usePostModal from "@/hooks/usePostModal";
 import {useAuth} from "@/hooks/useAuth";
 import Button from "@/components/ui/Button/Button";
+import TagSelector from "@/components/ui/TagSelector/TagSelector";
 
 export default function PostCreateModal(props: UsePostModalProps) {
     const { open, onClose } = props
@@ -20,6 +21,8 @@ export default function PostCreateModal(props: UsePostModalProps) {
     const {
         content,
         setContent,
+        tagIds,
+        setTagIds,
         loading,
         error,
         handleSubmit
@@ -50,6 +53,11 @@ export default function PostCreateModal(props: UsePostModalProps) {
                         maxLength={250}
                         placeholder={"Escreva aqui"}
                         autoFocus
+                        disabled={loading}
+                    />
+                    <TagSelector
+                        value={tagIds}
+                        onChange={setTagIds}
                         disabled={loading}
                     />
                     <div className={s.actions}>

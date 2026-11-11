@@ -1,9 +1,7 @@
 import {api} from "@/utils/api"
-import {PostDto} from "@/types/postsDTO";
+import {CreatePostRequest, PostDto} from "@/types/postsDTO";
 
-export async function createPost(req: {
-    content: string
-}, token: string): Promise<PostDto | null> {
+export async function createPost(req: CreatePostRequest, token: string): Promise<PostDto | null> {
     try{
         const {data} = await api.post<PostDto>("api/post", req, {
             headers: {

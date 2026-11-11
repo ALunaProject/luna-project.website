@@ -13,12 +13,14 @@ export default function usePostModal(props: UsePostModalProps) {
 
 
     const [content, setContent] = useState("")
+    const [tagIds, setTagIds] = useState<number[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         if (open) {
             setContent("")
+            setTagIds([])
             setError(null)
         }
     }, [open])
@@ -51,7 +53,7 @@ export default function usePostModal(props: UsePostModalProps) {
 
 
         return run(
-            token => createPost({content: trimmed}, token),
+            token => createPost({content: trimmed, tagIds}, token),
             "Não foi possível criar a lista",
         )
     }
@@ -59,6 +61,8 @@ export default function usePostModal(props: UsePostModalProps) {
     return {
         content,
         setContent,
+        tagIds,
+        setTagIds,
         loading,
         error,
         handleSubmit
