@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { createPortal } from "react-dom"
 import s from "../styles.module.scss"
-import { ListsDTO } from "@/types/UserLIstsDTO";
-import { useDialog } from "@/hooks/useDialog";
-import Button from "@/components/ui/Button/Button";
-import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal";
+import { ListsDTO } from "@/types/UserLIstsDTO"
+import { useDialog } from "@/hooks/useDialog"
+import Button from "@/components/ui/Button/Button"
+import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal"
 
 interface UserListsModalProps {
 	open: boolean
@@ -22,14 +22,14 @@ interface UserListsModalProps {
 }
 
 export default function UserListsModal({
-										   open,
-										   onClose,
-										   lists,
-										   onListsChange,
-										   canCreate = true,
-										   onAddToList,
-										   isGameInList,
-									   }: UserListsModalProps) {
+	open,
+	onClose,
+	lists,
+	onListsChange,
+	canCreate = true,
+	onAddToList,
+	isGameInList,
+}: UserListsModalProps) {
 	const router = useRouter()
 	const dialogRef = useDialog(open)
 	const wasOpen = useRef(false)
@@ -61,11 +61,10 @@ export default function UserListsModal({
 			ref={dialogRef}
 			className={s.dialog}
 			onClose={onClose}
-			onClick={(e) => {
+			onClick={e => {
 				e.stopPropagation()
 				if (e.target === e.currentTarget) onClose()
-			}}
-		>
+			}}>
 			<div className={s.userListsContent}>
 				<h2>{onAddToList ? "Adicionar à lista" : "Listas"}</h2>
 
@@ -80,8 +79,11 @@ export default function UserListsModal({
 									<div className={s.userListInfo}>
 										<span>{list.name}</span>
 										<span className={s.userListCount}>
-                                            {list.games.length} {list.games.length === 1 ? "jogo" : "jogos"}
-                                        </span>
+											{list.games.length}{" "}
+											{list.games.length === 1
+												? "jogo"
+												: "jogos"}
+										</span>
 									</div>
 
 									{onAddToList && (
@@ -89,9 +91,23 @@ export default function UserListsModal({
 											className={s.userListAddBtn}
 											type="button"
 											aria-label={`Adicionar jogo à lista ${list.name}`}
-											label={alreadyIn ? "Adicionado" : adding ? "Adicionando..." : "Adicionar"}
-											icon={alreadyIn || adding ? undefined : "AddIcon"}
-											disabled={alreadyIn || adding || addingId !== null}
+											label={
+												alreadyIn
+													? "Adicionado"
+													: adding
+														? "Adicionando..."
+														: "Adicionar"
+											}
+											icon={
+												alreadyIn || adding
+													? undefined
+													: "AddIcon"
+											}
+											disabled={
+												alreadyIn ||
+												adding ||
+												addingId !== null
+											}
 											onClick={() => handleAdd(list)}
 										/>
 									)}
@@ -124,6 +140,6 @@ export default function UserListsModal({
 				}}
 			/>
 		</dialog>,
-		document.body
+		document.body,
 	)
 }

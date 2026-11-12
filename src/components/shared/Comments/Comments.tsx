@@ -7,7 +7,7 @@ export default async function Comments(comment: CommentDTO) {
 	const user = await getUserByID(comment.userId)
 
 	if (!user) {
-		return null // não renderiza esse comentário se o autor não existe mais
+		return null
 	}
 
 	return (

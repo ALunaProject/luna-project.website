@@ -9,6 +9,7 @@
   h3 {
     @include poppins-regular-5xl;
   }
+
   h5 {
     @include poppins-regular-lg;
   }
@@ -17,19 +18,32 @@
     @include poppins-regular-xl;
   }
 }
+
 .createCommentSec {
   width: 100%;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
 
-.createCommentSec input {
-  border: 1px solid $blue-violet-900;
-  border-radius: 4px;
-  padding: 12px;
-  width: 100%;
-  color: $gs-white-smoke;
-  @include transition($duration-fast);
+  label{
+    width: 100%;
+    text-align: left;
+  }
+  button {
+    width: -webkit-fit-content;
+  }
 
-  &:hover {
-    color: $blue-violet-100;
+  input {
+    border: 1px solid $blue-violet-900;
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    color: $gs-white-smoke;
+    @include transition($duration-fast);
+
+    &:hover {
+      color: $blue-violet-100;
+    }
   }
 }
