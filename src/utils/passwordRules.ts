@@ -3,14 +3,14 @@
 export const PASSWORD_MAX_LENGTH = 100
 
 const RULES = [
-	{ label: "minimum 8 characters", test: (p: string) => p.length >= 8 },
+	{ label: "Mínimo 8 caracteres", test: (p: string) => p.length >= 8 },
 	{
-		label: "one special character",
+		label: "Um caractere especial",
 		test: (p: string) => /[^A-Za-z0-9]/.test(p),
 	},
-	{ label: "one number", test: (p: string) => /[0-9]/.test(p) },
-	{ label: "one uppercase character", test: (p: string) => /[A-Z]/.test(p) },
-	{ label: "one lowercase character", test: (p: string) => /[a-z]/.test(p) },
+	{ label: "Um número", test: (p: string) => /[0-9]/.test(p) },
+	{ label: "Uma letra maiúscula", test: (p: string) => /[A-Z]/.test(p) },
+	{ label: "Uma letra minúscula", test: (p: string) => /[a-z]/.test(p) },
 ]
 export function getPasswordRules(password: string) {
 	return RULES.map(rule => ({ label: rule.label, met: rule.test(password) }))
