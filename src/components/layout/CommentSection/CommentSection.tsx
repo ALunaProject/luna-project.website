@@ -42,7 +42,7 @@ export default function CommentSection() {
 	]
 
 	return (
-		<section className={s.commentsContainer}>
+		<section className={s.commentsContainer} id="comments">
 			<h3>Comentários</h3>
 			<div className={s.createCommentSec}>
 				<h5>Faça um comentário nessa página:</h5>
