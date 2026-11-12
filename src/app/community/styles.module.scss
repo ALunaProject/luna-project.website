@@ -3,11 +3,17 @@
 .container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 .content {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  margin-left: 77px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 150px 250px;
+  padding: clamp(32px, 10vh, 150px) clamp(16px, 8vw, 250px);
   gap: 30px;
 }
