@@ -64,6 +64,7 @@ export default function PostCreateModal(props: UsePostModalProps) {
                     <TagSelector
                         value={tagIds}
                         onChange={setTagIds}
+                        max={10}
                         disabled={loading}
                     />
                     <div className={s.actions}>

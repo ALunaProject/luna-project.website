@@ -6,8 +6,11 @@ import { PostCardProps } from "@/types/postsDTO"
 import { DEFAULT_AVATAR } from "@/utils/contants"
 
 export default function PostCard({ post, isPostPage = false }: PostCardProps) {
+	const visibleTags = isPostPage ? post.tags?.slice(0, 3) : post.tags
+	const hiddenTagCount = Math.max((post.tags?.length ?? 0) - 3, 0)
+
 	return (
-		<article className={s.postContainer}>
+		<article className={`${s.postContainer} ${isPostPage ? "" : s.detailPost}`}>
 			{isPostPage && (
 				<Link
 					className={s.cardLink}
@@ -27,12 +30,12 @@ export default function PostCard({ post, isPostPage = false }: PostCardProps) {
 				)}
 
 				<div className={s.tagsContainer}>
-					{post.tags?.slice(0, 3).map(tag => (
+					{visibleTags?.map(tag => (
 						<Tags key={tag.id} label={tag.name} inCard />
 					))}
-					{post.tags && post.tags.length > 3 && (
-						<span className={s.extraTags} aria-label={`${post.tags.length - 3} tags a mais`}>
-							+{post.tags.length - 3}
+					{isPostPage && hiddenTagCount > 0 && (
+						<span className={s.extraTags} aria-label={`${hiddenTagCount} tags a mais`}>
+							+{hiddenTagCount}
 						</span>
 					)}
 				</div>
