@@ -1,18 +1,18 @@
 'use client'
 
-import s from "@/components/layout/ListsWrapper/styles.module.scss"
-import {UsePostModalProps} from "@/types/postsDTO";
-import {useDialog} from "@/hooks/useDialog";
-import {useEffect, useId, useState} from "react";
-import {createPost} from "@/services/postsService";
-import usePostModal from "@/hooks/usePostModal";
-import {useAuth} from "@/hooks/useAuth";
-import Button from "@/components/ui/Button/Button";
-import TagSelector from "@/components/ui/TagSelector/TagSelector";
+import s from "./styles.module.scss"
+import { UsePostModalProps } from "@/types/postsDTO"
+import { useDialog } from "@/hooks/useDialog"
+import { useEffect, useId, useState } from "react"
+import usePostModal from "@/hooks/usePostModal"
+import Button from "@/components/ui/Button/Button"
+import TagSelector from "@/components/ui/TagSelector/TagSelector"
 
 export default function PostCreateModal(props: UsePostModalProps) {
     const { open, onClose } = props
     const inputId = useId()
+    const titleId = useId()
+    const descriptionId = useId()
     const dialogRef = useDialog(open)
 
     const [mounted, setMounted] = useState(false)
@@ -35,23 +35,29 @@ export default function PostCreateModal(props: UsePostModalProps) {
         <dialog
             ref={dialogRef}
             className={s.dialog}
+            aria-labelledby={titleId}
+            aria-describedby={descriptionId}
             onClose={onClose}
             onClick={e => {
                 e.stopPropagation()
                 if (e.target === e.currentTarget) onClose()
             }}>
             <div className={s.content}>
-                <h2>{"Crie novo post"}</h2>
+                <header className={s.header}>
+                    <h2 className={s.title} id={titleId}>Fazer um post</h2>
+                    <p id={descriptionId}>Compartilhe uma ideia, dúvida ou recomendação com a comunidade.</p>
+                </header>
 
                 <form className={s.section} onSubmit={handleSubmit}>
-                    <label htmlFor={inputId}>Escreva sua publicação</label>
+                    <label htmlFor={inputId}>Sua publicação</label>
                     <input
+                        className={s.postInput}
                         id={inputId}
                         type="text"
                         value={content}
                         onChange={e => setContent(e.target.value)}
                         maxLength={250}
-                        placeholder={"Escreva aqui"}
+                        placeholder={"O que você quer compartilhar?"}
                         autoFocus
                         disabled={loading}
                     />
@@ -70,8 +76,8 @@ export default function PostCreateModal(props: UsePostModalProps) {
                         <Button
                             label={
                                 loading
-                                    ? "Salvando..."
-                                    : "Publicar"
+                                    ? "Publicando..."
+                                    : "Publicar post"
                             }
                             type="submit"
                             disabled={loading}
