@@ -18,7 +18,15 @@ export async function createPost(req: CreatePostRequest, token: string): Promise
 export async function getPosts(): Promise<PostDto[] | null> {
     try {
         const {data} = await api.get<PostDto[]>("api/post");
-        return data;
+        const getPostTimestamp = (post: PostDto) => {
+            const date = post.createdAt ?? post.creation_date ?? post.creationDate
+            if (!date) return Number.NEGATIVE_INFINITY
+
+            const timestamp = Date.parse(date)
+            return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp
+        }
+
+        return [...data].sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
     }catch(err) {
         console.error("Nenhum post foi encontrado", err);
         // console.log(localStorage.getItem("token"));
