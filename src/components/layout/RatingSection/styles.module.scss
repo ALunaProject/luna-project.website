@@ -16,7 +16,6 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
-
 }
 
 .overallRate {
@@ -32,7 +31,6 @@
     line-height: 90%;
     text-shadow: $shadow-post-card;
     padding-right: 8%;
-    //  todos os filhos dessa classe tem esse shadow
   }
 
   span {
@@ -57,21 +55,15 @@
   gap: 4px;
 }
 
-// component
+// ---------- RateCard + nota do usuário ----------
+
 .rateCard {
+  @include card-surface;
   display: flex;
   gap: 5px;
   padding: 10px;
   width: 153px;
   justify-content: flex-start;
-  box-shadow: $shadow-post-card;
-  background-color: $blue-violet-desat-800;
-  border-radius: 8px;
-  @include scale-hover-ani(1.05);
-
-  &:hover {
-    box-shadow: $shadow-hover-primary;
-  }
 }
 
 .rateWrapper {
@@ -88,6 +80,48 @@
   }
 }
 
+.userRating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+// estado vazio: mesmo card, com borda tracejada para indicar "ação"
+.addButton {
+  @include reset-button;
+  @include card-surface;
+  @include focus-ring;
+  @include poppins-bold-xs;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 153px;
+  padding: 10px;
+  border: 2px solid rgba($blue-violet-500, 0.6);
+}
+
+.editButton {
+  @include reset-button;
+  @include focus-ring;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  opacity: 0.75;
+  @include transition;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  width: 153px;
+  height: 56px;
+  border-radius: 8px;
+  background-color: $blue-violet-desat-800;
+  opacity: 0.6;
+}
+
 .buySection {
   display: flex;
   flex-direction: column;
@@ -100,22 +134,15 @@
 }
 
 .buyLink {
+  @include card-surface;
   display: flex;
   width: 100%;
   justify-content: space-between;
   gap: 6px;
   padding: 11px;
-  box-shadow: $shadow-post-card;
-  background-color: $blue-violet-desat-800;
-  border-radius: 8px;
-  @include scale-hover-ani(1.05);
 
   span {
     @include poppins-bold-xs;
-  }
-
-  &:hover {
-    box-shadow: $shadow-hover-primary;
   }
 }
 
@@ -123,4 +150,79 @@
   display: flex;
   gap: 6px;
   align-items: center;
+}
+
+.dialog {
+  margin: auto;
+  padding: 0;
+  width: min(28rem, calc(100vw - 2rem));
+  border: 1px solid rgba($blue-violet-500, 0.4);
+  border-radius: 12px;
+  background-color: $blue-violet-desat-800;
+  color: $gs-white-smoke;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: $weight-semibold;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  font-weight: $weight-semibold;
+}
+
+.scoreInput {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba($gs-white-smoke, 0.25);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: $weight-semibold;
+  text-align: center;
+
+  &::placeholder {
+    color: rgba($gs-white-smoke, 0.4);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $blue-violet-500;
+    outline-offset: 2px;
+    border-color: $blue-violet-500;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $bloody-red;
+  }
+}
+
+.error {
+  margin: 0;
+  color: $bloody-red;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
 }
