@@ -8,4 +8,5 @@
   border-radius: 100px;
   background: $blue-violet;
   @include abeezee-base;
+  @include scale-hover-ani(1.05);
 }
