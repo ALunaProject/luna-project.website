@@ -14,8 +14,7 @@ const GAMES_PER_PAGE = 25
 export async function generateMetadata(): Promise<Metadata> {
 	return constructMetadata({
 		title: "Catalogo de Jogos",
-		description:
-			"Explore e conheça jogos em alta a mano algume escreve um texto generico aqui vai",
+		description: "Explore e conheça jogos em alta!",
 	})
 }
 
