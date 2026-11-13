@@ -1,0 +1,11 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  min-height: 100vh;
+  margin-left: 77px;
+  padding: 32px clamp(16px, 6vw, 80px);
+}

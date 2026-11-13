@@ -8,7 +8,7 @@ export default async function CommentSection(comment: CommentSectionProps) {
 	const comments = await getAllTargetComments(comment.type, comment.targetId)
 
 	return (
-		<section className={s.commentsContainer}>
+		<section className={s.commentsContainer} id="comments">
 			<h3>Comentários</h3>
 			<CommentForm {...comment} />
 			{comments ? (

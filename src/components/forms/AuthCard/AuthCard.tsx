@@ -34,8 +34,8 @@ function getAuthErrorMessage(err: unknown, isSignup: boolean) {
 		if (!isSignup && (status === 401 || status === 403)) {
 			return "Email ou senha incorretos."
 		}
-		if (isSignup && (status === 409 || status === 500)) {
-			return "Não foi possível criar a conta. O email ou o nome já pode estar em uso."
+		if (isSignup && status === 409) {
+			return "Este e-mail já está cadastrado. Faça login ou use outro e-mail."
 		}
 	}
 	return "Algo deu errado. Tente novamente."
