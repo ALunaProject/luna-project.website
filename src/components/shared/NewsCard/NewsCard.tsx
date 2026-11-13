@@ -8,7 +8,7 @@ interface NewsCardProps {
 	page: number
 }
 
-export default function NewsCard({article, page}: NewsCardProps) {
+export default function NewsCard({ article, page }: NewsCardProps) {
 	const href = `/news/${encodeNewsId(article.url)}?page=${page}`
 	return (
 		<Link href={href} className={s.card}>
@@ -18,7 +18,7 @@ export default function NewsCard({article, page}: NewsCardProps) {
 				className={s.image}
 				loading="lazy"
 			/>
-			<div className={s.overlay}/>
+			<div className={s.overlay} />
 			<h2 className={s.title}>{article.title}</h2>
 		</Link>
 	)
