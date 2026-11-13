@@ -1,0 +1,86 @@
+@use "../../../styles/utils/index" as *;
+
+// O .dialog/.section (ListsWrapper) estiliza "button:first-child" de forma global (vermelho),
+// por isso os botões daqui usam seletores mais específicos pra não herdar aquilo.
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include abeezee-sm;
+  color: $gs-light-slate-gray;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.wrapper .chips li button.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 100px;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    background: none;
+    .remove { color: $bloody-red-300; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $blue-violet-300;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.remove {
+  @include abeezee-sm;
+  color: $neutrals-white;
+}
+
+.suggestions {
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid $blue-violet-800;
+  border-radius: 8px;
+  background: $blue-violet-desat-800;
+}
+
+.wrapper .suggestions li button.suggestion {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  @include abeezee-sm;
+
+  &:hover,
+  &:focus-visible {
+    background: $blue-violet-800;
+    outline: none;
+  }
+}

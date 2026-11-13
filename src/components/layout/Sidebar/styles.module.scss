@@ -10,9 +10,12 @@
   align-items: flex-start;
   padding: 50px 0;
   height: 100vh;
+  height: 100dvh;
   background: $blue-violet-1200;
   box-shadow: $shadow-sidebar-left;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   @include transition(all, $duration-medium, $ease-standard);
 
   a:first-child {

@@ -1,0 +1,180 @@
+@use "../../../styles/utils/index" as *;
+
+.postContainer {
+	position: relative;
+	display: flex;
+	width: 94%;
+	max-width: 1100px;
+	align-self: center;
+	flex-direction: column;
+	gap: 12px;
+	padding: 22px 30px 18px;
+	border-radius: 8px;
+	background: $blue-violet-desat-600;
+	box-shadow: $shadow-post-card;
+}
+
+.detailPost {
+	width: min(58%, 760px);
+	max-width: 760px;
+	padding: 18px 24px;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.detailPost .profileContainer {
+	gap: 14px;
+
+	.userProfile {
+		img {
+			width: 34px;
+			height: 34px;
+		}
+
+		span {
+			font-size: 1rem;
+		}
+	}
+}
+
+.detailPost .tagsContainer {
+	justify-content: flex-end;
+}
+
+.detailPost .postContent {
+	margin-top: 8px;
+}
+
+.detailPost .contentText {
+	font-size: 0.85rem;
+	line-height: 1.4;
+}
+
+.cardLink {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	border-radius: inherit;
+	cursor: pointer;
+}
+
+.profileContainer {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	min-width: 0;
+	align-items: center;
+	gap: 16px;
+
+	.userProfile {
+		flex: 0 0 auto;
+		gap: 12px;
+		padding: 0 !important;
+
+		img {
+			width: 42px;
+			height: 42px;
+		}
+
+		span {
+			@include poppins-regular-xl;
+		}
+	}
+}
+
+.profileName {
+	flex: 0 0 auto;
+	@include poppins-regular-xl;
+	color: $gs-sea-salt;
+}
+
+.tagsContainer {
+	display: flex;
+	min-width: 0;
+	flex: 1;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 6px;
+
+	> span {
+		padding: 4px 10px;
+		font-size: 0.78rem;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+}
+
+.extraTags {
+	border-radius: 100px;
+	background: $blue-violet;
+	color: $gs-white-smoke;
+}
+
+.postContent {
+	width: 100%;
+}
+
+.contentText {
+	@include poppins-regular-lg;
+	line-height: 1.5;
+	color: $gs-sea-salt;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.footer {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	margin-top: 2px;
+}
+
+.commentLink {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: $gs-sea-salt;
+	font-size: 0.8rem;
+	transition: color 160ms ease;
+
+	svg {
+		flex: 0 0 auto;
+	}
+
+	&:hover,
+	&:focus-visible {
+		color: $blue-violet-200;
+	}
+
+	&:focus-visible {
+		outline: 2px solid $blue-violet-300;
+		outline-offset: 3px;
+		border-radius: 3px;
+	}
+}
+
+@media (max-width: 700px) {
+	.postContainer {
+		gap: 12px;
+		padding: 18px 20px 16px;
+	}
+
+	.detailPost {
+		width: 100%;
+		max-width: none;
+		padding: 18px 20px 16px;
+	}
+
+	.profileContainer {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.tagsContainer {
+		flex-basis: 100%;
+		justify-content: flex-start;
+	}
+}

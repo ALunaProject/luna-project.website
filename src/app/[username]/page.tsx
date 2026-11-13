@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import s from "./styles.module.scss"
-import React from "react"
 import { getUserByUsername } from "@/services/userServices"
 import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
 import EditingButton from "@/components/ui/EditinModal/EditingButton"
@@ -28,8 +27,6 @@ export default async function UserPage({ params }: UserPageProps) {
 	if (!user) {
 		notFound()
 	}
-
-	// const comments = await getAllComments()
 
 	return (
 		<ProfileEditProvider profileUser={user}>
@@ -85,7 +82,7 @@ export default async function UserPage({ params }: UserPageProps) {
 							<div className={s.favGamesWrapper}></div>
 						</aside>
 					</div>
-					<CommentSection />
+					<CommentSection targetId={user.id} type="profile" />
 				</section>
 			</main>
 		</ProfileEditProvider>

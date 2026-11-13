@@ -8,6 +8,7 @@
 .content {
   @include contentPage;
   align-items: flex-start;
+  height: stretch;
 
   .banner {
     position: relative;

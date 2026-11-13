@@ -1,10 +1,9 @@
 import s from "./styles.module.scss"
-import RateCard from "@/components/layout/RatingSection/RateCard"
 import { getAppReviews } from "@/services/gamesServices"
 import StarIcon from "@/assets/icons/StarIcon"
 import BuyLink from "@/components/layout/RatingSection/BuyLink"
 import { GameDetailsData } from "@/types/gamesDTO"
-import { useAuth } from "@/hooks/useAuth"
+import UserRating from "@/components/layout/RatingSection/UserRating";
 
 export interface RatingSectionProps {
 	appId: string
@@ -12,9 +11,9 @@ export interface RatingSectionProps {
 }
 
 export default async function RatingSection({
-	appId,
-	game,
-}: RatingSectionProps) {
+												appId,
+												game,
+											}: RatingSectionProps) {
 	const app = game
 
 	const gameReviews = await getAppReviews(appId)
@@ -35,7 +34,7 @@ export default async function RatingSection({
 				<div className={s.overallRate}>
 					<h2>{calcSteamRating()}</h2>
 					<div className={s.stars}>
-						{Array.from({ length: 5 }).map((_, index) => {
+						{Array.from({length: 5}).map((_, index) => {
 							let fillPercentage = 0
 
 							if (starCount - index >= 1) {
@@ -58,19 +57,24 @@ export default async function RatingSection({
 				<div className={s.otherRatings}>
 					<span>Outros:</span>
 					<div className={s.rateList}>
-						<RateCard overallRate={6.7} source="Pessoal" />
-						{/*  Quando criarem o Rating na API da luna, trocar isso aqui por um ternario:
-                           notRated? "Avaliar Jogo" : <RateCard overallRate={notaDoUser} source="Pessoal"> */}
+						<UserRating gameName={game.name} appId={appId}/>
 					</div>
 				</div>
 			</div>
 			<div className={s.buySection}>
 				<h3>Onde Comprar?</h3>
 				<div className={s.buyGrid}>
-					<BuyLink
-						price={app.price_overview.final_formatted}
-						source={`https://store.steampowered.com/app/${appId}`}
-					/>
+					{app.price_overview ? (
+						<BuyLink
+							price={app.price_overview.final_formatted}
+							source={`https://store.steampowered.com/app/${appId}`}
+						/>
+					) : app.is_free ? (
+						<BuyLink
+							price="Grátis"
+							source={`https://store.steampowered.com/app/${appId}`}
+						/>
+					) : null}
 				</div>
 			</div>
 		</section>
