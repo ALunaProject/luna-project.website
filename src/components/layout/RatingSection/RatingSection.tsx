@@ -3,7 +3,7 @@ import { getAppReviews } from "@/services/gamesServices"
 import StarIcon from "@/assets/icons/StarIcon"
 import BuyLink from "@/components/layout/RatingSection/BuyLink"
 import { GameDetailsData } from "@/types/gamesDTO"
-import UserRating from "@/components/layout/RatingSection/UserRating";
+import UserRating from "@/components/layout/RatingSection/UserRating"
 
 export interface RatingSectionProps {
 	appId: string
@@ -11,9 +11,9 @@ export interface RatingSectionProps {
 }
 
 export default async function RatingSection({
-												appId,
-												game,
-											}: RatingSectionProps) {
+	appId,
+	game,
+}: RatingSectionProps) {
 	const app = game
 
 	const gameReviews = await getAppReviews(appId)
@@ -34,7 +34,7 @@ export default async function RatingSection({
 				<div className={s.overallRate}>
 					<h2>{calcSteamRating()}</h2>
 					<div className={s.stars}>
-						{Array.from({length: 5}).map((_, index) => {
+						{Array.from({ length: 5 }).map((_, index) => {
 							let fillPercentage = 0
 
 							if (starCount - index >= 1) {
@@ -57,7 +57,7 @@ export default async function RatingSection({
 				<div className={s.otherRatings}>
 					<span>Outros:</span>
 					<div className={s.rateList}>
-						<UserRating gameName={game.name} appId={appId}/>
+						<UserRating gameName={game.name} appId={appId} />
 					</div>
 				</div>
 			</div>

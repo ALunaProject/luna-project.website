@@ -6,16 +6,20 @@ import s from "./styles.module.scss"
 import RateCard from "@/components/layout/RatingSection/RateCard"
 import { useAuth } from "@/hooks/useAuth"
 import { RatingResponse } from "@/types/ratingDTO"
-import { getMyGameRating, removeGameRating, saveGameRating } from "@/services/ratingServices"
-import RatingModal from "@/components/layout/RatingSection/RatingModal";
-import Button from "@/components/ui/Button/Button";
+import {
+	getMyGameRating,
+	removeGameRating,
+	saveGameRating,
+} from "@/services/ratingServices"
+import RatingModal from "@/components/layout/RatingSection/RatingModal"
+import Button from "@/components/ui/Button/Button"
 
 interface UserRatingProps {
 	appId: string
 	gameName?: string
 }
 
-export default function UserRating({appId, gameName}: UserRatingProps) {
+export default function UserRating({ appId, gameName }: UserRatingProps) {
 	const auth = useAuth()
 	const router = useRouter()
 	const isLogged = Boolean(auth?.user)
@@ -36,9 +40,7 @@ export default function UserRating({appId, gameName}: UserRatingProps) {
 			.then(data => {
 				if (!ignore) setRating(data)
 			})
-			.catch(() => {
-
-			})
+			.catch(() => {})
 			.finally(() => {
 				if (!ignore) setLoading(false)
 			})
@@ -66,13 +68,13 @@ export default function UserRating({appId, gameName}: UserRatingProps) {
 		setRating(null)
 	}
 
-	if (loading) return <div className={s.skeleton} aria-hidden="true"/>
+	if (loading) return <div className={s.skeleton} aria-hidden="true" />
 
 	return (
 		<>
 			{rating ? (
 				<div className={s.wrapper}>
-					<RateCard overallRate={rating.score} source="Pessoal"/>
+					<RateCard overallRate={rating.score} source="Pessoal" />
 					<Button
 						type="button"
 						className={s.editButton}

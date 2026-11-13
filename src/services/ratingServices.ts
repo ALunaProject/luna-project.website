@@ -1,5 +1,5 @@
 import { RatingResponse } from "@/types/ratingDTO"
-import { api } from "@/utils/api";
+import { api } from "@/utils/api"
 
 export async function getMyGameRating(appId: string) {
 	const res = await api.get<RatingResponse>(`/ratings/games/${appId}/me`)

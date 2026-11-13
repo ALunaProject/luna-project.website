@@ -1,6 +1,5 @@
 import s from "./styles.module.scss"
 
-import { getAppReviews, getGameDetails } from "@/services/gamesServices"
 import { notFound } from "next/navigation"
 import { GamesPageProps } from "@/types/gamesDTO"
 import { Metadata } from "next"
@@ -12,6 +11,7 @@ import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import CommentSection from "@/components/layout/CommentSection/CommentSection"
 import RatingSection from "@/components/layout/RatingSection/RatingSection"
 import SeeMoreSection from "@/components/ui/SeeMoreSection/SeeMoreSection"
+import { getGameDetails } from "@/services/gamesServices"
 
 export async function generateMetadata({
 	params,

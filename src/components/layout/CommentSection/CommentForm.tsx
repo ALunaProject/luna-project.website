@@ -8,10 +8,10 @@ import { useRouter } from "next/navigation"
 import { getErrorMessage } from "@/utils/getErrorMessage"
 import { createNewComment } from "@/services/commentsServices"
 import { CommentSectionProps } from "@/types/commentsDTO"
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth"
 
 export function CommentForm(props: CommentSectionProps) {
-	const {user} = useAuth()
+	const { user } = useAuth()
 	const [content, setContent] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
