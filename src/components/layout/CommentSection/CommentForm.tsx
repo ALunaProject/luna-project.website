@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation"
 import { getErrorMessage } from "@/utils/getErrorMessage"
 import { createNewComment } from "@/services/commentsServices"
 import { CommentSectionProps } from "@/types/commentsDTO"
+import { useAuth } from "@/hooks/useAuth"
 
 export function CommentForm(props: CommentSectionProps) {
+	const { user } = useAuth()
 	const [content, setContent] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -45,6 +47,7 @@ export function CommentForm(props: CommentSectionProps) {
 
 		const trimmed = content.trim()
 		if (!trimmed) return setError("Content cannot be empty")
+		setContent("")
 
 		return run(
 			token =>
@@ -69,13 +72,14 @@ export function CommentForm(props: CommentSectionProps) {
 				maxLength={1000}
 				autoFocus
 				onChange={e => setContent(e.target.value)}
+				disabled={!user}
 			/>
 			<Button
 				label="Comentar"
 				icon="ArrowIcon"
 				type="submit"
 				onClick={() => setContent(content)}
-				disabled={loading}
+				disabled={loading || !user}
 			/>
 		</form>
 	)

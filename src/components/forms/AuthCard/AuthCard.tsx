@@ -180,7 +180,10 @@ function AuthCard({ variant }: AuthCardProps) {
 				</p>
 			) : null}
 
-			<Button label={isSignup? "Cadastrar-se" : "Entrar"} type="submit" />
+			<Button
+				label={isSignup ? "Cadastrar-se" : "Entrar"}
+				type="submit"
+			/>
 
 			<p className={s.signupLink}>
 				{isSignup ? (

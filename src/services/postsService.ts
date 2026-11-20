@@ -1,70 +1,78 @@
-import {api} from "@/utils/api"
-import {CreatePostRequest, PostDto} from "@/types/postsDTO";
+import { api } from "@/utils/api"
+import { CreatePostRequest, PostDto } from "@/types/postsDTO"
 
-export async function createPost(req: CreatePostRequest, token: string): Promise<PostDto | null> {
-    try{
-        const {data} = await api.post<PostDto>("api/post", req, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        return data
-    }catch(err){
-        console.error("Error creating post", err)
-        return null;
-    }
+export async function createPost(
+	req: CreatePostRequest,
+	token: string,
+): Promise<PostDto | null> {
+	try {
+		const { data } = await api.post<PostDto>("api/post", req, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		return data
+	} catch (err) {
+		console.error("Error creating post", err)
+		return null
+	}
 }
 
 export async function getPosts(): Promise<PostDto[] | null> {
-    try {
-        const {data} = await api.get<PostDto[]>("api/post");
-        const getPostTimestamp = (post: PostDto) => {
-            const date = post.createdAt ?? post.creation_date ?? post.creationDate
-            if (!date) return Number.NEGATIVE_INFINITY
+	try {
+		const { data } = await api.get<PostDto[]>("api/post")
+		const getPostTimestamp = (post: PostDto) => {
+			const date =
+				post.createdAt ?? post.creation_date ?? post.creationDate
+			if (!date) return Number.NEGATIVE_INFINITY
 
-            const timestamp = Date.parse(date)
-            return Number.isNaN(timestamp) ? Number.NEGATIVE_INFINITY : timestamp
-        }
+			const timestamp = Date.parse(date)
+			return Number.isNaN(timestamp)
+				? Number.NEGATIVE_INFINITY
+				: timestamp
+		}
 
-        return [...data].sort((a, b) => getPostTimestamp(b) - getPostTimestamp(a));
-    }catch(err) {
-        console.error("Nenhum post foi encontrado", err);
-        // console.log(localStorage.getItem("token"));
-        return null;
-    }
+		return [...data].sort(
+			(a, b) => getPostTimestamp(b) - getPostTimestamp(a),
+		)
+	} catch (err) {
+		console.error("Nenhum post foi encontrado", err)
+		// console.log(localStorage.getItem("token"));
+		return null
+	}
 }
 
 export async function getPostById(id: string): Promise<PostDto | null> {
-    try {
-        const {data} = await api.get<PostDto[]>("api/post");
-        return data.find(p => p.id === id) ?? null;
-    }catch(err) {
-        console.error("Nenhum post foi encontrado", err);
-        return null;
-    }
+	try {
+		const { data } = await api.get<PostDto[]>("api/post")
+		return data.find(p => p.id === id) ?? null
+	} catch (err) {
+		console.error("Nenhum post foi encontrado", err)
+		return null
+	}
 }
 
 export async function updatePostById(
-    postId: string,
-    content: string
+	postId: string,
+	content: string,
 ): Promise<PostDto | null> {
-    try {
-        const response = await api.put(`api/post/${postId}`, {
-            content: content
-        })
-        return response.data;
-    }catch(err) {
-        console.error("Nenhum post foi encontrado", err);
-        return null;
-    }
+	try {
+		const response = await api.put(`api/post/${postId}`, {
+			content: content,
+		})
+		return response.data
+	} catch (err) {
+		console.error("Nenhum post foi encontrado", err)
+		return null
+	}
 }
 
 export async function deletePostById(postId: string): Promise<PostDto | null> {
-    try {
-        const response = await api.delete(`api/post/${postId}`);
-        return response.data;
-    }catch(err) {
-        console.error("Nenhum post foi encontrado", err);
-        return null;
-    }
+	try {
+		const response = await api.delete(`api/post/${postId}`)
+		return response.data
+	} catch (err) {
+		console.error("Nenhum post foi encontrado", err)
+		return null
+	}
 }
