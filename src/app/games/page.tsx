@@ -8,6 +8,7 @@ import { constructMetadata } from "@/utils/metadata"
 import Pagination from "@/components/shared/Pagination/Pagination"
 import { Suspense } from "react"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
+import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar";
 
 const GAMES_PER_PAGE = 25
 
@@ -18,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 	})
 }
 
-async function GamesList({ page }: { page: number }) {
+export async function GamesList({ page }: { page: number }) {
 	const start = page * GAMES_PER_PAGE
 	const games: GameData[] = await getAllGames({
 		start,
@@ -49,7 +50,11 @@ export default async function GamesPage({
 
 	return (
 		<main className={s.container}>
+			<Suspense fallback={null}>
+				<SearchSideBar />
+			</Suspense>
 			<Sidebar />
+
 			<section className={s.content}>
 				<div className={s.gamesWrapper}>
 					<Suspense key={page} fallback={<GamesCardSkeletonList />}>

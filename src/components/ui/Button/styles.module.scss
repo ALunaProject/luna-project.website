@@ -8,15 +8,16 @@
   align-items: flex-end;
   gap: 10px;
   border-radius: 5px;
-  background: $blue-violet-500;
+  background: $blue-violet;
   @include transition(all, $duration-fast);
+  @include scale-hover-ani(1.02);
 
   &:hover {
     background: $blue-violet-800;
   }
 
   &:active {
-    background: $blue-violet-400;
+    background: $blue-violet-300;
   }
 
   &:disabled {
@@ -42,4 +43,4 @@
     color: $gs-white-smoke;
   }
 
-}
+}
