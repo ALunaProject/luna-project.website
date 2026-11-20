@@ -19,12 +19,12 @@ export async function generateMetadata(): Promise<Metadata> {
 	})
 }
 
-export async function GamesList({ page }: { page: number }) {
+async function GamesList({ page }: { page: number }) {
 	const start = page * GAMES_PER_PAGE
 	const games: GameData[] = await getAllGames({
 		start,
 		count: GAMES_PER_PAGE,
-		sort: "20",
+		sort: "21",
 	})
 
 	if (games.length === 0) {

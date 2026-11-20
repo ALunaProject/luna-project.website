@@ -207,3 +207,4 @@ async function getStoreItems(appIds: number[]): Promise<GameData[]> {
 		return []
 	}
 }
+

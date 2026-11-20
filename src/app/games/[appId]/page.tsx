@@ -14,13 +14,13 @@ import RatingSection from "@/components/layout/RatingSection/RatingSection"
 import SeeMoreSection from "@/components/ui/SeeMoreSection/SeeMoreSection"
 
 export async function generateMetadata({
-	params,
-}: GamesPageProps): Promise<Metadata> {
-	const { appId } = await params
+										   params,
+									   }: GamesPageProps): Promise<Metadata> {
+	const {appId} = await params
 	const game = await getGameDetails(appId)
 
 	if (!game) {
-		return constructMetadata({ title: "Jogo não encontrado" })
+		return constructMetadata({title: "Jogo não encontrado"})
 	}
 
 	return constructMetadata({
@@ -30,8 +30,8 @@ export async function generateMetadata({
 	})
 }
 
-export default async function GamePage({ params }: GamesPageProps) {
-	const { appId } = await params
+export default async function GamePage({params}: GamesPageProps) {
+	const {appId} = await params
 	const game = await getGameDetails(appId)
 
 	if (!game) {
@@ -40,7 +40,7 @@ export default async function GamePage({ params }: GamesPageProps) {
 
 	return (
 		<main className={s.container}>
-			<Sidebar />
+			<Sidebar/>
 			{game ? (
 				<section className={s.content}>
 					<Banner
@@ -53,10 +53,12 @@ export default async function GamePage({ params }: GamesPageProps) {
 						<h1>{game.name}</h1>
 						<div className={s.tagsWrapper}>
 							{game?.genres?.map(gen => (
-								<Tags key={gen.id} label={gen.description} />
+								<Tags key={gen.id} label={gen.description}/>
 							))}
 							{game?.categories?.map(cat => (
-								<Tags key={cat.id} label={cat.description} />
+								<Tags key={cat.id} label={cat.description}/>
+								// 	esses são diferentes das tags de search, tem que chamar os mesmos aqui antes de relacionar
+								// ou seja, 2 endpoints e muita req por usuário
 							))}
 						</div>
 						<SeeMoreSection
@@ -64,8 +66,8 @@ export default async function GamePage({ params }: GamesPageProps) {
 							html={game.about_the_game}
 						/>
 					</div>
-					<RatingSection appId={appId} game={game} />
-					<CommentSection targetId={appId} type="game" />
+					<RatingSection appId={appId} game={game}/>
+					<CommentSection targetId={appId} type="game"/>
 				</section>
 			) : (
 				<p>Não foi possível carregar os detalhes do jogo.</p>

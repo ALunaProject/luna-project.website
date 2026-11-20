@@ -3,6 +3,7 @@
 import s from "./styles.module.scss"
 import Button from "@/components/ui/Button/Button"
 import { useRouter } from "next/navigation"
+import { Tag } from "@/types/tagsDTO";
 
 interface TagsProps {
 	label: string
@@ -10,9 +11,13 @@ interface TagsProps {
 	onClick?: () => void
 	selected?: boolean
 	disabled?: boolean
+	Tag?: {
+		id: string
+		description: string
+	}
 }
 
-export default function Tags({ label, inCard, onClick, selected, disabled }: TagsProps) {
+export default function Tags({ label, inCard, onClick, selected, disabled, Tag }: TagsProps) {
 	const router = useRouter()
 	const text = inCard && label.length > 15 ? label.slice(0, 15).trimEnd() + "..." : label
 
@@ -29,8 +34,8 @@ export default function Tags({ label, inCard, onClick, selected, disabled }: Tag
 		)
 	}
 
-	if (!inCard) {
-		return <Button className={s.tagContainer} label={text} onClick={() => router.push("./")} />
+	if (!inCard && Tag) {
+		return <Button className={s.tagContainer} label={text} onClick={() => router.push(`./games/search?tags=${Tag.id}`)} />
 	}
 
 	return <span className={s.tagContainer}>{text}</span>
