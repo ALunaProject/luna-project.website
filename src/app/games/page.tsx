@@ -24,7 +24,7 @@ async function GamesList({ page }: { page: number }) {
 	const games: GameData[] = await getAllGames({
 		start,
 		count: GAMES_PER_PAGE,
-		sort: "21",
+		sort: "20",
 	})
 
 	if (games.length === 0) {

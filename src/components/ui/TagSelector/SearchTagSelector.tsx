@@ -2,7 +2,7 @@
 
 import { useId, useMemo, useState } from "react"
 import s from "./styles.module.scss"
-import { AddIcon } from "@/assets/icons/LinksIcons"
+import { AddIcon, SearchIcon } from "@/assets/icons/LinksIcons"
 import {
 	EXCLUDES_TAGS,
 	POPULAR_TAG_IDS,
@@ -93,7 +93,7 @@ export default function SearchTagSelector({
 	return (
 		<div className={s.wrapper}>
 			<label className={s.search} htmlFor={inputId}>
-				<AddIcon />
+				<SearchIcon />
 				<input
 					id={inputId}
 					type="text"
