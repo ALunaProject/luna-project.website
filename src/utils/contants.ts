@@ -1,5 +1,6 @@
 import defaultAvatar from "@/assets/images/default-avatar.jpg"
 import defaultBanner from "@/assets/images/default-banner.png"
+import { GameData } from "@/types/gamesDTO";
 
 export const DEFAULT_AVATAR = defaultAvatar.src
 export const DEFAULT_BANNER = defaultBanner.src
@@ -18,8 +19,13 @@ export const STORE_ASSETS =
 	"https://shared.akamai.steamstatic.com/store_item_assets"
 
 // Fonte: https://store.steampowered.com/tagdata/populartags/english
-//TODO: deixar esse SET no back e chamar da nossa api
 
+export const FALLBACK_ASSETS: GameData["assets"] = {
+	header: "header.jpg",
+	header_2x: "header_2x.jpg",
+	community_icon: "",
+	library_capsule: "library_capsule.jpg",
+}
 export const STEAM_TAG_NAMES: Record<number, string> = {
 	492: "Indie",
 	19: "Ação",
@@ -453,6 +459,21 @@ export const STEAM_TAG_NAMES: Record<number, string> = {
 }
 export const EXCLUDES_TAGS = [
 	//	12095, // Conteúdo Sexual
-	//	6650,  // Nudez
+	//	6650, // Nudez
 	9130, // Hentai
+]
+
+export const POPULAR_TAG_IDS = [
+	699, // Corrida
+	1663, // FPS
+	1716, // Rogue-like
+	122, // RPG
+	492, // Indie
+	4182, // Single-player
+	3859, // Multi-player
+	1685, // Co-op
+	21978, // VR
+	599, // Simulação
+	1643, // Construção
+	3871, // 2D
 ]

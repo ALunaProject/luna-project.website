@@ -7,10 +7,10 @@ import {
 	GamesResponse,
 	GameData,
 	GameReviewsData,
-	GameReviewsResponse,
+	GameReviewsResponse, StoreSearchResponse,
 } from "@/types/gamesDTO"
 import { unstable_cache } from "next/cache"
-import { EXCLUDES_TAGS } from "@/utils/contants"
+import { EXCLUDES_TAGS, FALLBACK_ASSETS } from "@/utils/contants"
 
 export async function getAllGames({
 	start,
@@ -129,5 +129,81 @@ export async function getAppReviews(
 	} catch (error) {
 		console.error("Erro ao carregar análises da Steam:", error)
 		return null
+	}
+}
+
+type SearchInput = { term?: string; tagIds?: number[] }
+
+async function runSearch({ term = "", tagIds = [] }: SearchInput): Promise<GameData[]> {
+	const q = term.trim()
+
+	// só tags: 1 chamada, o Query já devolve o formato certo
+	if (!q) {
+		return tagIds.length ? getAllGames({ start: 0, count: 25, sort: 0, tagIds }) : []
+	}
+	if (q.length < 2) return []
+
+	// nome (+ tags): storesearch acha os ids, GetItems traz tags e assets
+	const search = await gamesStoreApi.get<StoreSearchResponse>("api/storesearch/", {
+		params: { term: q, l: "brazilian", cc: "br" },
+	})
+	const found = (search.data?.items ?? []).filter((i) => i.type === "app")
+	if (!found.length) return []
+
+	const items = await getStoreItems(found.map((i) => i.id))
+	const byId = new Map(items.map((g) => [String(g.appid), g]))
+
+	return found
+		.map((item) => {
+			const full = byId.get(String(item.id))
+			return {
+				appid: String(item.id),
+				name: item.name,
+				assets: full?.assets ?? FALLBACK_ASSETS,
+				tags: full?.tags ?? [],
+				tiny_image: item.tiny_image,
+			}
+		})
+		// nome + tags: o jogo precisa ter todas as tags escolhidas
+		.filter((g) => tagIds.every((id) => g.tags.some((t) => t.tagid === id)))
+}
+
+const getCachedSearch = unstable_cache(runSearch, ["search-games"], {
+	revalidate: 60 * 10,
+})
+
+export async function searchGames(input: SearchInput) {
+	try {
+		return await getCachedSearch({
+			term: (input.term ?? "").trim().toLowerCase(),
+			tagIds: input.tagIds ?? [],
+		})
+	} catch (error) {
+		console.error("Erro ao buscar jogos da Steam:", error)
+		return []
+	}
+}
+
+async function getStoreItems(appIds: number[]): Promise<GameData[]> {
+	try {
+		const res = await gamesApi.get<{ response: { store_items: GameData[] } }>(
+			"IStoreBrowseService/GetItems/v1/",
+			{
+				params: {
+					input_json: JSON.stringify({
+						ids: appIds.map((appid) => ({ appid })),
+						context: { language: "brazilian", country_code: "BR" },
+						data_request: {
+							include_assets: true,
+							include_tag_count: 69,
+						},
+					}),
+				},
+			},
+		)
+		return res.data?.response?.store_items ?? []
+	} catch (error) {
+		console.error("Erro ao carregar itens da Steam:", error)
+		return []
 	}
 }
