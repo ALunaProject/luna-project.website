@@ -47,6 +47,7 @@ export function CommentForm(props: CommentSectionProps) {
 
 		const trimmed = content.trim()
 		if (!trimmed) return setError("Content cannot be empty")
+		setContent("")
 
 		return run(
 			token =>
