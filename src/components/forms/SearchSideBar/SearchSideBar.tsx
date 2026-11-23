@@ -20,6 +20,8 @@ export default function SearchSideBar() {
 	const triggerRef = useRef<HTMLButtonElement>(null)
 	const searchRef = useRef<HTMLInputElement>(null)
 
+	const canSubmit = term.trim().length > 0 || tagIds.length > 0
+
 	const close = useCallback(() => {
 		setOpen(false)
 		triggerRef.current?.focus()
@@ -46,10 +48,11 @@ export default function SearchSideBar() {
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault()
+		if (!canSubmit) return
+
 		const next = new URLSearchParams()
 		if (term.trim()) next.set("q", term.trim())
 		if (tagIds.length) next.set("tags", tagIds.join(","))
-		if (!next.size) return
 		router.push(`/games/search?${next}`)
 		close()
 	}
@@ -74,14 +77,14 @@ export default function SearchSideBar() {
 				role="dialog"
 				aria-label="Filtros">
 				<form onSubmit={handleSubmit} role="search" className={s.searchForm}>
-					<fieldset className={s.sidebarHeader}>
+					<div className={s.sidebarHeader}>
 						<label className={s.searchBar}>
 							<SearchIcon />
 							<input
 								ref={searchRef}
 								value={term}
 								onChange={e => setTerm(e.target.value)}
-								placeholder="Search"
+								placeholder="Buscar jogo..."
 								aria-label="Buscar jogos"
 							/>
 						</label>
@@ -91,12 +94,12 @@ export default function SearchSideBar() {
 							onClick={close}
 							style={{width: "fit-content", backgroundColor: "transparent", rotate: "180deg"}}
 						/>
-					</fieldset>
+					</div>
 
-					<fieldset className={s.titleWrapper}>
+					<div className={s.titleWrapper}>
 						<h2>Filtros</h2>
 						<FilterIcon/>
-					</fieldset>
+					</div>
 
 					<p className={s.filterStatus}>
 						{tagIds.length
@@ -112,7 +115,7 @@ export default function SearchSideBar() {
 						<SearchTagSelector value={tagIds} onChange={setTagIds} max={5}/>
 					</details>
 
-					<Button label="Aplicar filtros" type="submit"/>
+					<Button label="Aplicar filtros" type="submit" disabled={!canSubmit}/>
 				</form>
 			</aside>
 		</>

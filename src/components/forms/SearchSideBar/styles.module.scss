@@ -83,9 +83,8 @@
 
 .sidebarHeader {
   display: flex;
-  align-items: center;
+  width: 100%;
   gap: 0.75rem;
-  border: none;
 }
 
 .searchBar {
@@ -124,7 +123,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: none;
 
   h2 {
     margin: 0;

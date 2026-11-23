@@ -8,6 +8,7 @@ import { constructMetadata } from "@/utils/metadata"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
 import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
+import Sidebar from "@/components/layout/Sidebar/Sidebar";
 
 type SearchPageProps = {
 	searchParams: Promise<{ q?: string; tags?: string }>
@@ -48,6 +49,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
 	return (
 		<main className={s.container}>
+			<Sidebar />
 			<Suspense fallback={null}>
 				<SearchSideBar />
 			</Suspense>

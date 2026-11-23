@@ -100,7 +100,7 @@ export default function SearchTagSelector({
 					value={query}
 					onChange={e => setQuery(e.target.value)}
 					onKeyDown={handleKeyDown}
-					placeholder={limitReached ? `Máximo de ${max} tags` : "Buscar tag"}
+					placeholder={limitReached ? `Máximo de ${max} tags` : "Buscar categorias..."}
 					disabled={disabled || limitReached}
 					autoComplete="off"
 				/>
