@@ -39,7 +39,8 @@ export default function TagSelector({
 			const seen = new Set<string>()
 			setTags(
 				list.filter(tag => {
-					if (EXCLUDES_TAGS.includes(tag.id) || seen.has(tag.name)) return false
+					if (EXCLUDES_TAGS.includes(tag.id) || seen.has(tag.name))
+						return false
 					seen.add(tag.name)
 					return true
 				}),
@@ -57,7 +58,10 @@ export default function TagSelector({
 		const q = normalize(query.trim())
 		if (!q) return []
 		return tags
-			.filter(tag => !value.includes(tag.id) && normalize(tag.name).includes(q))
+			.filter(
+				tag =>
+					!value.includes(tag.id) && normalize(tag.name).includes(q),
+			)
 			.slice(0, 8)
 	}, [tags, value, query])
 
@@ -93,7 +97,9 @@ export default function TagSelector({
 									disabled={disabled}
 									aria-label={`Remover tag ${name}`}>
 									<Tags label={name} />
-									<span className={s.remove} aria-hidden="true">
+									<span
+										className={s.remove}
+										aria-hidden="true">
 										×
 									</span>
 								</button>
@@ -109,7 +115,9 @@ export default function TagSelector({
 				value={query}
 				onChange={e => setQuery(e.target.value)}
 				placeholder={
-					limitReached ? `Máximo de ${max} tags` : "Buscar tag (ex.: Cooperativo)"
+					limitReached
+						? `Máximo de ${max} tags`
+						: "Buscar tag (ex.: Cooperativo)"
 				}
 				disabled={disabled || limitReached}
 				autoComplete="off"
