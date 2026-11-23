@@ -10,7 +10,8 @@ export default function PostCard({ post, isPostPage = false }: PostCardProps) {
 	const hiddenTagCount = Math.max((post.tags?.length ?? 0) - 3, 0)
 
 	return (
-		<article className={`${s.postContainer} ${isPostPage ? "" : s.detailPost}`}>
+		<article
+			className={`${s.postContainer} ${isPostPage ? "" : s.detailPost}`}>
 			{isPostPage && (
 				<Link
 					className={s.cardLink}
@@ -34,7 +35,9 @@ export default function PostCard({ post, isPostPage = false }: PostCardProps) {
 						<Tags key={tag.id} label={tag.name} inCard />
 					))}
 					{isPostPage && hiddenTagCount > 0 && (
-						<span className={s.extraTags} aria-label={`${hiddenTagCount} tags a mais`}>
+						<span
+							className={s.extraTags}
+							aria-label={`${hiddenTagCount} tags a mais`}>
 							+{hiddenTagCount}
 						</span>
 					)}
@@ -44,28 +47,6 @@ export default function PostCard({ post, isPostPage = false }: PostCardProps) {
 			<div className={s.postContent}>
 				<p className={s.contentText}>{post.content}</p>
 			</div>
-
-			<footer className={s.footer}>
-				<Link
-					className={s.commentLink}
-					href={isPostPage ? `/community/${post.id}#comments` : "#comments"}>
-					<svg
-						aria-hidden="true"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none">
-						<path
-							d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-4 2v-9.5A7.5 7.5 0 0 1 10.5 4h2A7.5 7.5 0 0 1 20 11.5Z"
-							stroke="currentColor"
-							strokeWidth="1.6"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-					</svg>
-					Comentar
-				</Link>
-			</footer>
 		</article>
 	)
 }

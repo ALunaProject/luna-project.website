@@ -4,18 +4,18 @@ import { notFound } from "next/navigation"
 import { NewsDetailPageProps } from "@/types/newsDTO"
 import { Metadata } from "next"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
-import CommentSection from "@/components/layout/CommentSection/CommentSection";
+import CommentSection from "@/components/layout/CommentSection/CommentSection"
 
 export async function generateMetadata({
-										   params,
-										   searchParams,
-									   }: NewsDetailPageProps): Promise<Metadata> {
-	const {id} = await params
-	const {page} = await searchParams
+	params,
+	searchParams,
+}: NewsDetailPageProps): Promise<Metadata> {
+	const { id } = await params
+	const { page } = await searchParams
 	const article = await getNewsDetails(id, Number(page) || 1)
 
 	if (!article) {
-		return {title: "Notícia não encontrada"}
+		return { title: "Notícia não encontrada" }
 	}
 
 	return {
@@ -23,17 +23,17 @@ export async function generateMetadata({
 		description: article.description ?? undefined,
 		referrer: "no-referrer", //libera bloqueiro
 		openGraph: article.urlToImage
-			? {images: [{url: article.urlToImage}]}
+			? { images: [{ url: article.urlToImage }] }
 			: undefined,
 	}
 }
 
 export default async function NewsDetailPage({
-												 params,
-												 searchParams,
-											 }: NewsDetailPageProps) {
-	const {id} = await params
-	const {page} = await searchParams
+	params,
+	searchParams,
+}: NewsDetailPageProps) {
+	const { id } = await params
+	const { page } = await searchParams
 	const article = await getNewsDetails(id, Number(page) || 1)
 
 	if (!article) {
@@ -48,7 +48,7 @@ export default async function NewsDetailPage({
 
 	return (
 		<main className={s.container}>
-			<Sidebar/>
+			<Sidebar />
 			<section className={s.content}>
 				<div className={s.banner}>
 					<img

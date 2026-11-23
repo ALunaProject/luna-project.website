@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react"
 import s from "@/components/layout/RatingSection/styles.module.scss"
-import Button from "@/components/ui/Button/Button";
+import Button from "@/components/ui/Button/Button"
 
 interface RatingModalProps {
 	gameName?: string
@@ -23,12 +23,12 @@ function parseScore(raw: string): number | null {
 }
 
 export default function RatingModal({
-										gameName,
-										initialScore,
-										onClose,
-										onSave,
-										onRemove,
-									}: RatingModalProps) {
+	gameName,
+	initialScore,
+	onClose,
+	onSave,
+	onRemove,
+}: RatingModalProps) {
 	const dialogRef = useRef<HTMLDialogElement>(null)
 	const [value, setValue] = useState(
 		initialScore !== null ? String(initialScore).replace(".", ",") : "",
@@ -111,7 +111,6 @@ export default function RatingModal({
 							onClick={() => run(onRemove)}
 							label="Remover nota"
 						/>
-
 					)}
 					<Button
 						type="button"
@@ -123,7 +122,9 @@ export default function RatingModal({
 					<Button
 						type="submit"
 						disabled={parsed === null || status === "loading"}
-						label={status === "loading" ? "Salvando..." : "Salvar nota"}
+						label={
+							status === "loading" ? "Salvando..." : "Salvar nota"
+						}
 					/>
 				</div>
 			</form>

@@ -41,6 +41,9 @@
     width: 100%;
     color: $gs-white-smoke;
     @include transition($duration-fast);
+    &:disabled{
+      cursor: not-allowed;
+    }
 
     &:hover {
       color: $blue-violet-100;

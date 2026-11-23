@@ -23,6 +23,7 @@
   &:disabled {
     opacity: 0.75;
     background-color: $blue-violet-desat-300;
+    cursor: not-allowed;
   }
 
   // variante vermelha (ex: botão Cancelar)

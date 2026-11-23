@@ -1,19 +1,17 @@
 @use "../../styles/utils/index" as *;
 
-.container {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.content {
-  flex: 1;
-  min-width: 0;
-  height: 100vh;
-  margin-left: 77px;
-  overflow-y: auto;
+.page {
   display: flex;
   flex-direction: column;
-  padding: clamp(32px, 10vh, 150px) clamp(16px, 8vw, 250px);
-  gap: 30px;
+  align-items: center;
+  gap: 32px;
+  min-height: 100vh;
+  padding: 48px 0 40px;
+}
+
+.list {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 24px;
 }
