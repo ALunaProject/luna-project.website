@@ -89,6 +89,7 @@ export default function SearchSideBar() {
 							/>
 						</label>
 						<Button
+							type="button"
 							aria-label="Fechar filtros"
 							icon="LogoutIcon"
 							onClick={close}

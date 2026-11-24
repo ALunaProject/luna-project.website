@@ -26,6 +26,16 @@ export const FALLBACK_ASSETS: GameData["assets"] = {
 	community_icon: "",
 	library_capsule: "library_capsule.jpg",
 }
+
+export const GAME_SORT = {
+	ALPHABETICAL: 1,
+	APPID_ASC: 2,
+	NEWEST: 20,
+	BEST_RATED: 21,
+} as const
+
+export type GameSort = (typeof GAME_SORT)[keyof typeof GAME_SORT]
+
 export const STEAM_TAG_NAMES: Record<number, string> = {
 	492: "Indie",
 	19: "Ação",

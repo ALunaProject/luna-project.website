@@ -5,6 +5,7 @@ import { searchGames } from "@/services/gamesServices"
 import { parseTagIds } from "@/utils/searchTags"
 import { GameData } from "@/types/gamesDTO"
 import { constructMetadata } from "@/utils/metadata"
+import { STEAM_TAG_NAMES } from "@/utils/contants"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
 import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
@@ -46,6 +47,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 	const { q = "", tags } = await searchParams
 	const term = q.trim().slice(0, 100) // limita o tamanho vindo da URL
 	const tagIds = parseTagIds(tags)
+	const tagNames = tagIds.map(id => STEAM_TAG_NAMES[id]).filter(Boolean)
 
 	return (
 		<main className={s.container}>
@@ -55,7 +57,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 			</Suspense>
 
 			<section className={s.content}>
-				<h3>Resultador para: {q}</h3>
+				{(term || tagNames.length > 0) && (
+					<h3>
+						Resultados
+						{term && ` para: ${term}`}
+						{tagNames.length > 0 && ` · ${tagNames.join(", ")}`}
+					</h3>
+				)}
 				<div className={s.gamesWrapper}>
 					<Suspense
 						key={`${term}|${tagIds.join(",")}`}

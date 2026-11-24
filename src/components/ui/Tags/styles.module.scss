@@ -44,3 +44,10 @@
     margin-left: 6px;
   }
 }
+
+.link {
+  @include focus-ring;
+
+  color: inherit;
+  text-decoration: none;
+}
