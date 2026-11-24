@@ -1,6 +1,6 @@
 import defaultAvatar from "@/assets/images/default-avatar.jpg"
 import defaultBanner from "@/assets/images/default-banner.png"
-import { GameData } from "@/types/gamesDTO";
+import { GameData } from "@/types/gamesDTO"
 
 export const DEFAULT_AVATAR = defaultAvatar.src
 export const DEFAULT_BANNER = defaultBanner.src

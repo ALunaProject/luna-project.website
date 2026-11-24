@@ -217,7 +217,6 @@ function searchByTags(tagIds: number[]): Promise<GameData[]> {
 	})
 }
 
-
 async function searchByName(
 	term: string,
 	tagIds: number[],

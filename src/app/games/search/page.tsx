@@ -9,13 +9,15 @@ import { STEAM_TAG_NAMES } from "@/utils/contants"
 import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
 import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
-import Sidebar from "@/components/layout/Sidebar/Sidebar";
+import Sidebar from "@/components/layout/Sidebar/Sidebar"
 
 type SearchPageProps = {
 	searchParams: Promise<{ q?: string; tags?: string }>
 }
 
-export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
+export async function generateMetadata({
+	searchParams,
+}: SearchPageProps): Promise<Metadata> {
 	const { q = "" } = await searchParams
 	return constructMetadata({
 		title: q ? `Busca: ${q}` : "Busca de Jogos",
@@ -23,7 +25,13 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
 	})
 }
 
-async function SearchResults({ term, tagIds }: { term: string; tagIds: number[] }) {
+async function SearchResults({
+	term,
+	tagIds,
+}: {
+	term: string
+	tagIds: number[]
+}) {
 	if (!term && !tagIds.length) {
 		return <p>Digite um nome ou escolha tags para buscar.</p>
 	}
