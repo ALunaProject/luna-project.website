@@ -29,7 +29,7 @@
   justify-content: flex-start;
   overflow-y: scroll;
   margin-left: 77px;
-  @include respond(mobile) {
+  @include respond(tablet) {
     margin-left: 0;
   }
 }

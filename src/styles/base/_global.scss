@@ -63,9 +63,25 @@ table {
 // ---------------------------------------------
 
 
-h1 { @include poppins-regular-7xl; }
-h2 { @include poppins-regular-6xl; }
-h3 { @include poppins-regular-4xl; }
+h1 {
+  @include poppins-regular-6xl;
+}
+
+h2 {
+  @include poppins-regular-5xl;
+}
+
+h3 {
+  @include poppins-regular-4xl;
+  @include respond(tablet) {
+    @include poppins-regular-3xl
+  }
+}
+
+h4 {
+  @include abeezee-base
+}
+
 
 p {
   color: $gs-white-smoke;

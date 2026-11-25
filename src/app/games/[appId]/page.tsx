@@ -63,7 +63,7 @@ export default async function GamePage({ params }: GamesPageProps) {
 						height={300}
 					/>
 					<div className={s.gameContent}>
-						<h1>{game.name}</h1>
+						<h1>{game.name.toUpperCase()}</h1>
 						<div className={s.tagsWrapper}>
 							{tags.length > 0 ? (
 								tags.map(tag => (

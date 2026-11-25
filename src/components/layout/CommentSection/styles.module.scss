@@ -6,12 +6,12 @@
   width: 100%;
   max-width: 1000px;
 
-  h3 {
-    @include poppins-regular-5xl;
-  }
-
   h5 {
     @include poppins-regular-lg;
+  }
+
+  h4 {
+    margin-top: 20px;
   }
 
   div a span {
