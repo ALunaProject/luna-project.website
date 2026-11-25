@@ -5,10 +5,10 @@ import GamesCard from "@/components/shared/GamesCard/GamesCard"
 import { GameData } from "@/types/gamesDTO"
 import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
-import Pagination from "@/components/shared/Pagination/Pagination"
 import { Suspense } from "react"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
 import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
+import Links from "@/components/shared/Links/Links";
 
 const GAMES_PER_PAGE = 25
 
@@ -61,7 +61,20 @@ export default async function GamesPage({
 						<GamesList page={page} />
 					</Suspense>
 				</div>
-				<Pagination page={page} />
+				<div className={s.pagination}>
+					{page > 0 && (
+						<Links
+							href={`?page=${page - 1}`}
+							label={"Anterior"}
+							icon={"ArrowIcon"}
+						/>
+					)}
+					<Links
+						href={`?page=${page + 1}`}
+						label={"Próximo"}
+						icon={"ArrowIcon"}
+					/>
+				</div>
 			</section>
 		</main>
 	)
