@@ -68,7 +68,7 @@ export default function SearchSideBar() {
 				aria-label="Abrir filtros"
 				aria-expanded={open}
 				aria-controls={drawerId}
-				icon="LogoutIcon"
+				icon="FilterSearchIcon"
 			/>
 
 			<div
