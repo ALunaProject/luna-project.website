@@ -125,6 +125,43 @@
   }
 }
 
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+
+  @include poppins-regular-xs;
+  color: $gs-light-slate-gray;
+  line-height: 150%;
+
+  input {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: $blue-violet;
+    cursor: pointer;
+  }
+
+  a {
+    color: $blue-violet;
+    font-weight: $weight-semibold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .error {
   @include poppins-regular-xs;
   width: 100%;
