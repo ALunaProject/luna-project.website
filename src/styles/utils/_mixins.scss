@@ -29,6 +29,9 @@
   justify-content: flex-start;
   overflow-y: scroll;
   margin-left: 77px;
+  @include respond(mobile) {
+    margin-left: 0;
+  }
 }
 
 @mixin contentPage {

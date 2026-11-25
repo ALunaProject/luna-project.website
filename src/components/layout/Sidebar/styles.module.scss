@@ -1,5 +1,36 @@
 @use "../../../styles/utils" as *;
 
+@mixin sidebar-expanded {
+  width: 100%;
+
+  a:first-child {
+    gap: 10px;
+
+    svg:last-child {
+      opacity: 1;
+      max-width: unset;
+    }
+  }
+
+  .linksWrapper a {
+    gap: 12px;
+
+    span {
+      opacity: 1;
+      max-width: 200px;
+    }
+  }
+
+  .userProfile {
+    gap: 12px;
+
+    span {
+      opacity: 1;
+      max-width: 200px;
+    }
+  }
+}
+
 .sidebarContainer {
   z-index: 2;
   min-width: 77px;
@@ -9,18 +40,17 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 50px 0;
-  height: 100vh;
   height: 100dvh;
   background: $blue-violet-1200;
   box-shadow: $shadow-sidebar-left;
   position: fixed;
   top: 0;
   left: 0;
-  @include transition(all, $duration-medium, $ease-standard);
+  @include transition(all, $duration-base, $ease-standard);
 
   a:first-child {
     gap: 0;
-    @include transition(all, $duration-medium, $ease-standard);
+    @include transition(all, $duration-fast, $ease-standard);
 
     svg:last-child {
       display: inline-block;
@@ -28,7 +58,7 @@
       max-width: 0;
       overflow: hidden;
       white-space: nowrap;
-      @include transition(opacity max-width, $duration-medium, $ease-standard);
+      @include transition(opacity max-width, $duration-fast, $ease-standard);
     }
   }
 
@@ -42,7 +72,7 @@
     width: 100%;
 
     a {
-      @include transition(all, $duration-medium, $ease-standard);
+      @include transition(all, $duration-fast, $ease-standard);
       gap: 0;
 
       span {
@@ -51,15 +81,16 @@
         max-width: 0;
         overflow: hidden;
         white-space: nowrap;
-        @include transition(opacity max-width, $duration-medium, $ease-standard);
+        @include transition(opacity max-width, $duration-fast, $ease-standard);
       }
     }
   }
 
+
   // user profile
   .userProfile {
     gap: 0;
-    @include transition(all, $duration-medium, $ease-standard);
+    @include transition(all, $duration-base, $ease-standard);
 
     span {
       display: inline-block;
@@ -67,37 +98,129 @@
       max-width: 0;
       overflow: hidden;
       white-space: nowrap;
-      @include transition(opacity max-width, $duration-medium, $ease-standard);
+      @include transition(opacity max-width, $duration-base, $ease-standard);
     }
   }
 
   &:hover {
-    width: 100%;
-    a:first-child {
-      gap: 10px;
+    @include sidebar-expanded;
+  }
 
-      svg:last-child {
-        opacity: 1;
-        max-width: unset;
-      }
+  // Tablet e abaixo: o trilho some e vira uma gaveta, aberta pelo ícone (.trigger).
+  // Precisa ficar DEPOIS das regras acima, porque tem a mesma especificidade.
+  @include respond(tablet) {
+    @include sidebar-expanded;
+
+    z-index: 101; // acima do .backdrop (100) e do ícone (99)
+    min-width: 0;
+    transform: translateX(-100%);
+    visibility: hidden; // fechada: fora da ordem de tab e da leitura de tela
+
+    // transform anima com ease-in; visibility só vira "hidden" no FIM do fechamento
+    @include transition(
+                    (transform, visibility),
+                    ($duration-base, 0s),
+                    ($ease-accelerate, linear),
+                    (0s, $duration-base)
+    );
+
+    &[data-open="true"] {
+      transform: none;
+      visibility: visible;
+      transition-delay: 0s, 0s; // ao abrir, fica visível já no primeiro frame
     }
 
-    .linksWrapper a {
-      gap: 12px;
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0s;
+      transition-delay: 0s;
+    }
+  }
+}
 
-      span {
-        opacity: 1;
-        max-width: 200px;
-      }
+// Ícone que abre o menu (só existe em tablet e abaixo)
+.trigger {
+  @include reset-button;
+  @include focus-ring;
+  @include scale-hover-ani(1.1);
+
+  display: none;
+  color: $gs-sea-salt;
+
+  @include respond(tablet) {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    z-index: 99;
+    width: 40px;
+    height: 40px;
+    rotate: 180deg;
+  }
+}
+
+// Fundo escurecido: clicar fora fecha o menu
+.backdrop {
+  display: none;
+
+  @include respond(tablet) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba($neutrals-black, 0.5);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    visibility: hidden;
+
+    @include transition(
+                    (opacity, visibility),
+                    ($duration-base, 0s),
+                    ($ease-accelerate, linear),
+                    (0s, $duration-base)
+    );
+
+    &[data-open="true"] {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s, 0s;
     }
 
-    .userProfile {
-      gap: 12px;
-
-      span {
-        opacity: 1;
-        max-width: 200px;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0s;
+      transition-delay: 0s;
     }
+  }
+}
+
+.closeBtn {
+  @include reset-button;
+  @include focus-ring;
+  @include scale-hover-ani(1.1);
+
+  display: none;
+  color: $gs-sea-salt;
+
+  @include respond(tablet) {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    svg path {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.loggedUser {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+  button {
+    margin: 0 auto;
+    width: 45%;
   }
 }
