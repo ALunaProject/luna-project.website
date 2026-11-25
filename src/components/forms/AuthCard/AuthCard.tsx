@@ -50,6 +50,10 @@ function AuthCard({ variant }: AuthCardProps) {
 	const [email, setEmail] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
 
+	// caixas de confirmação do cadastro (só validação no front)
+	const [acceptedTerms, setAcceptedTerms] = useState<boolean>(false)
+	const [isAdult, setIsAdult] = useState<boolean>(false)
+
 	const [loading, setLoading] = useState<boolean>(false)
 	const [error, setError] = useState<string>("")
 	// vira true quando tenta enviar com senha fraca: aí as regras não atendidas ficam vermelhas
@@ -59,8 +63,19 @@ function AuthCard({ variant }: AuthCardProps) {
 
 	const requirements = useMemo(() => getPasswordRules(password), [password])
 
+	// no cadastro, as duas caixas precisam estar marcadas
+	const canSubmit = !isSignup || (acceptedTerms && isAdult)
+
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault()
+
+		// garante a regra mesmo se o botão for enviado de outro jeito (ex: Enter)
+		if (isSignup && !(acceptedTerms && isAdult)) {
+			setError(
+				"Para criar a conta, aceite os Termos e confirme que tem 18 anos ou mais."
+			)
+			return
+		}
 
 		// nomes iguais a rotas do site (login, games, news...) quebrariam o perfil
 		if (isSignup && isReservedUsername(username)) {
@@ -174,6 +189,38 @@ function AuthCard({ variant }: AuthCardProps) {
 				)}
 			</div>
 
+			{isSignup && (
+				<div className={signupStyles.checks}>
+					<label className={signupStyles.check}>
+						<input
+							type="checkbox"
+							checked={acceptedTerms}
+							onChange={e => setAcceptedTerms(e.target.checked)}
+						/>
+						<span>
+							Li e concordo com os{" "}
+							<a href="/terms" target="_blank" rel="noopener noreferrer">
+								Termos de Uso
+							</a>{" "}
+							e a{" "}
+							<a href="/privacy" target="_blank" rel="noopener noreferrer">
+								Política de Privacidade
+							</a>
+							.
+						</span>
+					</label>
+
+					<label className={signupStyles.check}>
+						<input
+							type="checkbox"
+							checked={isAdult}
+							onChange={e => setIsAdult(e.target.checked)}
+						/>
+						<span>Declaro que tenho 18 anos ou mais.</span>
+					</label>
+				</div>
+			)}
+
 			{error ? (
 				<p className={s.error} role="alert">
 					{error}
@@ -183,6 +230,7 @@ function AuthCard({ variant }: AuthCardProps) {
 			<Button
 				label={isSignup ? "Cadastrar-se" : "Entrar"}
 				type="submit"
+				disabled={!canSubmit}
 			/>
 
 			<p className={s.signupLink}>
