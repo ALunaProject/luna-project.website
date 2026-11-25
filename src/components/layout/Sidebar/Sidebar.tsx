@@ -9,7 +9,7 @@ import Button from "@/components/ui/Button/Button"
 import { useAuth } from "@/hooks/useAuth"
 import { DEFAULT_AVATAR } from "@/utils/contants"
 import s from "./styles.module.scss"
-import { LogoutIcon } from "@/assets/icons/LinksIcons";
+import { LogoutIcon } from "@/assets/icons/LinksIcons"
 
 const CloseIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="none">
@@ -24,7 +24,7 @@ const CloseIcon = () => (
 )
 
 export default function Sidebar() {
-	const {isLoggedIn, user, logout} = useAuth()
+	const { isLoggedIn, user, logout } = useAuth()
 	const router = useRouter()
 	const pathname = usePathname()
 	const drawerId = useId()
@@ -47,7 +47,7 @@ export default function Sidebar() {
 	}, [])
 
 	useEffect(() => {
-		if (open) closeRef.current?.focus({preventScroll: true})
+		if (open) closeRef.current?.focus({ preventScroll: true })
 	}, [open])
 
 	useEffect(() => {
@@ -85,7 +85,7 @@ export default function Sidebar() {
 				aria-label="Abrir menu"
 				aria-expanded={open}
 				aria-controls={drawerId}>
-				<LogoutIcon/>
+				<LogoutIcon />
 			</button>
 
 			<div
@@ -101,10 +101,10 @@ export default function Sidebar() {
 				className={s.sidebarContainer}
 				data-open={open}
 				aria-label="Navegação principal">
-				<LunaLogo/>
+				<LunaLogo />
 				<nav className={s.linksWrapper}>
-					<Links href="/news" label="Notícias" icon="NewsIcon"/>
-					<Links href="/games" label="Jogos" icon="GamesIcon"/>
+					<Links href="/news" label="Notícias" icon="NewsIcon" />
+					<Links href="/games" label="Jogos" icon="GamesIcon" />
 					<Links
 						href="/community"
 						label="Comunidade"
@@ -127,7 +127,10 @@ export default function Sidebar() {
 						/>
 					</div>
 				) : (
-					<Button onClick={() => router.push("/login")} label="Entrar"/>
+					<Button
+						onClick={() => router.push("/login")}
+						label="Entrar"
+					/>
 				)}
 
 				<button
@@ -136,7 +139,7 @@ export default function Sidebar() {
 					className={s.closeBtn}
 					onClick={close}
 					aria-label="Fechar menu">
-					<CloseIcon/>
+					<CloseIcon />
 				</button>
 			</aside>
 		</>

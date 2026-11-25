@@ -1,6 +1,6 @@
 import { api } from "@/utils/api"
 import { CreatePostRequest, PostDto } from "@/types/postsDTO"
-import { isAxiosError } from "axios";
+import { isAxiosError } from "axios"
 
 export async function createPost(
 	req: CreatePostRequest,

@@ -8,7 +8,7 @@ import { constructMetadata } from "@/utils/metadata"
 import { Suspense } from "react"
 import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
 import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
-import Links from "@/components/shared/Links/Links";
+import Links from "@/components/shared/Links/Links"
 
 const GAMES_PER_PAGE = 25
 

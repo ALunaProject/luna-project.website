@@ -1,8 +1,8 @@
-import { getPosts } from "@/services/postsService";
+import { getPosts } from "@/services/postsService"
 import s from "./styles.module.scss"
-import Sidebar from "@/components/layout/Sidebar/Sidebar";
-import PostActions from "@/components/layout/PostCreateModal/PostActions";
-import PostCard from "@/components/shared/PostCard/PostCard";
+import Sidebar from "@/components/layout/Sidebar/Sidebar"
+import PostActions from "@/components/layout/PostCreateModal/PostActions"
+import PostCard from "@/components/shared/PostCard/PostCard"
 
 export const dynamic = "force-dynamic"
 
