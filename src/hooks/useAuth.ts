@@ -43,5 +43,11 @@ export function useAuth() {
 		return () => window.removeEventListener(PROFILE_UPDATED_EVENT, loadUser)
 	}, [loadUser])
 
-	return { isLoggedIn, isLoading, user }
+	const logout = useCallback(() => {
+		localStorage.removeItem(STORAGE_KEYS.TOKEN)
+		localStorage.removeItem(STORAGE_KEYS.USER)
+		setUser(null)
+		setIsLoggedIn(false)
+	}, [])
+	return { isLoggedIn, isLoading, user, logout }
 }

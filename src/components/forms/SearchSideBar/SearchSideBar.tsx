@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation"
 import s from "./styles.module.scss"
 import { parseTagIds } from "@/utils/searchTags"
 import { FilterIcon, SearchIcon } from "@/assets/icons/LinksIcons"
-import Button from "@/components/ui/Button/Button";
-import SearchTagSelector from "@/components/ui/TagSelector/SearchTagSelector";
+import Button from "@/components/ui/Button/Button"
+import SearchTagSelector from "@/components/ui/TagSelector/SearchTagSelector"
 
 export default function SearchSideBar() {
 	const router = useRouter()
@@ -15,10 +15,14 @@ export default function SearchSideBar() {
 
 	const [open, setOpen] = useState(false)
 	const [term, setTerm] = useState(params.get("q") ?? "")
-	const [tagIds, setTagIds] = useState<number[]>(parseTagIds(params.get("tags")))
+	const [tagIds, setTagIds] = useState<number[]>(
+		parseTagIds(params.get("tags")),
+	)
 
 	const triggerRef = useRef<HTMLButtonElement>(null)
 	const searchRef = useRef<HTMLInputElement>(null)
+
+	const canSubmit = term.trim().length > 0 || tagIds.length > 0
 
 	const close = useCallback(() => {
 		setOpen(false)
@@ -32,7 +36,7 @@ export default function SearchSideBar() {
 	}
 
 	useEffect(() => {
-		if (open) searchRef.current?.focus({preventScroll: true})
+		if (open) searchRef.current?.focus({ preventScroll: true })
 	}, [open])
 
 	useEffect(() => {
@@ -46,10 +50,11 @@ export default function SearchSideBar() {
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault()
+		if (!canSubmit) return
+
 		const next = new URLSearchParams()
 		if (term.trim()) next.set("q", term.trim())
 		if (tagIds.length) next.set("tags", tagIds.join(","))
-		if (!next.size) return
 		router.push(`/games/search?${next}`)
 		close()
 	}
@@ -63,9 +68,15 @@ export default function SearchSideBar() {
 				aria-label="Abrir filtros"
 				aria-expanded={open}
 				aria-controls={drawerId}
-				icon="LogoutIcon"/>
+				icon="FilterSearchIcon"
+			/>
 
-			<div className={s.backdrop} data-open={open} onClick={close} aria-hidden="true"/>
+			<div
+				className={s.backdrop}
+				data-open={open}
+				onClick={close}
+				aria-hidden="true"
+			/>
 
 			<aside
 				id={drawerId}
@@ -73,46 +84,67 @@ export default function SearchSideBar() {
 				data-open={open}
 				role="dialog"
 				aria-label="Filtros">
-				<form onSubmit={handleSubmit} role="search" className={s.searchForm}>
-					<fieldset className={s.sidebarHeader}>
+				<form
+					onSubmit={handleSubmit}
+					role="search"
+					className={s.searchForm}>
+					<div className={s.sidebarHeader}>
 						<label className={s.searchBar}>
 							<SearchIcon />
 							<input
 								ref={searchRef}
 								value={term}
 								onChange={e => setTerm(e.target.value)}
-								placeholder="Search"
+								placeholder="Buscar jogo..."
 								aria-label="Buscar jogos"
 							/>
 						</label>
 						<Button
+							type="button"
 							aria-label="Fechar filtros"
 							icon="LogoutIcon"
 							onClick={close}
-							style={{width: "fit-content", backgroundColor: "transparent", rotate: "180deg"}}
+							style={{
+								width: "fit-content",
+								backgroundColor: "transparent",
+								rotate: "180deg",
+							}}
 						/>
-					</fieldset>
+					</div>
 
-					<fieldset className={s.titleWrapper}>
+					<div className={s.titleWrapper}>
 						<h2>Filtros</h2>
-						<FilterIcon/>
-					</fieldset>
+						<FilterIcon />
+					</div>
 
 					<p className={s.filterStatus}>
 						{tagIds.length
 							? `${tagIds.length} filtro(s) aplicado(s)`
 							: "Nenhum filtro aplicado"}
 						{tagIds.length > 0 && (
-							<Button type="button" className={s.clear} onClick={() => setTagIds([])} label="Limpar"/>
+							<Button
+								type="button"
+								className={s.clear}
+								onClick={() => setTagIds([])}
+								label="Limpar"
+							/>
 						)}
 					</p>
 
 					<details className={s.categoriesSection} open>
 						<summary>Categorías</summary>
-						<SearchTagSelector value={tagIds} onChange={setTagIds} max={5}/>
+						<SearchTagSelector
+							value={tagIds}
+							onChange={setTagIds}
+							max={5}
+						/>
 					</details>
 
-					<Button label="Aplicar filtros" type="submit"/>
+					<Button
+						label="Aplicar filtros"
+						type="submit"
+						disabled={!canSubmit}
+					/>
 				</form>
 			</aside>
 		</>

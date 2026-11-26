@@ -6,21 +6,25 @@ import { Metadata } from "next"
 import { constructMetadata } from "@/utils/metadata"
 import Tags from "@/components/ui/Tags/Tags"
 import Banner from "@/components/ui/Banner/Banner"
-import { DEFAULT_BANNER } from "@/utils/contants"
+import {
+	DEFAULT_BANNER,
+	EXCLUDES_TAGS,
+	STEAM_TAG_NAMES,
+} from "@/utils/contants"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import CommentSection from "@/components/layout/CommentSection/CommentSection"
 import RatingSection from "@/components/layout/RatingSection/RatingSection"
 import SeeMoreSection from "@/components/ui/SeeMoreSection/SeeMoreSection"
-import { getGameDetails } from "@/services/gamesServices"
+import { getGameDetails, getGameTags } from "@/services/gamesServices"
 
 export async function generateMetadata({
-										   params,
-									   }: GamesPageProps): Promise<Metadata> {
-	const {appId} = await params
+	params,
+}: GamesPageProps): Promise<Metadata> {
+	const { appId } = await params
 	const game = await getGameDetails(appId)
 
 	if (!game) {
-		return constructMetadata({title: "Jogo não encontrado"})
+		return constructMetadata({ title: "Jogo não encontrado" })
 	}
 
 	return constructMetadata({
@@ -30,17 +34,26 @@ export async function generateMetadata({
 	})
 }
 
-export default async function GamePage({params}: GamesPageProps) {
-	const {appId} = await params
-	const game = await getGameDetails(appId)
+export default async function GamePage({ params }: GamesPageProps) {
+	const { appId } = await params
+	const [game, gameTags] = await Promise.all([
+		getGameDetails(appId),
+		getGameTags(appId),
+	])
 
 	if (!game) {
 		notFound()
 	}
 
+	const tags = [...gameTags]
+		.sort((a, b) => Number(b.weight) - Number(a.weight))
+		.map(t => ({ id: t.tagid, name: STEAM_TAG_NAMES[t.tagid] }))
+		.filter(t => t.name && !EXCLUDES_TAGS.includes(t.id))
+		.slice(0, 10)
+
 	return (
 		<main className={s.container}>
-			<Sidebar/>
+			<Sidebar />
 			{game ? (
 				<section className={s.content}>
 					<Banner
@@ -50,24 +63,40 @@ export default async function GamePage({params}: GamesPageProps) {
 						height={300}
 					/>
 					<div className={s.gameContent}>
-						<h1>{game.name}</h1>
+						<h1>{game.name.toUpperCase()}</h1>
 						<div className={s.tagsWrapper}>
-							{game?.genres?.map(gen => (
-								<Tags key={gen.id} label={gen.description}/>
-							))}
-							{game?.categories?.map(cat => (
-								<Tags key={cat.id} label={cat.description}/>
-								// 	esses são diferentes das tags de search, tem que chamar os mesmos aqui antes de relacionar
-								// ou seja, 2 endpoints e muita req por usuário
-							))}
+							{tags.length > 0 ? (
+								tags.map(tag => (
+									<Tags
+										key={tag.id}
+										label={tag.name}
+										href={`/games/search?tags=${tag.id}`}
+									/>
+								))
+							) : (
+								<>
+									{game.genres?.map(gen => (
+										<Tags
+											key={gen.id}
+											label={gen.description}
+										/>
+									))}
+									{game.categories?.map(cat => (
+										<Tags
+											key={cat.id}
+											label={cat.description}
+										/>
+									))}
+								</>
+							)}
 						</div>
 						<SeeMoreSection
 							className={s.description}
 							html={game.about_the_game}
 						/>
 					</div>
-					<RatingSection appId={appId} game={game}/>
-					<CommentSection targetId={appId} type="game"/>
+					<RatingSection appId={appId} game={game} />
+					<CommentSection targetId={appId} type="game" />
 				</section>
 			) : (
 				<p>Não foi possível carregar os detalhes do jogo.</p>

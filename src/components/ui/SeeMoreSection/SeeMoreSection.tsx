@@ -16,7 +16,7 @@ export default function SeeMoreSection({
 	const [open, setOpen] = useState(false)
 
 	return (
-		<Collapsible open={open} onOpenChange={setOpen}>
+		<Collapsible className={s.collaps} open={open} onOpenChange={setOpen}>
 			<div className={s.clamp} data-open={open}>
 				<div
 					className={className}

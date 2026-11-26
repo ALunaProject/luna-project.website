@@ -1,6 +1,6 @@
 import defaultAvatar from "@/assets/images/default-avatar.jpg"
 import defaultBanner from "@/assets/images/default-banner.png"
-import { GameData } from "@/types/gamesDTO";
+import { GameData } from "@/types/gamesDTO"
 
 export const DEFAULT_AVATAR = defaultAvatar.src
 export const DEFAULT_BANNER = defaultBanner.src
@@ -26,6 +26,16 @@ export const FALLBACK_ASSETS: GameData["assets"] = {
 	community_icon: "",
 	library_capsule: "library_capsule.jpg",
 }
+
+export const GAME_SORT = {
+	ALPHABETICAL: 1,
+	APPID_ASC: 2,
+	NEWEST: 20,
+	BEST_RATED: 21,
+} as const
+
+export type GameSort = (typeof GAME_SORT)[keyof typeof GAME_SORT]
+
 export const STEAM_TAG_NAMES: Record<number, string> = {
 	492: "Indie",
 	19: "Ação",

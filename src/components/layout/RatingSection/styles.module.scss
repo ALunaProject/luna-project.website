@@ -8,6 +8,7 @@
   padding-top: 80px;
   @include respond(desktop) {
     width: 100%;
+    padding-top: 0;
   }
 }
 
@@ -16,6 +17,9 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
+  @include respond(tablet) {
+    flex-direction: column;
+  }
 }
 
 .overallRate {
@@ -92,7 +96,7 @@
   @include reset-button;
   @include card-surface;
   @include focus-ring;
-  @include poppins-bold-xs;
+  @include poppins-semibold-xs;
   box-sizing: border-box;
   display: flex;
   align-items: center;

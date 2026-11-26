@@ -8,7 +8,7 @@ import {
 	POPULAR_TAG_IDS,
 	STEAM_TAG_NAMES,
 } from "@/utils/contants"
-import Tags from "@/components/ui/Tags/Tags";
+import Tags from "@/components/ui/Tags/Tags"
 
 interface TagSelectorProps {
 	value: number[]
@@ -46,11 +46,11 @@ const POPULAR_TAGS = POPULAR_TAG_IDS.map(id => TAGS_BY_ID.get(id)).filter(
 )
 
 export default function SearchTagSelector({
-										value,
-										onChange,
-										max = 5,
-										disabled = false,
-									}: TagSelectorProps) {
+	value,
+	onChange,
+	max = 5,
+	disabled = false,
+}: TagSelectorProps) {
 	const inputId = useId()
 	const [query, setQuery] = useState("")
 	const q = normalize(query)
@@ -63,17 +63,22 @@ export default function SearchTagSelector({
 
 	const matches = useMemo(() => {
 		if (!q) return []
-		return ALL_TAGS.filter(tag => !value.includes(tag.id) && tag.key.includes(q))
+		return ALL_TAGS.filter(
+			tag => !value.includes(tag.id) && tag.key.includes(q),
+		)
 			.sort(
 				(a, b) =>
 					// quem começa com o texto vem primeiro, depois ordem alfabética
-					Number(!a.key.startsWith(q)) - Number(!b.key.startsWith(q)) ||
+					Number(!a.key.startsWith(q)) -
+						Number(!b.key.startsWith(q)) ||
 					a.name.localeCompare(b.name, "pt-BR"),
 			)
 			.slice(0, 16)
 	}, [q, value])
 
-	const visible = q ? matches : POPULAR_TAGS.filter(tag => !value.includes(tag.id))
+	const visible = q
+		? matches
+		: POPULAR_TAGS.filter(tag => !value.includes(tag.id))
 
 	function toggle(id: number) {
 		if (disabled) return
@@ -100,7 +105,11 @@ export default function SearchTagSelector({
 					value={query}
 					onChange={e => setQuery(e.target.value)}
 					onKeyDown={handleKeyDown}
-					placeholder={limitReached ? `Máximo de ${max} tags` : "Buscar tag"}
+					placeholder={
+						limitReached
+							? `Máximo de ${max} tags`
+							: "Buscar categorias..."
+					}
 					disabled={disabled || limitReached}
 					autoComplete="off"
 				/>
@@ -124,8 +133,8 @@ export default function SearchTagSelector({
 			<p className={s.label}>
 				<span>{q ? "Resultados" : "Mais pesquisados"}</span>
 				<span>
-                {value.length}/{max}
-             </span>
+					{value.length}/{max}
+				</span>
 			</p>
 
 			<ul className={s.chips} aria-live="polite">
@@ -143,7 +152,9 @@ export default function SearchTagSelector({
 				))}
 			</ul>
 
-			{q && matches.length === 0 && <p className={s.empty}>Nenhuma tag encontrada</p>}
+			{q && matches.length === 0 && (
+				<p className={s.empty}>Nenhuma tag encontrada</p>
+			)}
 		</div>
 	)
 }

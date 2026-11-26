@@ -5,7 +5,7 @@ import Tags from "@/components/ui/Tags/Tags"
 import { GameData } from "@/types/gamesDTO"
 import { STEAM_TAG_NAMES, STORE_ASSETS } from "@/utils/contants"
 import CardActions from "@/components/shared/GamesCard/CardActions/GameCardActions"
-import GameImage from "@/components/shared/GamesCard/CardActions/GameImage";
+import GameImage from "@/components/shared/GamesCard/CardActions/GameImage"
 
 export default async function GamesCard(Game: GameData) {
 	const tags = Game.tags

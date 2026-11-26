@@ -1,6 +1,6 @@
 // espera appIds passado da rota para atribuir em params, e puxar infos do game na pagina do game,
 export interface GamesPageProps {
-	params: Promise<{appId: string}>
+	params: Promise<{ appId: string }>
 }
 
 export type ListGamesProps = {
@@ -19,7 +19,7 @@ export interface GameData {
 		community_icon: string
 		library_capsule: string
 	}
-	tags: Array<{tagid: number; weight: string}>
+	tags: Array<{ tagid: number; weight: string }>
 	tiny_image?: string // só existe no search
 }
 
@@ -31,7 +31,7 @@ export interface GamesResponse {
 			start: string
 			count: string
 		}
-		ids: Array<{appId: string; item_type?: string}>
+		ids: Array<{ appId: string; item_type?: string }>
 		store_items: GameData[]
 	}
 }
@@ -46,10 +46,10 @@ export interface GameDetailsData {
 	background: string
 	background_raw: string
 
-	genres: Array<{id: string; description: string}>
-	categories: Array<{id: string; description: string}>
-	screenshots: Array<{id: string; path_full: string}>
-	movies: Array<{id: string; thumbnail: string; dash_av1: string}>
+	genres: Array<{ id: string; description: string }>
+	categories: Array<{ id: string; description: string }>
+	screenshots: Array<{ id: string; path_full: string }>
+	movies: Array<{ id: string; thumbnail: string; dash_av1: string }>
 
 	release_date: {
 		coming_soon: boolean
@@ -99,15 +99,15 @@ export type GameReviewsResponse = {
 }
 
 export interface GameTags {
-	data: Array<{tagid: number; name: string}>
+	data: Array<{ tagid: number; name: string }>
 }
 
 export interface StoreSearchResponse {
 	total: number
 	items: Array<{
-		id: number;
-		name: string;
-		type: string;
+		id: number
+		name: string
+		type: string
 		tiny_image: string
 	}>
 }
