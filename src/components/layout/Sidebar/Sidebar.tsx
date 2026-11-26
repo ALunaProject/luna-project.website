@@ -113,17 +113,16 @@ export default function Sidebar() {
 				</nav>
 				{isLoggedIn && user ? (
 					<div className={s.loggedUser}>
-						<Button
-							type="button"
-							onClick={handleLogout}
-							aria-label="Sair da conta"
-							icon="LogoutIcon"
-							label="Sair"
-						/>
 						<UserProfile
 							className={s.userProfile}
 							username={user.username}
 							userPP={user.profilePicUrl || DEFAULT_AVATAR}
+						/>
+						<Button
+							type="button"
+							onClick={handleLogout}
+							aria-label="Sair da conta"
+							label="Sair"
 						/>
 					</div>
 				) : (
