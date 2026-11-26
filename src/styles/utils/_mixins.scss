@@ -29,6 +29,7 @@
   justify-content: flex-start;
   overflow-y: scroll;
   margin-left: 77px;
+  scrollbar-width: none;
   @include respond(tablet) {
     margin-left: 0;
   }

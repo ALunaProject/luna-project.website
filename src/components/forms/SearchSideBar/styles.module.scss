@@ -9,8 +9,12 @@
   place-items: center;
   color: $gs-white-smoke;
   position: fixed;
-  right: 25px;
-  top: 25px;
+  right: 40px;
+  top: 40px;
+  @include respond(tablet) {
+    right: 25px;
+    top: 25px;
+  }
   z-index: 99;
 }
 
