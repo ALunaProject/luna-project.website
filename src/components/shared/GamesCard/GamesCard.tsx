@@ -5,6 +5,7 @@ import Tags from "@/components/ui/Tags/Tags"
 import { GameData } from "@/types/gamesDTO"
 import { STEAM_TAG_NAMES, STORE_ASSETS } from "@/utils/contants"
 import CardActions from "@/components/shared/GamesCard/CardActions/GameCardActions"
+import GameImage from "@/components/shared/GamesCard/CardActions/GameImage"
 
 export default async function GamesCard(Game: GameData) {
 	const tags = Game.tags
@@ -14,12 +15,11 @@ export default async function GamesCard(Game: GameData) {
 
 	return (
 		<Link href={`/games/${Game.appid}`} className={s.gamesCard}>
-			<Image
-				src={`${STORE_ASSETS}/steam/apps/${Game.appid}/${Game.assets.header}?t=1789251637)`}
-				alt={`${Game.name}preview-image`}
-				width={321}
-				height={150}
-				loading="eager"
+			<GameImage
+				key={Game.appid}
+				src={`${STORE_ASSETS}/steam/apps/${Game.appid}/${Game.assets.header}`}
+				fallbackSrc={Game.tiny_image}
+				alt={Game.name}
 			/>
 			<div className={s.gameProps}>
 				<p>{Game.name}</p>

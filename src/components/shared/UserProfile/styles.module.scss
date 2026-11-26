@@ -17,7 +17,7 @@
   }
 
   span {
-    @include poppins-extralight-base;
+    @include abeezee-base;
     @include scale-hover-ani($scale-size: 1.05);
     color: $gs-sea-salt;
   }

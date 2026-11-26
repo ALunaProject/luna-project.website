@@ -20,6 +20,7 @@ export interface GameData {
 		library_capsule: string
 	}
 	tags: Array<{ tagid: number; weight: string }>
+	tiny_image?: string // só existe no search
 }
 
 // response da API - appList
@@ -99,4 +100,14 @@ export type GameReviewsResponse = {
 
 export interface GameTags {
 	data: Array<{ tagid: number; name: string }>
+}
+
+export interface StoreSearchResponse {
+	total: number
+	items: Array<{
+		id: number
+		name: string
+		type: string
+		tiny_image: string
+	}>
 }

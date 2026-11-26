@@ -1,4 +1,5 @@
 import * as React from "react"
+import { SVGProps } from "react"
 
 export const NewsIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
@@ -241,6 +242,63 @@ export const DeleteCheckIcon = () => (
 			strokeLinejoin="round"
 			strokeWidth={1.5}
 			d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10ZM9.17 14.83l5.66-5.66M14.83 14.83 9.17 9.17"
+		/>
+	</svg>
+)
+
+export const SearchIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
+		<path
+			stroke="#8F33DF"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={1.5}
+			d="M21 11.5a9.5 9.5 0 1 1-19 0 9.5 9.5 0 0 1 19 0ZM22 22l-2-2"
+		/>
+	</svg>
+)
+
+export const FilterIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none">
+		<path
+			stroke="#DFE6EC"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={1.5}
+			d="M5.4 2.1h13.2c1.1 0 2 .9 2 2v2.2c0 .8-.5 1.8-1 2.3l-4.3 3.8c-.6.5-1 1.5-1 2.3V19c0 .6-.4 1.4-.9 1.7l-1.4.9c-1.3.8-3.1-.1-3.1-1.7v-5.3c0-.7-.4-1.6-.8-2.1l-3.8-4c-.5-.5-.9-1.4-.9-2V4.2c0-1.2.9-2.1 2-2.1Z"
+		/>
+	</svg>
+)
+
+export const FilterSearchIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="none">
+		<path
+			stroke="#DFE6EC"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeMiterlimit={10}
+			strokeWidth={2.5}
+			d="M23.868 31.783c0 1.017-.667 2.35-1.517 2.867L20 36.166c-2.183 1.35-5.217-.166-5.217-2.866v-8.917c0-1.183-.666-2.7-1.35-3.533l-6.4-6.734c-.85-.85-1.516-2.35-1.516-3.366V6.883c0-2.017 1.516-3.533 3.366-3.533h22.234a3.379 3.379 0 0 1 3.366 3.366v3.7c0 1.35-.85 3.034-1.683 3.867"
+		/>
+		<path
+			stroke="#DFE6EC"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={2.5}
+			d="M32.115 22.2a5.333 5.333 0 1 1-10.666 0 5.333 5.333 0 0 1 10.666 0ZM33.115 28.533l-1.666-1.666"
+		/>
+	</svg>
+)
+
+export const LogoutIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="none">
+		<path
+			stroke="#DFE6EC"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			strokeWidth={2.5}
+			d="M14.834 12.6c.516-6 3.6-8.45 10.35-8.45h.216c7.45 0 10.434 2.984 10.434 10.434V25.45c0 7.45-2.984 10.434-10.434 10.434h-.216c-6.7 0-9.784-2.417-10.334-8.317M25 20H6.033M9.75 14.417 4.167 20l5.583 5.584"
 		/>
 	</svg>
 )

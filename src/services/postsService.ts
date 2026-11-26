@@ -1,5 +1,6 @@
 import { api } from "@/utils/api"
 import { CreatePostRequest, PostDto } from "@/types/postsDTO"
+import { isAxiosError } from "axios"
 
 export async function createPost(
 	req: CreatePostRequest,
@@ -32,12 +33,15 @@ export async function getPosts(): Promise<PostDto[] | null> {
 				: timestamp
 		}
 
-		return [...data].sort(
+		return [...(data ?? [])].sort(
 			(a, b) => getPostTimestamp(b) - getPostTimestamp(a),
 		)
 	} catch (err) {
-		console.error("Nenhum post foi encontrado", err)
-		// console.log(localStorage.getItem("token"));
+		// quando a api da problema...
+		if (isAxiosError(err) && err.response?.status === 404) return []
+
+		// sem resposta (API desligada, timeout, rede) ou erro 5xx
+		console.error("Erro ao buscar posts", err)
 		return null
 	}
 }

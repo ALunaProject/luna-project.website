@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding: 16px;
+  padding: 16px 15.5px;
   svg:last-child {
     @include scale-hover-ani($scale-size: 1.05);
   }

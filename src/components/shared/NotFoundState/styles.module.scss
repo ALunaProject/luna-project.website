@@ -1,18 +1,13 @@
 @use "../../../styles/utils/index" as *;
 
 .container {
-  display: flex;
-  height: 100vh;
+  @include container;
 }
 
 .content {
-  @include flex-center;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  margin-left: 77px;
-  padding: 30px;
+  @include content;
   text-align: center;
+  justify-content: center;
   background: $blue-violet-desat-600;
 }
 

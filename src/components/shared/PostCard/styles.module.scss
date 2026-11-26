@@ -19,9 +19,9 @@
 }
 
 .detailPost {
-	width: min(58%, 760px);
-	max-width: 760px;
-	padding: 18px 24px;
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 30px;
 	border-radius: 0;
 	background: transparent;
 	box-shadow: none;
@@ -31,13 +31,14 @@
 	gap: 14px;
 
 	.userProfile {
+		gap: 24px;
 		img {
-			width: 34px;
-			height: 34px;
+			width: 72.59px;
+			height: 72.59px;
 		}
 
 		span {
-			font-size: 1rem;
+			@include poppins-regular-3xl;
 		}
 	}
 }
@@ -51,8 +52,7 @@
 }
 
 .detailPost .contentText {
-	font-size: 0.85rem;
-	line-height: 1.4;
+	@include poppins-regular-lg;
 }
 
 .cardLink {
