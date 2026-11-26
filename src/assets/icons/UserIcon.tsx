@@ -1,40 +1,42 @@
+
 import React from "react"
 
-interface SvgComponentProps extends React.SVGProps<SVGSVGElement> {
+interface UserIconProps extends React.SVGProps<SVGSVGElement> {
 	width?: string | number
 	height?: string | number
 }
 
-const UserIcon = React.forwardRef<SVGSVGElement, SvgComponentProps>(
+const UserIcon = React.forwardRef<SVGSVGElement, UserIconProps>(
 	({ width = 20, height = 20, ...props }, ref) => {
 		return (
 			<svg
 				ref={ref}
 				width={width}
 				height={height}
+				viewBox="0 0 20 20"
+				fill="none"
 				role="img"
 				aria-hidden="true"
 				xmlns="http://www.w3.org/2000/svg"
-				{...props}>
-				<g className="layer">
-					<path
-						d="M10.1 10.65a.67.67 0 0 0-.2 0 2.72 2.72 0 0 1-2.63-2.73c0-1.5 1.21-2.73 2.73-2.73 1.51 0 2.73 1.23 2.73 2.73a2.727 2.727 0 0 1-2.63 2.73zM15.62 16.15A8.282 8.282 0 0 1 10 18.33c-2.17 0-4.13-.82-5.62-2.18.09-.78.59-1.55 1.48-2.15 2.28-1.52 6.01-1.52 8.28 0 .89.6 1.39 1.37 1.48 2.15z"
-						stroke="#5A189A"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						strokeWidth="1.5"
-					/>
-					<path
-						d="M10 18.33a8.33 8.33 0 1 0-.001-16.661A8.33 8.33 0 0 0 10 18.33z"
-						stroke="#5A189A"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						strokeWidth="1.5"
-					/>
-				</g>
+				{...props}
+			>
+				<path
+					stroke="#5A189A"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					strokeWidth={1.5}
+					d="M10.099 10.65a.806.806 0 0 0-.2 0 2.724 2.724 0 0 1-2.633-2.725A2.73 2.73 0 0 1 9.999 5.19a2.73 2.73 0 0 1 .1 5.458ZM15.616 16.15A8.279 8.279 0 0 1 10 18.333a8.279 8.279 0 0 1-5.616-2.183c.083-.783.583-1.55 1.475-2.15 2.283-1.517 6.016-1.517 8.283 0 .892.6 1.392 1.367 1.475 2.15Z"
+				/>
+				<path
+					stroke="#5A189A"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+					strokeWidth={1.5}
+					d="M18.333 10a8.333 8.333 0 1 1-16.667 0 8.333 8.333 0 0 1 16.667 0Z"
+				/>
 			</svg>
 		)
-	},
+	}
 )
 
 UserIcon.displayName = "UserIcon"
