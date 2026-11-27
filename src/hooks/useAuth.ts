@@ -1,53 +1,24 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
-import { STORAGE_KEYS } from "@/utils/contants"
-import { getUserByUsername } from "@/services/userServices"
+import { useEffect } from "react"
+import { initAuth, useAuthStore } from "@/stores/authStore"
 
-export const PROFILE_UPDATED_EVENT = "luna:profile-updated"
-
-export function notifyProfileUpdated() {
-	window.dispatchEvent(new Event(PROFILE_UPDATED_EVENT))
-}
+export { notifyProfileUpdated, PROFILE_UPDATED_EVENT } from "@/stores/authStore"
 
 export function useAuth() {
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-	const [user, setUser] = useState<UserDTO | null>(null)
-	const [isLoading, setIsLoading] = useState<boolean>(true)
-
-	const loadUser = useCallback(() => {
-		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
-		const username = localStorage.getItem(STORAGE_KEYS.USER)
-
-		if (!token || !username) {
-			setIsLoggedIn(false)
-			setIsLoading(false)
-			return
-		}
-
-		setIsLoggedIn(true)
-
-		getUserByUsername(username)
-			.then(setUser)
-			.catch(() => {
-				setUser(null)
-				setIsLoggedIn(false)
-			})
-			.finally(() => setIsLoading(false))
-	}, [])
+	const status = useAuthStore(s => s.status)
+	const user = useAuthStore(s => s.user)
+	const logout = useAuthStore(s => s.logout)
 
 	useEffect(() => {
-		loadUser()
-
-		window.addEventListener(PROFILE_UPDATED_EVENT, loadUser)
-		return () => window.removeEventListener(PROFILE_UPDATED_EVENT, loadUser)
-	}, [loadUser])
-
-	const logout = useCallback(() => {
-		localStorage.removeItem(STORAGE_KEYS.TOKEN)
-		localStorage.removeItem(STORAGE_KEYS.USER)
-		setUser(null)
-		setIsLoggedIn(false)
+		initAuth()
 	}, [])
-	return { isLoggedIn, isLoading, user, logout }
+
+	return {
+		isLoggedIn: status === "authenticated",
+		// true até o sistema saber se há usuário logado ou não
+		isLoading: status === "loading",
+		user,
+		logout,
+	}
 }
