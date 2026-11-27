@@ -9,6 +9,7 @@ import { ListsDTO } from "@/types/UserLIstsDTO"
 import { useAuth } from "@/hooks/useAuth"
 import { GameData } from "@/types/gamesDTO"
 import UserListsButton from "@/components/layout/ListsWrapper/UserListsButton"
+import { CardActionsSkeleton } from "@/components/ui/skeleton/Skeletons"
 import { addFavoriteGame, getUserFavorites } from "@/services/userServices";
 
 interface GameCardActionsProps {
@@ -20,22 +21,19 @@ const MAX_FAVORITES = 4
 export default function GameCardActions({req}: GameCardActionsProps) {
 	const [favorites, setFavorites] = useState<ListsDTO | null>(null)
 	const [userLists, setUserLists] = useState<ListsDTO[]>([])
-	const {user} = useAuth()
-
-	useEffect(() => {
-		if (!user) return
-
-		getUserLists(user.id).then(data => {
-			if (data) setUserLists(data)
-		})
-	}, [user])
+	// true só até a primeira resposta (depois de adicionar jogo, atualiza sem piscar skeleton)
+	const [listsLoading, setListsLoading] = useState(true)
+	const {user, isLoading} = useAuth()
 
 	function refreshLists() {
 		if (!user) return
-		getUserLists(user.id).then(data => {
-			if (data) setUserLists(data)
-		})
-		getUserFavorites(user.id).then(data => setFavorites(data))
+		Promise.all([getUserLists(user.id), getUserFavorites(user.id)])
+			.then(([lists, favs]) => {
+				if (lists) setUserLists(lists)
+				setFavorites(favs)
+			})
+			.catch(() => {})
+			.finally(() => setListsLoading(false))
 	}
 
 	useEffect(() => {
@@ -92,6 +90,8 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 		g => String(g.appid) === String(req.appid),
 	)
 
+	if (isLoading) return <CardActionsSkeleton />
+
 	if (!user) return null
 
 	return (
@@ -102,6 +102,7 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 				icon="AddIcon"
 				label="Adicionar em uma lista"
 				lists={userLists}
+				loading={listsLoading}
 				onListsChange={refreshLists}
 				onAddToList={handleCustomList}
 				isGameInList={isGameInList}
