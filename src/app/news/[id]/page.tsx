@@ -79,9 +79,7 @@ export default async function NewsDetailPage({
 					className={s.readMore}>
 					Ler matéria completa em {article.source.name}
 				</a>
-				{/*<CommentSection targetId={id} type="news"/>
-					TODO: precisa ter newsCache no back, ainda não tem!
-				*/}
+				<CommentSection targetId={id} type="news"/>
 			</section>
 		</main>
 	)

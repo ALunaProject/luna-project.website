@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import Sidebar from "@/components/layout/Sidebar/Sidebar"
 import s from "./styles.module.scss"
-import { getUserByUsername } from "@/services/userServices"
+import { getUserByUsername, getUserFavorites } from "@/services/userServices"
 import { DEFAULT_AVATAR, DEFAULT_BANNER } from "@/utils/contants"
 import EditingButton from "@/components/ui/EditinModal/EditingButton"
 import EditableField from "@/components/ui/EditinModal/EditableField"
@@ -11,6 +11,7 @@ import ProfileBanner from "@/components/ui/EditinModal/ProfileBanner"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 import ListsWrapper from "@/components/layout/ListsWrapper/ListsWrapper"
 import CommentSection from "@/components/layout/CommentSection/CommentSection"
+import UserFavActions from "@/components/layout/UserFavActions/UserFavActions";
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username: rawUsername } = await params
@@ -22,11 +23,12 @@ export default async function UserPage({ params }: UserPageProps) {
 		notFound()
 	}
 	const user = await getUserByUsername(username)
-	// const favGames = lista custom com nome de favoritos
 
 	if (!user) {
 		notFound()
 	}
+
+	const favorites = await getUserFavorites(user.id)
 
 	return (
 		<ProfileEditProvider profileUser={user}>
@@ -79,7 +81,9 @@ export default async function UserPage({ params }: UserPageProps) {
 							<h5>
 								Favoritos de <span>{user.username}</span>
 							</h5>
-							<div className={s.favGamesWrapper}></div>
+							<div className={s.favGamesWrapper}>
+								<UserFavActions favorites={favorites} />
+							</div>
 						</aside>
 					</div>
 					<CommentSection targetId={user.id} type="profile" />

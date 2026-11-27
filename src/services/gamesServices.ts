@@ -277,3 +277,55 @@ export async function searchGames({
 		return []
 	}
 }
+
+const STEAM_GET_ITEMS =
+	"https://api.steampowered.com/IStoreBrowseService/GetItems/v1"
+
+interface SteamStoreItem {
+	appid: number
+	name?: string
+	assets?: { header?: string }
+	tagids?: number[]
+}
+
+export async function getSteamGamesByIds(
+	appIds: number[],
+): Promise<Map<number, GameData>> {
+	const result = new Map<number, GameData>()
+	if (appIds.length === 0) return result
+
+	const ids = [...new Set(appIds)].sort((a, b) => a - b)
+
+	const input = {
+		ids: ids.map(appid => ({ appid })),
+		context: { language: "brazilian", country_code: "BR", steam_realm: 1 },
+		data_request: { include_assets: true, include_tag_count: 3 },
+	}
+
+	try {
+		const res = await fetch(
+			`${STEAM_GET_ITEMS}?input_json=${encodeURIComponent(JSON.stringify(input))}`,
+			{ next: { revalidate: 60 * 60 * 24 } }, // 24h
+		)
+		if (!res.ok) throw new Error(`Steam respondeu ${res.status}`)
+
+		const json = await res.json()
+		const items: SteamStoreItem[] = json?.response?.store_items ?? []
+
+		for (const item of items) {
+			if (!item.name) continue
+			const header = item.assets?.header ?? "header.jpg"
+			result.set(item.appid, {
+				appid: item.appid,
+				name: item.name,
+				tags: (item.tagids ?? []).map(tagid => ({ tagid })),
+				assets: { header },
+				tiny_image: "", 
+			} as unknown as GameData)
+		}
+	} catch (error) {
+		console.error("Falha ao buscar jogos na Steam: ", error)
+	}
+
+	return result
+}

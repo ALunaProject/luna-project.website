@@ -9,27 +9,34 @@ import { useDialog } from "@/hooks/useDialog"
 import Button from "@/components/ui/Button/Button"
 import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal"
 
+export interface FavoritesOption {
+	count: number
+	max: number
+	isGameIn: boolean
+	onAdd: () => void | Promise<void>
+}
+
 interface UserListsModalProps {
 	open: boolean
 	onClose: () => void
 	lists: ListsDTO[]
 	onListsChange?: () => void
 	canCreate?: boolean
-	// When provided, each list gets an "Adicionar" button
 	onAddToList?: (list: ListsDTO) => void | Promise<void>
-	// Optional: marks lists that already contain the game (button disabled)
 	isGameInList?: (list: ListsDTO) => boolean
+	favorites?: FavoritesOption
 }
 
 export default function UserListsModal({
-	open,
-	onClose,
-	lists,
-	onListsChange,
-	canCreate = true,
-	onAddToList,
-	isGameInList,
-}: UserListsModalProps) {
+										   open,
+										   onClose,
+										   lists,
+										   onListsChange,
+										   canCreate = true,
+										   onAddToList,
+										   isGameInList,
+										   favorites
+									   }: UserListsModalProps) {
 	const router = useRouter()
 	const dialogRef = useDialog(open)
 	const wasOpen = useRef(false)
@@ -56,6 +63,19 @@ export default function UserListsModal({
 		}
 	}
 
+	async function handleAddFavorite() {
+		if (!favorites) return
+		setAddingId("favorites")
+		try {
+			await favorites.onAdd()
+		} finally {
+			setAddingId(null)
+		}
+	}
+
+	const favoritesFull = favorites ? favorites.count >= favorites.max : false
+	const hasItems = lists.length > 0 || !!favorites
+
 	return createPortal(
 		<dialog
 			ref={dialogRef}
@@ -67,6 +87,44 @@ export default function UserListsModal({
 			}}>
 			<div className={s.userListsContent}>
 				<h2>{onAddToList ? "Adicionar à lista" : "Listas"}</h2>
+
+				{favorites && (
+					<li className={s.userListItem}>
+						<div className={s.userListInfo}>
+							<span>Favoritos</span>
+							<span className={s.userListCount}>
+                               {favorites.count}/{favorites.max} jogos
+                            </span>
+						</div>
+						<Button
+							className={s.userListAddBtn}
+							type="button"
+							aria-label="Adicionar jogo aos favoritos"
+							label={
+								favorites.isGameIn
+									? "Adicionado"
+									: addingId === "favorites"
+										? "Adicionando..."
+										: favoritesFull
+											? "Limite atingido"
+											: "Adicionar"
+							}
+							icon={
+								favorites.isGameIn ||
+								favoritesFull ||
+								addingId === "favorites"
+									? undefined
+									: "AddIcon"
+							}
+							disabled={
+								favorites.isGameIn ||
+								favoritesFull ||
+								addingId !== null
+							}
+							onClick={handleAddFavorite}
+						/>
+					</li>
+				)}
 
 				{lists.length > 0 ? (
 					<ul className={s.userLists}>
@@ -120,7 +178,7 @@ export default function UserListsModal({
 				)}
 
 				<div className={s.actions}>
-					<Button label="Fechar" type="button" onClick={onClose} />
+					<Button label="Fechar" type="button" onClick={onClose}/>
 					{canCreate && (
 						<Button
 							label="Nova lista"

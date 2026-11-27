@@ -1,11 +1,10 @@
 import s from "./styles.module.scss"
-import Image from "next/image"
-import Link from "next/link"
 import Tags from "@/components/ui/Tags/Tags"
 import { GameData } from "@/types/gamesDTO"
 import { STEAM_TAG_NAMES, STORE_ASSETS } from "@/utils/contants"
 import CardActions from "@/components/shared/GamesCard/CardActions/GameCardActions"
 import GameImage from "@/components/shared/GamesCard/CardActions/GameImage"
+import GameCardLink from "@/components/shared/GamesCard/CardActions/GameCardLink";
 
 export default async function GamesCard(Game: GameData) {
 	const tags = Game.tags
@@ -14,7 +13,7 @@ export default async function GamesCard(Game: GameData) {
 		.filter(Boolean)
 
 	return (
-		<Link href={`/games/${Game.appid}`} className={s.gamesCard}>
+		<GameCardLink href={`/games/${Game.appid}`}>
 			<GameImage
 				key={Game.appid}
 				src={`${STORE_ASSETS}/steam/apps/${Game.appid}/${Game.assets.header}`}
@@ -30,6 +29,6 @@ export default async function GamesCard(Game: GameData) {
 				</div>
 				<CardActions req={Game} />
 			</div>
-		</Link>
+		</GameCardLink>
 	)
 }

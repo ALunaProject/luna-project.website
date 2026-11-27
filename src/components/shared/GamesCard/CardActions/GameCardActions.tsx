@@ -9,14 +9,18 @@ import { ListsDTO } from "@/types/UserLIstsDTO"
 import { useAuth } from "@/hooks/useAuth"
 import { GameData } from "@/types/gamesDTO"
 import UserListsButton from "@/components/layout/ListsWrapper/UserListsButton"
+import { addFavoriteGame, getUserFavorites } from "@/services/userServices";
 
 interface GameCardActionsProps {
 	req: GameData
 }
 
-export default function GameCardActions({ req }: GameCardActionsProps) {
-	const { user } = useAuth()
+const MAX_FAVORITES = 4
+
+export default function GameCardActions({req}: GameCardActionsProps) {
+	const [favorites, setFavorites] = useState<ListsDTO | null>(null)
 	const [userLists, setUserLists] = useState<ListsDTO[]>([])
+	const {user} = useAuth()
 
 	useEffect(() => {
 		if (!user) return
@@ -31,7 +35,13 @@ export default function GameCardActions({ req }: GameCardActionsProps) {
 		getUserLists(user.id).then(data => {
 			if (data) setUserLists(data)
 		})
+		getUserFavorites(user.id).then(data => setFavorites(data))
 	}
+
+	useEffect(() => {
+		refreshLists()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user])
 
 	async function handleAddToList(e: MouseEvent, listType: string) {
 		e.preventDefault()
@@ -48,6 +58,7 @@ export default function GameCardActions({ req }: GameCardActionsProps) {
 			alert(`Jogo adicionado na lista "${list.name}"`)
 		}
 	}
+
 	async function handleCustomList(list: ListsDTO) {
 		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
 		if (!token) return console.error("No token")
@@ -63,32 +74,43 @@ export default function GameCardActions({ req }: GameCardActionsProps) {
 		return list.games.some(g => String(g.appid) === String(req.appid))
 	}
 
+	async function handleAddFavorite() {
+		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
+		if (!token) return console.error("No token")
+
+		const updated = await addFavoriteGame(req, token)
+		if (updated) {
+			setFavorites(updated)
+			alert("Jogo adicionado aos favoritos")
+		} else {
+			alert("Não foi possível favoritar (limite de 4 jogos ou já favoritado)")
+		}
+	}
+
+	const favoritesGames = favorites?.games ?? []
+	const isGameInFavorites = favoritesGames.some(
+		g => String(g.appid) === String(req.appid),
+	)
+
 	if (!user) return null
 
 	return (
 		<div className={s.buttonsWrapper}>
-			<Button
-				aria-label={`Adicionar à lista "Quero Jogar"`}
-				onClick={e => handleAddToList(e, "WISHLIST")}
-				icon="PlayWishIcon"
-			/>
-			<Button
-				aria-label={`Adicionar à lista "Jogando"`}
-				onClick={e => handleAddToList(e, "PLAYING")}
-				icon="PlayAddIcon"
-			/>
-			<Button
-				aria-label={`Adicionar à lista "Jogado"`}
-				onClick={e => handleAddToList(e, "PLAYED")}
-				icon="PlayCheckIcon"
-			/>
+
 			<UserListsButton
 				ariaLabel="Ver minhas listas"
 				icon="AddIcon"
+				label="Adicionar em uma lista"
 				lists={userLists}
 				onListsChange={refreshLists}
 				onAddToList={handleCustomList}
 				isGameInList={isGameInList}
+				favorites={{
+					count: favoritesGames.length,
+					max: MAX_FAVORITES,
+					isGameIn: isGameInFavorites,
+					onAdd: handleAddFavorite,
+				}}
 			/>
 		</div>
 	)
