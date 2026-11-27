@@ -3,7 +3,7 @@ import { GameData } from "@/types/gamesDTO"
 export interface ListsDTO {
 	id: string
 	name: string
-	type: "WISHLIST" | "PLAYING" | "PLAYED" | "CUSTOM"
+	type: "WISHLIST" | "PLAYING" | "PLAYED" | "CUSTOM" | "FAVORITES"
 	user: {
 		id: string
 	}
