@@ -412,7 +412,53 @@
   }
 }
 
-// dialog
+// dialog / modais
+
+@keyframes modal-scale-up {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-backdrop-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// entrada do card do modal (scale-up + fade). Serve para qualquer elemento que monta já visível.
+@mixin modal-enter {
+  animation: modal-scale-up $duration-base $ease-decelerate;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+// entrada do fundo escurecido (só fade)
+@mixin backdrop-enter {
+  animation: modal-backdrop-fade $duration-fast $ease-decelerate;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+// para <dialog>: anima a cada showModal() (quando o atributo [open] aparece), card e ::backdrop
+@mixin modal-scale-up {
+  &[open] {
+    @include modal-enter;
+
+    &::backdrop {
+      @include backdrop-enter;
+    }
+  }
+}
 
 @mixin reset-button {
   padding: 0;

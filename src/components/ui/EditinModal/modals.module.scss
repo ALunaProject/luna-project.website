@@ -8,6 +8,7 @@
   padding: 24px;
   background-color: rgb(11 8 16 / 0.6);
   backdrop-filter: blur(10px);
+  @include backdrop-enter;
 }
 
 .card {
@@ -21,6 +22,7 @@
   background: $blue-violet-desat-600;
   border: 1px solid $blue-violet-desat-400;
   box-shadow: $shadow-focused;
+  @include modal-enter;
 }
 
 .cardWide {
