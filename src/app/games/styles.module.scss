@@ -1,0 +1,45 @@
+@use "../../styles/utils/index" as *;
+
+.container {
+  @include container;
+  justify-content: flex-start;
+}
+
+.content {
+  @include content;
+
+}
+
+.gamesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 23px;
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a {
+    background-color: $blue-violet-500;
+    padding: 6px 8px;
+    border-radius: 5px;
+    height: unset;
+
+    svg {
+      rotate: 180deg;
+    }
+
+    &:last-child {
+      flex-direction: row-reverse;
+
+      svg {
+        rotate: unset;
+      }
+    }
+  }
+}

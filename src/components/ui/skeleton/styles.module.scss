@@ -1,0 +1,35 @@
+@use "../../../styles/utils/index" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 321px;
+  border-radius: 12px;
+  background: $blue-violet-desat-600;
+  box-shadow: $shadow-card;
+}
+
+.image {
+  @include skeleton-shimmer;
+  width: 100%;
+  height: 150px; // mesma altura da <Image> do card real
+  border-radius: 12px 12px 0 0;
+}
+
+.props {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 194px; // mesma altura do .gameProps real
+  padding: 30px 12px;
+}
+
+.line {
+  @include skeleton-shimmer;
+  border-radius: 6px;
+}
+
+.title { height: 20px; width: 70%; }
+.tags  { display: flex; gap: 8px; }
+.tag   { height: 24px; width: 64px; border-radius: 999px; }

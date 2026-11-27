@@ -1,0 +1,9 @@
+@use "../../../styles/utils" as *;
+
+.linkContainer {
+  gap: 12px;
+  height: 24px;
+  @include flex-center;
+  @include poppins-regular-xl;
+  @include scale-hover-ani($scale-size: 1.05);
+}

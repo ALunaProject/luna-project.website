@@ -1,0 +1,32 @@
+[
+	{
+		"id": "1",
+		"name": "Red Dead Redemption II",
+		"previewImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFe_GrvFbrvky2v1tK5xa-IkuQ46vRvH-Y0lwVuNt5lWiYKvRm84Yiz4Q&s=10",
+		"tags": ["western", "simulator", "goty"]
+	},
+	{
+		"id": "2",
+		"name": "Portal 2",
+		"previewImg": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Portal2cover.jpg/250px-Portal2cover.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"tags": ["puzzle", "simulator", "valve"]
+	},
+	{
+		"id": "3",
+		"name": "Clair Obscur: Expedition 33",
+		"previewImg": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Minecraft_Spider.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+		"tags": ["n sei", "jogo ai", "goty?"]
+	},
+	{
+		"id": "4",
+		"name": "Celeste",
+		"previewImg": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Minecraft_Enderman.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+		"tags": ["puzzle", "platform", "pixelated"]
+	},
+	{
+		"id": "5",
+		"name": "Minecraft",
+		"previewImg": "https://upload.wikimedia.org/wikipedia/en/b/be/Minecraft_game_logo_2023.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+		"tags": ["sandbox", "simulator", "sei la"]
+	}
+]

@@ -1,0 +1,11 @@
+@use "../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  gap: 32px;
+  min-height: 100vh;
+}
+
+.content {
+  @include content;
+}

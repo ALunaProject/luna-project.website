@@ -1,0 +1,48 @@
+@use "../../../styles/utils/index" as *;
+
+.trigger {
+	display: flex;
+	width: 47%;
+	max-width: 550px;
+	min-height: 52px;
+	align-self: center;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 10px 16px;
+	border: 1px solid $blue-violet-300;
+	border-radius: 8px;
+	background: $blue-violet-500;
+	box-shadow: none;
+	color: $gs-white-smoke;
+	@include poppins-regular-lg;
+	cursor: pointer;
+	@include transition(all, $duration-fast);
+
+	&:hover {
+		background: $blue-violet-700;
+		border-color: $blue-violet-200;
+	}
+
+	&:active {
+		background: $blue-violet-800;
+	}
+
+	&:focus-visible {
+		outline: 3px solid $blue-violet-200;
+		outline-offset: 3px;
+	}
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+
+	svg {
+		width: 22px;
+		height: 22px;
+	}
+}

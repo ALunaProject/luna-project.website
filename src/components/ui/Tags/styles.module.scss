@@ -1,0 +1,53 @@
+@use "../../../styles/utils/index" as *;
+
+.tagContainer {
+  @include flex-center;
+  padding: 4px 10px;
+  align-items: flex-end;
+  gap: 10px;
+  border-radius: 100px;
+  background: $blue-violet;
+  @include abeezee-base;
+  @include scale-hover-ani(1.05);
+
+  &:hover {
+    background: $blue-violet-800;
+  }
+}
+
+.interactive {
+  @include focus-ring;
+
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+
+  &:active:not(:disabled) {
+    scale: 0.95;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &:disabled:hover {
+    scale: 1;
+  }
+}
+
+.selected {
+  box-shadow: inset 0 0 0 2px #fff;
+
+  &::after {
+    content: "×";
+    margin-left: 6px;
+  }
+}
+
+.link {
+  @include focus-ring;
+
+  color: inherit;
+  text-decoration: none;
+}

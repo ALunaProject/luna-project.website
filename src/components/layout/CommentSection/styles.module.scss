@@ -1,0 +1,56 @@
+@use "../../../styles/utils" as *;
+
+.commentsContainer {
+  @include flex-center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+
+  h5 {
+    @include poppins-regular-lg;
+  }
+
+  h4 {
+    margin-top: 20px;
+  }
+
+  div a span {
+    @include poppins-regular-xl;
+  }
+}
+
+.createCommentSec {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+
+  @include respond(tablet) {
+    padding: 0 30px;
+  }
+
+  label{
+    width: 100%;
+    text-align: left;
+  }
+  button {
+    width: -webkit-fit-content;
+  }
+
+  input {
+    border: 1px solid $blue-violet-900;
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    color: $gs-white-smoke;
+    @include transition($duration-fast);
+    &:disabled{
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      color: $blue-violet-100;
+    }
+  }
+}

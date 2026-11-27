@@ -1,0 +1,81 @@
+import s from "./styles.module.scss"
+import Sidebar from "@/components/layout/Sidebar/Sidebar"
+import { getAllGames } from "@/services/gamesServices"
+import GamesCard from "@/components/shared/GamesCard/GamesCard"
+import { GameData } from "@/types/gamesDTO"
+import { Metadata } from "next"
+import { constructMetadata } from "@/utils/metadata"
+import { Suspense } from "react"
+import { GamesCardSkeletonList } from "@/components/ui/skeleton/GamesCardSK"
+import SearchSideBar from "@/components/forms/SearchSideBar/SearchSideBar"
+import Links from "@/components/shared/Links/Links"
+
+const GAMES_PER_PAGE = 25
+
+export async function generateMetadata(): Promise<Metadata> {
+	return constructMetadata({
+		title: "Catalogo de Jogos",
+		description: "Explore e conheça jogos em alta!",
+	})
+}
+
+async function GamesList({ page }: { page: number }) {
+	const start = page * GAMES_PER_PAGE
+	const games: GameData[] = await getAllGames({
+		start,
+		count: GAMES_PER_PAGE,
+		sort: "20",
+	})
+
+	if (games.length === 0) {
+		return <p>Nenhum jogo encontrado no momento.</p>
+	}
+
+	return (
+		<>
+			{games.map((game: GameData) => (
+				<GamesCard key={game.appid} {...game} />
+			))}
+		</>
+	)
+}
+
+export default async function GamesPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ page?: string }>
+}) {
+	const params = await searchParams
+	const page = Math.max(0, Number(params.page) || 0)
+
+	return (
+		<main className={s.container}>
+			<Suspense fallback={null}>
+				<SearchSideBar />
+			</Suspense>
+			<Sidebar />
+
+			<section className={s.content}>
+				<div className={s.gamesWrapper}>
+					<Suspense key={page} fallback={<GamesCardSkeletonList />}>
+						<GamesList page={page} />
+					</Suspense>
+				</div>
+				<div className={s.pagination}>
+					{page > 0 && (
+						<Links
+							href={`?page=${page - 1}`}
+							label={"Anterior"}
+							icon={"ArrowIcon"}
+						/>
+					)}
+					<Links
+						href={`?page=${page + 1}`}
+						label={"Próximo"}
+						icon={"ArrowIcon"}
+					/>
+				</div>
+			</section>
+		</main>
+	)
+}

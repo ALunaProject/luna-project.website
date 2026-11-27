@@ -1,0 +1,124 @@
+@use "../../styles/utils/index" as *;
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  @include content;
+  padding: 0;
+  background: $blue-violet-desat-600;
+
+  .userInfo {
+    position: relative;
+    z-index: 1;
+    margin-top: -130px;
+    display: flex;
+    padding: 0 60px;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+
+    @include respond(tablet) {
+     padding: 0 30px;
+    }
+  }
+
+  .userPP {
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+  }
+
+  h5 {
+    @include poppins-regular-3xl;
+    color: $neutrals-white;
+  }
+
+  @include respond(tablet) {
+    .userInfo {
+      flex-direction: column;
+
+      .userFavGames {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.userProps {
+  @include flex-center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  @include respond(tablet) {
+    align-items: center;
+  }
+   p {
+     word-break: break-all;
+   }
+}
+
+.userLists {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  h4 {
+    @include poppins-light-4xl;
+  }
+}
+
+
+.userInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 30px;
+  flex: 1 0 0;
+  align-self: stretch;
+  width: 100%;
+  @include respond(tablet) {
+    align-items: center;
+  }
+}
+
+.userFavGames {
+  display: flex;
+  width: 100%;
+  padding-top: 113px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1 0 0;
+
+  h5 span {
+    font-style: italic;
+  }
+}
+
+.favGamesWrapper {
+  @include flex-center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+}
+
+.userCommentsWrapper {
+  @include flex-center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 862px;
+
+  h3 {
+    @include poppins-regular-5xl;
+  }
+
+  div a span {
+    @include poppins-regular-xl;
+  }
+}

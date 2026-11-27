@@ -1,0 +1,93 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  @include container;
+}
+
+.content {
+  @include contentPage;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1;
+  flex-wrap: wrap;
+
+  // banner de largura total (anula o padding lateral do content) e colado no conteúdo (anula o gap de 30px)
+  .banner {
+    width: calc(100% + 60px);
+    margin: 0 -30px -30px;
+  }
+
+  @include respond(desktop) {
+    flex-wrap: unset;
+    flex-direction: column;
+    justify-content: flex-start;
+    .gameContent, .rating{
+      width: 100%;
+    }
+  }
+}
+
+.gameContent {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 59%;
+  h1 {
+    line-height: 100%;
+    letter-spacing: 0;
+    @include respond(tablet){
+      @include poppins-regular-5xl;
+      word-break: break-all;
+    }
+  }
+}
+
+.rating {
+  display: flex;
+  width: 38%;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 80px;
+}
+
+.tagsWrapper {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
+  br, p:empty {
+    display: none;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong, span {
+    @include poppins-semibold-xl;
+    text-align: start !important;
+  }
+
+  p {
+    line-height: 1.6 !important;
+    text-align: start !important;
+  }
+
+  ul, li {
+    list-style: inside !important;
+  }
+
+}

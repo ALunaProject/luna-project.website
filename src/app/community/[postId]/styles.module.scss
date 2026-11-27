@@ -1,0 +1,23 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  @include container;
+}
+
+.content {
+  @include content;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  margin-top: -110px;
+  width: 100%;
+  padding: 0;
+}
+
+@media (max-width: 700px) {
+  .content {
+    margin-top: -70px;
+  }
+
+}

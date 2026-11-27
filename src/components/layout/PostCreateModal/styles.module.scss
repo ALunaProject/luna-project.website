@@ -1,0 +1,147 @@
+@use "../../../styles/utils/index" as *;
+
+.dialog {
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	width: min(520px, calc(100vw - 32px));
+	max-width: none;
+	max-height: calc(100vh - 32px);
+	max-height: calc(100dvh - 32px);
+	padding: 0;
+	border: 1px solid $blue-violet-desat-400;
+	border-radius: 16px;
+	background: $blue-violet-desat-600;
+	color: $gs-white-smoke;
+	overflow: auto;
+
+	&::backdrop {
+		background: rgba($neutrals-black, 0.72);
+		backdrop-filter: blur(3px);
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+	padding: 28px;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+	p {
+		@include poppins-regular-base;
+		color: $blue-violet-desat-200;
+	}
+}
+
+.title {
+	@include poppins-regular-2xl;
+	line-height: 1.25;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 0;
+
+	label {
+		@include poppins-regular-base;
+	}
+
+	input:not(.postInput) {
+		width: 100%;
+		min-height: 44px;
+		padding: 10px 12px;
+		border: 1px solid $blue-violet-500;
+		border-radius: 8px;
+		background: $blue-violet-desat-700;
+		color: $gs-white-smoke;
+
+		&::placeholder {
+			color: $gs-slate-gray;
+		}
+
+		&:focus-visible {
+			outline: 2px solid $blue-violet-300;
+			outline-offset: 2px;
+		}
+	}
+}
+
+.postInput {
+	width: 100%;
+	min-height: 48px;
+	padding: 12px 14px;
+	border: 1px solid $blue-violet-500;
+	border-radius: 8px;
+	background: $blue-violet-desat-700;
+	color: $gs-white-smoke;
+
+	&::placeholder {
+		color: $gs-slate-gray;
+	}
+
+	&:focus-visible {
+		outline: 2px solid $blue-violet-300;
+		outline-offset: 2px;
+	}
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 4px;
+
+	button {
+		width: auto;
+		min-width: 124px;
+		padding: 10px 16px;
+		align-items: center;
+		border: 1px solid transparent;
+		border-radius: 8px;
+		cursor: pointer;
+	}
+
+	button:first-child {
+		border-color: $blue-violet-desat-300;
+		background: transparent;
+
+		&:hover {
+			background: $blue-violet-desat-500;
+		}
+	}
+
+	button:last-child {
+		background: $blue-violet-500;
+
+		&:hover {
+			background: $blue-violet-700;
+		}
+	}
+}
+
+.error {
+	color: $bloody-red-200;
+	font-size: 0.875rem;
+}
+
+@media (max-width: 480px) {
+	.content {
+		gap: 18px;
+		padding: 22px;
+	}
+
+	.actions {
+		button {
+			min-width: 0;
+			flex: 1;
+		}
+	}
+}

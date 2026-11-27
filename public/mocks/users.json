@@ -1,0 +1,56 @@
+[
+	{
+		"id": "550e8400-e29b-41d4-a716-446655440000",
+		"username": "chimbinha",
+		"email": "chimbinha@email.com",
+		"bio": "gosto de batatas",
+		"profilePicUrl": "https://thumb.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/250px-Corinthians_simbolo.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"bannerUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdgIjTnh_iciBei1blFfmm9R0awmOkbT8WxVTBn3yW4nfHAKI3fCvur6k&s=10",
+		"role": "ADMIN"
+	},
+	{
+		"id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+		"username": "estelionatalia",
+		"email": "estelionatalia@email.com",
+		"bio": "rdr2 merecia o goty 2018",
+		"profilePicUrl": "https://thumb.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/250px-Corinthians_simbolo.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"bannerUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Q1qX93pPH5NKqFY61A20Q2_H1pUEpJCewatadpB6Jw&s",
+		"role": "USER"
+	},
+	{
+		"id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+		"username": "lucas",
+		"email": "lucas@email.com",
+		"bio": "tenho 1.90 e ouvo lana del rei",
+		"profilePicUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Q1qX93pPH5NKqFY61A20Q2_H1pUEpJCewatadpB6Jw&s",
+		"bannerUrl": null,
+		"role": "USER"
+	},
+	{
+		"id": "16fd2706-8baf-433b-82eb-8c7fada847da",
+		"username": "vitor",
+		"email": "vitor@email.com",
+		"bio": null,
+		"profilePicUrl": null,
+		"bannerUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Davi_Brito_-_BBB_24_O_Reencontro.png/250px-Davi_Brito_-_BBB_24_O_Reencontro.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"role": "USER"
+	},
+	{
+		"id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+		"username": "erico",
+		"email": "etico@email.com",
+		"bio": "o adm ta online",
+		"profilePicUrl": "https://thumb.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/250px-Corinthians_simbolo.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"bannerUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ76WMU0JJXJJsB5zeVehbbMoV5gD9PswpeJ26t9BnX&s",
+		"role": "USER"
+	},
+	{
+		"id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+		"username": "lyan",
+		"email": "nigga@email.com",
+		"bio": "o adm ta online",
+		"profilePicUrl": "https://thumb.wikimedia.org/wikipedia/pt/thumb/b/b4/Corinthians_simbolo.png/250px-Corinthians_simbolo.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+		"bannerUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ76WMU0JJXJJsB5zeVehbbMoV5gD9PswpeJ26t9BnX&s",
+		"role": "ADMIN"
+	}
+]

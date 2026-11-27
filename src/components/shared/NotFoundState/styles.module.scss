@@ -1,0 +1,34 @@
+@use "../../../styles/utils/index" as *;
+
+.container {
+  @include container;
+}
+
+.content {
+  @include content;
+  text-align: center;
+  justify-content: center;
+  background: $blue-violet-desat-600;
+}
+
+.message {
+  @include poppins-regular-2xl;
+  color: $neutrals-white;
+}
+
+.illustration {
+  width: auto;
+  height: auto;
+  max-height: 45vh;
+  object-fit: contain;
+}
+
+@include respond(tablet) {
+  .message {
+    @include poppins-regular-xl;
+  }
+
+  .illustration {
+    max-height: 35vh;
+  }
+}
