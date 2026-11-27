@@ -45,7 +45,7 @@ export default function FavGameItem({
 			{canEdit && isEditing && (
 				<button
 					type="button"
-					className={s.removeBtn}
+					className={s.removeFavBtn}
 					aria-label={`Remover ${gameName ?? "jogo"} dos favoritos`}
 					onClick={handleRemove}
 					disabled={removing}
