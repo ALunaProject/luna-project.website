@@ -6,6 +6,7 @@ import LunaLogo from "@/assets/icons/LunaLogo"
 import Links from "@/components/shared/Links/Links"
 import UserProfile from "@/components/shared/UserProfile/UserProfile"
 import Button from "@/components/ui/Button/Button"
+import Skeleton from "@/components/ui/skeleton/Skeleton"
 import { useAuth } from "@/hooks/useAuth"
 import { DEFAULT_AVATAR } from "@/utils/contants"
 import s from "./styles.module.scss"
@@ -24,7 +25,7 @@ const CloseIcon = () => (
 )
 
 export default function Sidebar() {
-	const { isLoggedIn, user, logout } = useAuth()
+	const { isLoggedIn, isLoading, user, logout } = useAuth()
 	const router = useRouter()
 	const pathname = usePathname()
 	const drawerId = useId()
@@ -111,7 +112,26 @@ export default function Sidebar() {
 						icon="CommunityIcon"
 					/>
 				</nav>
-				{isLoggedIn && user ? (
+				{isLoading ? (
+					<output
+						className={s.loggedUser}
+						aria-busy="true"
+						aria-label="Verificando login">
+						<div className={s.userSkeletonRow} aria-hidden="true">
+							<Skeleton circle width={45} height={45} />
+							<Skeleton
+								className={s.userSkeletonName}
+								width={110}
+								height={16}
+							/>
+						</div>
+						<Skeleton
+							width="45%"
+							height={36}
+							style={{ margin: "0 auto", borderRadius: 5 }}
+						/>
+					</output>
+				) : isLoggedIn && user ? (
 					<div className={s.loggedUser}>
 						<UserProfile
 							className={s.userProfile}
