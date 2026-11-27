@@ -35,6 +35,11 @@
   flex-wrap: wrap;
   gap: 20px;
 
+  @media(max-width: 1140px) {
+    flex-direction: column;
+    flex-wrap: unset;
+  }
+
   .addListBtn {
     display: flex;
     gap: 6px;
@@ -46,7 +51,7 @@
     linear-gradient(90deg, $blue-violet-300, $blue-violet-800, $blue-violet-300) border-box;
     border: 2px solid transparent;
     box-shadow: $shadow-post-card;
-    @include respond(tablet) {
+    @media(max-width: 1140px) {
       max-width: unset;
     }
     @include scale-hover-ani(1.05)
@@ -63,15 +68,19 @@
 }
 
 .listItem {
+  position: relative;
   width: 47.7%;
 
-  .editListBtn, {
+  @media(max-width: 1140px) {
+    width: 100%;
+  }
+  .editListBtn {
     @include flex-center;
     position: absolute;
+    bottom: -12px;
+    right: -12px;
     width: 45px;
     height: 45px;
-    margin-top: -2rem;
-    margin-left: 19.35%;
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
@@ -79,26 +88,22 @@
     box-shadow: unset;
     background: $blue-violet-500;
 
-    @include respond(tablet) {
-      max-width: unset;
-    }
     @include scale-hover-ani(1.1);
   }
 
   .removeListBtn {
     @include flex-center;
     position: absolute;
+    top: -10px;
+    right: -10px;
     width: unset;
     height: unset;
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
     background: $blue-violet-500;
-    margin-left: 40px;
-    margin-top: -20px;
     padding: 4px;
   }
-
 }
 
 // CreateListModal

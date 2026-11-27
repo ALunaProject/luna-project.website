@@ -4,7 +4,7 @@ import s from "./styles.module.scss"
 import Image from "next/image"
 import Link from "next/link"
 import { ListsDTO } from "@/types/UserLIstsDTO"
-import { STORAGE_KEYS, STORE_ASSETS } from "@/utils/contants"
+import { DEFAULT_BANNER, STORAGE_KEYS, STORE_ASSETS } from "@/utils/contants"
 import { useProfileEdit } from "@/components/ui/EditinModal/ProfileEditContext"
 import Button from "@/components/ui/Button/Button"
 import { removeGameOnList } from "@/services/userListsServices"
@@ -48,7 +48,11 @@ export default function ListsCard(List: ListsDTO) {
 					<Link key={game.appid} href={`../../games/${game.appid}`}>
 						<RemoveGame id={List.id} appId={game.appid} />
 						<Image
-							src={`${STORE_ASSETS}/steam/apps/${game.appid}/${game.assets.library_capsule}?t=1789251637)`}
+							src={
+								game.assets?.library_capsule
+									? `${STORE_ASSETS}/steam/apps/${game.appid}/${game.assets.library_capsule}?t=1789251637`
+									: DEFAULT_BANNER
+							}
 							alt={`Ícone de ${game.appid}`}
 							width={50}
 							height={50}

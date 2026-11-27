@@ -33,8 +33,8 @@
 .editBtn {
   @include flex-center;
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 45px;
+  height: 45px;
   padding: 0;
   border: none;
   border-radius: 100%;
@@ -54,8 +54,8 @@
   right: 28px;
   bottom: 140px; // fica acima da área onde o perfil começa a sobrepor o banner
   z-index: 3;
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
 }
 
 // ---------- nome/bio editados direto na tela ----------
