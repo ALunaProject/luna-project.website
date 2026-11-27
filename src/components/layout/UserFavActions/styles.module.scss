@@ -1,0 +1,28 @@
+@use "../../../styles/utils" as *;
+
+.favItem {
+  position: relative;
+  width: fit-content;
+}
+
+.removeBtn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 2;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $blue-violet;
+  color: $gs-white-smoke;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+}
