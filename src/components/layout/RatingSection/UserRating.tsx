@@ -29,6 +29,9 @@ export default function UserRating({ appId, gameName }: UserRatingProps) {
 	const [modalOpen, setModalOpen] = useState(false)
 
 	useEffect(() => {
+		// ainda não sabemos se há usuário logado: não decide nada (evita piscar "Adicione uma nota")
+		if (auth.isLoading) return
+
 		if (!isLogged) {
 			setRating(null)
 			setLoading(false)
@@ -48,7 +51,7 @@ export default function UserRating({ appId, gameName }: UserRatingProps) {
 		return () => {
 			ignore = true
 		}
-	}, [appId, isLogged])
+	}, [appId, isLogged, auth.isLoading])
 
 	function handleAddClick() {
 		if (!isLogged) {
@@ -68,7 +71,8 @@ export default function UserRating({ appId, gameName }: UserRatingProps) {
 		setRating(null)
 	}
 
-	if (loading) return <div className={s.skeleton} aria-hidden="true" />
+	if (auth.isLoading || loading)
+		return <div className={s.skeleton} aria-hidden="true" />
 
 	return (
 		<>
