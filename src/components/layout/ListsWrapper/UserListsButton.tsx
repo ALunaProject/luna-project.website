@@ -3,7 +3,7 @@
 import { ComponentProps, useState } from "react"
 import { ListsDTO } from "@/types/UserLIstsDTO"
 import Button from "@/components/ui/Button/Button"
-import UserListsModal from "@/components/layout/ListsWrapper/Modals/UserListsModal"
+import UserListsModal, { FavoritesOption } from "@/components/layout/ListsWrapper/Modals/UserListsModal"
 
 interface UserListsButtonProps {
 	lists: ListsDTO[]
@@ -15,6 +15,7 @@ interface UserListsButtonProps {
 	canCreate?: boolean
 	onAddToList?: (list: ListsDTO) => void | Promise<void>
 	isGameInList?: (list: ListsDTO) => boolean
+	favorites?: FavoritesOption
 }
 
 export default function UserListsButton({
@@ -26,6 +27,7 @@ export default function UserListsButton({
 	canCreate,
 	onAddToList,
 	isGameInList,
+	favorites
 }: UserListsButtonProps) {
 	const [modalOpen, setModalOpen] = useState(false)
 
@@ -51,6 +53,7 @@ export default function UserListsButton({
 				canCreate={canCreate}
 				onAddToList={onAddToList}
 				isGameInList={isGameInList}
+				favorites={favorites}
 			/>
 		</>
 	)
