@@ -1,15 +1,15 @@
 "use client"
 
-import { MouseEvent, useEffect, useState } from "react"
-import s from "@/components/shared/GamesCard/styles.module.scss"
-import Button from "@/components/ui/Button/Button"
-import { addGameToList, getUserLists } from "@/services/userListsServices"
-import { STORAGE_KEYS } from "@/utils/contants"
-import { ListsDTO } from "@/types/UserLIstsDTO"
-import { useAuth } from "@/hooks/useAuth"
-import { GameData } from "@/types/gamesDTO"
 import UserListsButton from "@/components/layout/ListsWrapper/UserListsButton"
-import { addFavoriteGame, getUserFavorites } from "@/services/userServices";
+import s from "@/components/shared/GamesCard/styles.module.scss"
+import { CardActionsSkeleton } from "@/components/ui/skeleton/Skeletons"
+import { useAuth } from "@/hooks/useAuth"
+import { useUserCollections } from "@/hooks/useUserCollections"
+import { addGameToList } from "@/services/userListsServices"
+import { addFavoriteGame } from "@/services/userServices"
+import type { GameData } from "@/types/gamesDTO"
+import type { ListsDTO } from "@/types/UserLIstsDTO"
+import { STORAGE_KEYS } from "@/utils/contants"
 
 interface GameCardActionsProps {
 	req: GameData
@@ -17,47 +17,10 @@ interface GameCardActionsProps {
 
 const MAX_FAVORITES = 4
 
-export default function GameCardActions({req}: GameCardActionsProps) {
-	const [favorites, setFavorites] = useState<ListsDTO | null>(null)
-	const [userLists, setUserLists] = useState<ListsDTO[]>([])
-	const {user} = useAuth()
-
-	useEffect(() => {
-		if (!user) return
-
-		getUserLists(user.id).then(data => {
-			if (data) setUserLists(data)
-		})
-	}, [user])
-
-	function refreshLists() {
-		if (!user) return
-		getUserLists(user.id).then(data => {
-			if (data) setUserLists(data)
-		})
-		getUserFavorites(user.id).then(data => setFavorites(data))
-	}
-
-	useEffect(() => {
-		refreshLists()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user])
-
-	async function handleAddToList(e: MouseEvent, listType: string) {
-		e.preventDefault()
-		e.stopPropagation()
-
-		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
-		if (!token) return console.error("No token")
-
-		const list = userLists.find(l => l.type === listType)
-		if (!list) return console.error(`Lista ${listType} não encontrada`)
-
-		const updatedList = await addGameToList(list.id, req, token)
-		if (updatedList) {
-			alert(`Jogo adicionado na lista "${list.name}"`)
-		}
-	}
+export default function GameCardActions({ req }: GameCardActionsProps) {
+	const { user, isLoading: authLoading } = useAuth()
+	const { lists, favorites, loading, refresh, setFavorites } =
+		useUserCollections()
 
 	async function handleCustomList(list: ListsDTO) {
 		const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
@@ -66,7 +29,7 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 		const updatedList = await addGameToList(list.id, req, token)
 		if (updatedList) {
 			alert(`Jogo adicionado na lista "${list.name}"`)
-			refreshLists()
+			refresh()
 		}
 	}
 
@@ -83,7 +46,9 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 			setFavorites(updated)
 			alert("Jogo adicionado aos favoritos")
 		} else {
-			alert("Não foi possível favoritar (limite de 4 jogos ou já favoritado)")
+			alert(
+				"Não foi possível favoritar (limite de 4 jogos ou já favoritado)",
+			)
 		}
 	}
 
@@ -92,17 +57,19 @@ export default function GameCardActions({req}: GameCardActionsProps) {
 		g => String(g.appid) === String(req.appid),
 	)
 
+	if (authLoading) return <CardActionsSkeleton />
+
 	if (!user) return null
 
 	return (
 		<div className={s.buttonsWrapper}>
-
 			<UserListsButton
 				ariaLabel="Ver minhas listas"
 				icon="AddIcon"
 				label="Adicionar em uma lista"
-				lists={userLists}
-				onListsChange={refreshLists}
+				lists={lists}
+				loading={loading}
+				onListsChange={refresh}
 				onAddToList={handleCustomList}
 				isGameInList={isGameInList}
 				favorites={{

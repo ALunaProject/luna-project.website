@@ -11,7 +11,7 @@ import { CommentSectionProps } from "@/types/commentsDTO"
 import { useAuth } from "@/hooks/useAuth"
 
 export function CommentForm(props: CommentSectionProps) {
-	const { user } = useAuth()
+	const { user, isLoading } = useAuth()
 	const [content, setContent] = useState("")
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState<string | null>(null)
@@ -65,21 +65,21 @@ export function CommentForm(props: CommentSectionProps) {
 		<form className={s.createCommentSec} onSubmit={handleSubmit}>
 			<label htmlFor={inputId}>Faça um comentário nessa página:</label>
 			<input
-				placeholder="Escreva aqui..."
+				placeholder={isLoading ? "Carregando..." : "Escreva aqui..."}
 				type="text"
 				name="content"
 				value={content}
 				maxLength={1000}
 				autoFocus
 				onChange={e => setContent(e.target.value)}
-				disabled={!user}
+				disabled={isLoading || !user}
 			/>
 			<Button
 				label="Comentar"
 				icon="ArrowIcon"
 				type="submit"
 				onClick={() => setContent(content)}
-				disabled={loading || !user}
+				disabled={loading || isLoading || !user}
 			/>
 		</form>
 	)

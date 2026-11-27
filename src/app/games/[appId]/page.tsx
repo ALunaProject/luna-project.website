@@ -16,6 +16,8 @@ import CommentSection from "@/components/layout/CommentSection/CommentSection"
 import RatingSection from "@/components/layout/RatingSection/RatingSection"
 import SeeMoreSection from "@/components/ui/SeeMoreSection/SeeMoreSection"
 import { getGameDetails, getGameTags } from "@/services/gamesServices"
+import { Suspense } from "react"
+import { RatingSectionSkeleton } from "@/components/ui/skeleton/Skeletons"
 
 export async function generateMetadata({
 	params,
@@ -95,7 +97,9 @@ export default async function GamePage({ params }: GamesPageProps) {
 							html={game.about_the_game}
 						/>
 					</div>
-					<RatingSection appId={appId} game={game} />
+					<Suspense fallback={<RatingSectionSkeleton />}>
+						<RatingSection appId={appId} game={game} />
+					</Suspense>
 					<CommentSection targetId={appId} type="game" />
 				</section>
 			) : (

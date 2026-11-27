@@ -1,0 +1,176 @@
+@use "../../../styles/utils/index" as *;
+
+// ---------- primitivo ----------
+.block {
+  @include skeleton-shimmer;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+// ---------- NewsCard ----------
+.newsCard {
+  @include skeleton-shimmer;
+  width: 100%;
+  max-width: 1020px;
+  height: 350px; // mesma altura do NewsCard real
+  border-radius: 8px;
+  box-shadow: $shadow-post-card;
+
+  @include respond(tablet) {
+    height: 260px;
+  }
+
+  @include respond(mobile) {
+    height: 200px;
+  }
+}
+
+// ---------- PostCard ----------
+.postCard {
+  display: flex;
+  width: 94%;
+  max-width: 1100px;
+  align-self: center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 30px 18px;
+  border-radius: 8px;
+  background: $blue-violet-desat-600;
+  box-shadow: $shadow-post-card;
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.postTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+
+// ---------- Comentários ----------
+.comment {
+  display: flex;
+  width: 100%;
+  padding: 15px 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  border-bottom: 1px solid $blue-violet-desat-300;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.commentUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.commentList {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+// ---------- Avaliação (RatingSection) ----------
+.rating {
+  display: flex;
+  width: 38%;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 80px;
+
+  @include respond(desktop) {
+    width: 100%;
+    padding-top: 0;
+  }
+}
+
+.ratingTop {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  @include respond(tablet) {
+    flex-direction: column;
+  }
+}
+
+.ratingScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.buyGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+// ---------- Perfil: listas ----------
+.lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @media (max-width: 1140px) {
+    flex-direction: column;
+    flex-wrap: unset;
+  }
+}
+
+.listCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 47.7%;
+  min-height: 120px;
+  padding: 20px;
+  border-radius: 10px;
+  background: $blue-violet-desat-600;
+  box-shadow: $shadow-post-card;
+
+  @media (max-width: 1140px) {
+    width: 100%;
+  }
+}
+
+.listGames {
+  display: flex;
+  gap: 8px;
+}
+
+.favGames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+// ---------- Botões / ações ----------
+.actionsRow {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 8px;
+}

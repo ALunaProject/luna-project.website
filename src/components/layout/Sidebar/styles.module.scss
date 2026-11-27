@@ -29,6 +29,15 @@
       max-width: 200px;
     }
   }
+
+  .userSkeletonRow {
+    gap: 12px;
+
+    .userSkeletonName {
+      opacity: 1;
+      max-width: 200px;
+    }
+  }
 }
 
 .sidebarContainer {
@@ -98,6 +107,21 @@
       max-width: 0;
       overflow: hidden;
       white-space: nowrap;
+      @include transition(opacity max-width, $duration-base, $ease-standard);
+    }
+  }
+
+  // skeleton do usuário (enquanto o login é verificado): mesma geometria do .userProfile
+  .userSkeletonRow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 16px;
+    @include transition(all, $duration-base, $ease-standard);
+
+    .userSkeletonName {
+      opacity: 0;
+      max-width: 0;
       @include transition(opacity max-width, $duration-base, $ease-standard);
     }
   }

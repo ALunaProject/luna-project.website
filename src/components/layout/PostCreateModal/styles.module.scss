@@ -6,7 +6,6 @@
 	margin: auto;
 	width: min(520px, calc(100vw - 32px));
 	max-width: none;
-	max-height: calc(100vh - 32px);
 	max-height: calc(100dvh - 32px);
 	padding: 0;
 	border: 1px solid $blue-violet-desat-400;
@@ -14,6 +13,7 @@
 	background: $blue-violet-desat-600;
 	color: $gs-white-smoke;
 	overflow: auto;
+	@include modal-scale-up;
 
 	&::backdrop {
 		background: rgba($neutrals-black, 0.72);

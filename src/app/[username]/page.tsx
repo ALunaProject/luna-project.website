@@ -11,7 +11,17 @@ import ProfileBanner from "@/components/ui/EditinModal/ProfileBanner"
 import { ProfileEditProvider } from "@/components/ui/EditinModal/ProfileEditContext"
 import ListsWrapper from "@/components/layout/ListsWrapper/ListsWrapper"
 import CommentSection from "@/components/layout/CommentSection/CommentSection"
-import UserFavActions from "@/components/layout/UserFavActions/UserFavActions";
+import UserFavActions from "@/components/layout/UserFavActions/UserFavActions"
+import { Suspense } from "react"
+import {
+	FavGamesSkeleton,
+	ProfileListsSkeleton,
+} from "@/components/ui/skeleton/Skeletons"
+
+async function UserFavorites({ userId }: { userId: string }) {
+	const favorites = await getUserFavorites(userId)
+	return <UserFavActions favorites={favorites} />
+}
 
 export default async function UserPage({ params }: UserPageProps) {
 	const { username: rawUsername } = await params
@@ -27,8 +37,6 @@ export default async function UserPage({ params }: UserPageProps) {
 	if (!user) {
 		notFound()
 	}
-
-	const favorites = await getUserFavorites(user.id)
 
 	return (
 		<ProfileEditProvider profileUser={user}>
@@ -71,10 +79,12 @@ export default async function UserPage({ params }: UserPageProps) {
 							</div>
 							<section className={s.userLists}>
 								<h4>Lists</h4>
-								<ListsWrapper
-									userId={user.id}
-									username={user.username}
-								/>
+								<Suspense fallback={<ProfileListsSkeleton />}>
+									<ListsWrapper
+										userId={user.id}
+										username={user.username}
+									/>
+								</Suspense>
 							</section>
 						</aside>
 						<aside className={s.userFavGames}>
@@ -82,7 +92,9 @@ export default async function UserPage({ params }: UserPageProps) {
 								Favoritos de <span>{user.username}</span>
 							</h5>
 							<div className={s.favGamesWrapper}>
-								<UserFavActions favorites={favorites} />
+								<Suspense fallback={<FavGamesSkeleton />}>
+									<UserFavorites userId={user.id} />
+								</Suspense>
 							</div>
 						</aside>
 					</div>

@@ -7,6 +7,7 @@ import UserListsModal, { FavoritesOption } from "@/components/layout/ListsWrappe
 
 interface UserListsButtonProps {
 	lists: ListsDTO[]
+	loading?: boolean
 	label?: string
 	icon?: ComponentProps<typeof Button>["icon"]
 	ariaLabel?: string
@@ -19,16 +20,17 @@ interface UserListsButtonProps {
 }
 
 export default function UserListsButton({
-	lists,
-	label,
-	icon,
-	ariaLabel,
-	onListsChange,
-	canCreate,
-	onAddToList,
-	isGameInList,
-	favorites
-}: UserListsButtonProps) {
+											lists,
+											loading,
+											label,
+											icon,
+											ariaLabel,
+											onListsChange,
+											canCreate,
+											onAddToList,
+											isGameInList,
+											favorites
+										}: UserListsButtonProps) {
 	const [modalOpen, setModalOpen] = useState(false)
 
 	return (
@@ -49,6 +51,7 @@ export default function UserListsButton({
 				open={modalOpen}
 				onClose={() => setModalOpen(false)}
 				lists={lists}
+				loading={loading}
 				onListsChange={onListsChange}
 				canCreate={canCreate}
 				onAddToList={onAddToList}

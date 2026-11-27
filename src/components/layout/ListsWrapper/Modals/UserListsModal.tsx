@@ -8,6 +8,7 @@ import { ListsDTO } from "@/types/UserLIstsDTO"
 import { useDialog } from "@/hooks/useDialog"
 import Button from "@/components/ui/Button/Button"
 import ListModal from "@/components/layout/ListsWrapper/Modals/ListModal"
+import Skeleton from "@/components/ui/skeleton/Skeleton"
 
 export interface FavoritesOption {
 	count: number
@@ -20,6 +21,7 @@ interface UserListsModalProps {
 	open: boolean
 	onClose: () => void
 	lists: ListsDTO[]
+	loading?: boolean
 	onListsChange?: () => void
 	canCreate?: boolean
 	onAddToList?: (list: ListsDTO) => void | Promise<void>
@@ -31,6 +33,7 @@ export default function UserListsModal({
 										   open,
 										   onClose,
 										   lists,
+										   loading = false,
 										   onListsChange,
 										   canCreate = true,
 										   onAddToList,
@@ -88,7 +91,28 @@ export default function UserListsModal({
 			<div className={s.userListsContent}>
 				<h2>{onAddToList ? "Adicionar à lista" : "Listas"}</h2>
 
-				{favorites && (
+				{loading && (
+					<ul
+						className={s.userLists}
+						aria-busy="true"
+						aria-label="Carregando listas">
+						{[0, 1, 2, 3].map(n => (
+							<li key={n} className={s.userListItem} aria-hidden="true">
+								<div className={s.userListInfo}>
+									<Skeleton width={110} height={16} />
+									<Skeleton width={70} height={12} />
+								</div>
+								<Skeleton
+									width={90}
+									height={32}
+									style={{ borderRadius: 5 }}
+								/>
+							</li>
+						))}
+					</ul>
+				)}
+
+				{!loading && favorites && (
 					<li className={s.userListItem}>
 						<div className={s.userListInfo}>
 							<span>Favoritos</span>
@@ -126,7 +150,7 @@ export default function UserListsModal({
 					</li>
 				)}
 
-				{lists.length > 0 ? (
+				{loading ? null : lists.length > 0 ? (
 					<ul className={s.userLists}>
 						{lists.map(list => {
 							const alreadyIn = isGameInList?.(list) ?? false

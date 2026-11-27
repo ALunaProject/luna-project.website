@@ -164,6 +164,7 @@
   border-radius: 12px;
   background-color: $blue-violet-desat-800;
   color: $gs-white-smoke;
+  @include modal-scale-up;
 
   &::backdrop {
     background: rgba(0, 0, 0, 0.65);
